@@ -1,0 +1,1633 @@
+[
+  {
+    "question": "What is the supreme law of the land?",
+    "correct_options": [
+      "The Constitution"
+    ],
+    "incorrect_options": [
+      "The Declaration of Independence",
+      "The Articles of Confederation",
+      "The Emancipation Proclamation"
+    ]
+  },
+  {
+    "question": "What does the Constitution do?",
+    "correct_options": [
+      "Sets up the government",
+      "Defines the government",
+      "Protects basic rights of Americans"
+    ],
+    "incorrect_options": [
+      "Declares independence from Great Britain",
+      "Sets the voting age",
+      "Lists the 13 original colonies"
+    ]
+  },
+  {
+    "question": "The idea of self-government is in the first three words of the Constitution. What are these words?",
+    "correct_options": [
+      "We the People"
+    ],
+    "incorrect_options": [
+      "I pledge allegiance",
+      "Four score",
+      "Life, Liberty, Happiness"
+    ]
+  },
+  {
+    "question": "What is an amendment?",
+    "correct_options": [
+      "A change (to the Constitution)",
+      "An addition (to the Constitution)"
+    ],
+    "incorrect_options": [
+      "A preamble",
+      "A law passed by the President",
+      "The introduction to the Constitution"
+    ]
+  },
+  {
+    "question": "What do we call the first ten amendments to the Constitution?",
+    "correct_options": [
+      "The Bill of Rights"
+    ],
+    "incorrect_options": [
+      "The Articles of Confederation",
+      "The Declaration of Independence",
+      "The Code of Laws"
+    ]
+  },
+  {
+    "question": "What is one right or freedom from the First Amendment?",
+    "correct_options": [
+      "Right to speech",
+      "Right to religion",
+      "Right to assembly",
+      "Right to press",
+      "Right to petition the government"
+    ],
+    "incorrect_options": [
+      "Right to bear arms",
+      "Right to a speedy trial",
+      "Right to vote"
+    ]
+  },
+  {
+    "question": "How many amendments does the Constitution have?",
+    "correct_options": [
+      "Twenty-Seven (27)"
+    ],
+    "incorrect_options": [
+      "Ten (10)",
+      "Fifty (50)",
+      "One hundred (100)"
+    ]
+  },
+  {
+    "question": "What did the Declaration of Independence do?",
+    "correct_options": [
+      "Announced our independence (from Great Britain)",
+      "Declared our independence (from Great Britain)",
+      "Said that the United States is free (from Great Britain)"
+    ],
+    "incorrect_options": [
+      "Freed the slaves",
+      "Established the U.S. Mint",
+      "Created the first ten amendments"
+    ]
+  },
+  {
+    "question": "What are two rights in the Declaration of Independence?",
+    "correct_options": [
+      "Right to life and liberty",
+      "Right to life and pursuit of happiness",
+      "Right to liberty and pursuit of happiness"
+    ],
+    "incorrect_options": [
+      "Freedom of speech and religion",
+      "Right to bear arms and to a jury trial",
+      "Right to vote and run for office"
+    ]
+  },
+  {
+    "question": "What is freedom of religion?",
+    "correct_options": [
+      "You can practice any religion, or not practice a religion."
+    ],
+    "incorrect_options": [
+      "You must attend a church of the government's choice.",
+      "Only certain religions are allowed.",
+      "You cannot change your religion."
+    ]
+  },
+  {
+    "question": "What is the economic system in the United States?",
+    "correct_options": [
+      "Capitalist economy",
+      "Market economy"
+    ],
+    "incorrect_options": [
+      "Communist economy",
+      "Socialist economy",
+      "Barter economy"
+    ]
+  },
+  {
+    "question": "What is the 'rule of law'?",
+    "correct_options": [
+      "Everyone must follow the law.",
+      "Leaders must obey the law.",
+      "Government must obey the law.",
+      "No one is above the law."
+    ],
+    "incorrect_options": [
+      "Only leaders must follow the law.",
+      "The law is determined by the President.",
+      "Laws are secret and only for government officials."
+    ]
+  },
+  {
+    "question": "Name one branch or part of the government.",
+    "correct_options": [
+      "The Congress",
+      "The Legislative",
+      "The President",
+      "The Executive",
+      "The Courts",
+      "The Judicial"
+    ],
+    "incorrect_options": [
+      "The States",
+      "The Treasury",
+      "The Pentagon"
+    ]
+  },
+  {
+    "question": "What stops one branch of government from becoming too powerful?",
+    "correct_options": [
+      "The Checks and balances",
+      "The Separation of powers"
+    ],
+    "incorrect_options": [
+      "The President",
+      "The people",
+      "The Bill of Rights"
+    ]
+  },
+  {
+    "question": "Who is in charge of the executive branch?",
+    "correct_options": [
+      "The President"
+    ],
+    "incorrect_options": [
+      "The Speaker of the House",
+      "The Chief Justice",
+      "The Secretary of Defense"
+    ]
+  },
+  {
+    "question": "Who makes federal laws?",
+    "correct_options": [
+      "The Congress",
+      "The Senate and House of Representatives",
+      "The U.S. Legislature"
+    ],
+    "incorrect_options": [
+      "The President",
+      "The Supreme Court",
+      "The States"
+    ]
+  },
+  {
+    "question": "What are the two parts of the U.S. Congress?",
+    "correct_options": [
+      "The Senate and House of Representatives"
+    ],
+    "incorrect_options": [
+      "The President and the Cabinet",
+      "The Supreme Court and federal courts",
+      "The Democratic and Republican parties"
+    ]
+  },
+  {
+    "question": "How many U.S. Senators are there?",
+    "correct_options": [
+      "One hundred (100)"
+    ],
+    "incorrect_options": [
+      "Fifty (50)",
+      "Four hundred thirty-five (435)",
+      "It depends on the state's population"
+    ]
+  },
+  {
+    "question": "We elect a U.S. Senator for how many years?",
+    "correct_options": [
+      "Six (6)"
+    ],
+    "incorrect_options": [
+      "Two (2)",
+      "Four (4)",
+      "Eight (8)"
+    ]
+  },
+  {
+    "question": "Who is one of your state's U.S. Senators now?",
+    "correct_options": [
+      "Answers will vary."
+    ],
+    "incorrect_options": [
+      "Hillary Clinton",
+      "Mitch McConnell",
+      "Bernie Sanders"
+    ]
+  },
+  {
+    "question": "The House of Representatives has how many voting members?",
+    "correct_options": [
+      "four hundred thirty-five (435)"
+    ],
+    "incorrect_options": [
+      "One hundred (100)",
+      "Fifty (50)",
+      "Two hundred (200)"
+    ]
+  },
+  {
+    "question": "We elect a U.S. Representative for how many years?",
+    "correct_options": [
+      "two (2)"
+    ],
+    "incorrect_options": [
+      "Four (4)",
+      "Six (6)",
+      "For life"
+    ]
+  },
+  {
+    "question": "Name your U.S. Representative.",
+    "correct_options": [
+      "Answers will vary."
+    ],
+    "incorrect_options": [
+      "Alexandria Ocasio-Cortez",
+      "Matt Gaetz",
+      "Adam Schiff"
+    ]
+  },
+  {
+    "question": "Who does a U.S. Senator represent?",
+    "correct_options": [
+      "All people of the state"
+    ],
+    "incorrect_options": [
+      "Only the people in their congressional district",
+      "The state legislature",
+      "The President"
+    ]
+  },
+  {
+    "question": "Why do some states have more Representatives than other states?",
+    "correct_options": [
+      "Because of the state's population",
+      "Because they have more people",
+      "Because some states have more people"
+    ],
+    "incorrect_options": [
+      "Because of the state's geographical size",
+      "Because the original states have more",
+      "Because of the state's wealth"
+    ]
+  },
+  {
+    "question": "We elect a President for how many years?",
+    "correct_options": [
+      "four (4)"
+    ],
+    "incorrect_options": [
+      "Two (2)",
+      "Six (6)",
+      "Ten (10)"
+    ]
+  },
+  {
+    "question": "In what month do we vote for President?",
+    "correct_options": [
+      "November"
+    ],
+    "incorrect_options": [
+      "January",
+      "July",
+      "October"
+    ]
+  },
+  {
+    "question": "What is the name of the President of the United States now?",
+    "correct_options": [
+      "Donald Trump"
+    ],
+    "incorrect_options": [
+      "Joe Biden",
+      "Barack Obama",
+      "George W. Bush"
+    ]
+  },
+  {
+    "question": "What is the name of the Vice President of the United States now?",
+    "correct_options": [
+      "JD Vance"
+    ],
+    "incorrect_options": [
+      "Kamala Harris",
+      "Mike Pence",
+      "Dick Cheney"
+    ]
+  },
+  {
+    "question": "If the President can no longer serve, who becomes President?",
+    "correct_options": [
+      "The Vice President"
+    ],
+    "incorrect_options": [
+      "The Speaker of the House",
+      "The First Lady",
+      "The Secretary of State"
+    ]
+  },
+  {
+    "question": "If both the President and the Vice President can no longer serve, who becomes President?",
+    "correct_options": [
+      "The Speaker of the House"
+    ],
+    "incorrect_options": [
+      "The Chief Justice",
+      "The leader of the Senate",
+      "A new election is held immediately"
+    ]
+  },
+  {
+    "question": "Who is the Commander in Chief of the military?",
+    "correct_options": [
+      "The President"
+    ],
+    "incorrect_options": [
+      "The Secretary of Defense",
+      "The Chairman of the Joint Chiefs of Staff",
+      "The Attorney General"
+    ]
+  },
+  {
+    "question": "Who signs bills to become laws?",
+    "correct_options": [
+      "The President"
+    ],
+    "incorrect_options": [
+      "The Vice President",
+      "The Chief Justice",
+      "The Speaker of the House"
+    ]
+  },
+  {
+    "question": "Who vetoes bills?",
+    "correct_options": [
+      "The President"
+    ],
+    "incorrect_options": [
+      "The Senate",
+      "The Speaker of the House",
+      "The Vice President"
+    ]
+  },
+  {
+    "question": "What does the President's Cabinet do?",
+    "correct_options": [
+      "Advises the President"
+    ],
+    "incorrect_options": [
+      "Makes laws",
+      "Commands the military",
+      "Judges legal cases"
+    ]
+  },
+  {
+    "question": "What are two Cabinet-level positions?",
+    "correct_options": [
+      "Secretary of Agriculture and Secretary of Commerce",
+      "Secretary of Agriculture and Secretary of Defense",
+      "Secretary of Agriculture and Secretary of Education",
+      "Secretary of Agriculture and Attorney General",
+      "Secretary of Agriculture and Vice President",
+      "Secretary of Commerce and Secretary of Defense",
+      "Secretary of Commerce and Secretary of Education",
+      "Secretary of Commerce and Attorney General",
+      "Secretary of Commerce and Vice President",
+      "Secretary of Defense and Secretary of Education",
+      "Secretary of Defense and Attorney General",
+      "Secretary of Defense and Vice President",
+      "Secretary of Education and Attorney General",
+      "Secretary of Education and Vice President",
+      "Attorney General and Vice President"
+    ],
+    "incorrect_options": [
+      "Governor and Mayor",
+      "Chief Justice and Associate Justice",
+      "Speaker of the House and President pro tempore"
+    ]
+  },
+  {
+    "question": "What does the judicial branch do?",
+    "correct_options": [
+      "Reviews laws",
+      "Explains laws",
+      "Resolves disputes (disagreements)",
+      "Decides if a law goes against the Constitution"
+    ],
+    "incorrect_options": [
+      "Writes new laws",
+      "Vetoes bills",
+      "Commands the army"
+    ]
+  },
+  {
+    "question": "What is the highest court in the United States?",
+    "correct_options": [
+      "The Supreme Court"
+    ],
+    "incorrect_options": [
+      "The Superior Court",
+      "The Federal Appeals Court",
+      "The District Court"
+    ]
+  },
+  {
+    "question": "How many justices are on the Supreme Court?",
+    "correct_options": [
+      "Nine (9)"
+    ],
+    "incorrect_options": [
+      "Seven (7)",
+      "Eleven (11)",
+      "Twelve (12)"
+    ]
+  },
+  {
+    "question": "Who is the Chief Justice of the United States now?",
+    "correct_options": [
+      "John Roberts"
+    ],
+    "incorrect_options": [
+      "Clarence Thomas",
+      "William Rehnquist",
+      "Sonia Sotomayor"
+    ]
+  },
+  {
+    "question": "Under our Constitution, some powers belong to the federal government. What is one power of the federal government?",
+    "correct_options": [
+      "To print money",
+      "To declare war",
+      "To create an army",
+      "To make treaties"
+    ],
+    "incorrect_options": [
+      "To provide schooling and education",
+      "To provide police departments",
+      "To issue driver's licenses"
+    ]
+  },
+  {
+    "question": "Under our Constitution, some powers belong to the states. What is one power of the states?",
+    "correct_options": [
+      "To provide schooling and education",
+      "To provide protection (police)",
+      "To provide safety (fire departments)",
+      "To give a driver's license",
+      "To approve zoning and land use"
+    ],
+    "incorrect_options": [
+      "To print money",
+      "To create an army",
+      "To make treaties"
+    ]
+  },
+  {
+    "question": "Who is the Governor of your state now?",
+    "correct_options": [
+      "Answers will vary."
+    ],
+    "incorrect_options": [
+      "Gavin Newsom",
+      "Ron DeSantis",
+      "Greg Abbott"
+    ]
+  },
+  {
+    "question": "What is the capital of your state?",
+    "correct_options": [
+      "Answers will vary."
+    ],
+    "incorrect_options": [
+      "New York City",
+      "Los Angeles",
+      "Chicago"
+    ]
+  },
+  {
+    "question": "What are the two major political parties in the United States?",
+    "correct_options": [
+      "Democratic and Republican"
+    ],
+    "incorrect_options": [
+      "Progressive and Conservative",
+      "Labor and Liberal",
+      "Federalist and Anti-Federalist"
+    ]
+  },
+  {
+    "question": "What is the political party of the President now?",
+    "correct_options": [
+      "Republican"
+    ],
+    "incorrect_options": [
+      "Democratic",
+      "Independent",
+      "Libertarian"
+    ]
+  },
+  {
+    "question": "What is the name of the Speaker of the House of Representatives now?",
+    "correct_options": [
+      "Mike Johnson"
+    ],
+    "incorrect_options": [
+      "Nancy Pelosi",
+      "Kevin McCarthy",
+      "Paul Ryan"
+    ]
+  },
+  {
+    "question": "There are four amendments to the Constitution about who can vote. Describe one of them.",
+    "correct_options": [
+      "Citizens eighteen (18) and older (can vote).",
+      "You don't have to pay (a poll tax) to vote.",
+      "Any citizen can vote. (Women and men can vote.)",
+      "A male citizen of any race (can vote)."
+    ],
+    "incorrect_options": [
+      "Only landowners can vote.",
+      "You must be born in the United States to vote.",
+      "Only people who own a home can vote."
+    ]
+  },
+  {
+    "question": "What is one responsibility that is only for United States citizens?",
+    "correct_options": [
+      "Serve on a jury",
+      "Vote in a federal election"
+    ],
+    "incorrect_options": [
+      "Pay taxes",
+      "Obey the law",
+      "Own property"
+    ]
+  },
+  {
+    "question": "Name one right only for United States citizens.",
+    "correct_options": [
+      "Vote in a federal election",
+      "Run for federal office"
+    ],
+    "incorrect_options": [
+      "Freedom of speech",
+      "Freedom of religion",
+      "Right to bear arms"
+    ]
+  },
+  {
+    "question": "What are two rights of everyone living in the United States?",
+    "correct_options": [
+      "Freedom of expression and Freedom of speech",
+      "Freedom of expression and Freedom of assembly",
+      "Freedom of expression and Freedom to petition the government",
+      "Freedom of expression and Freedom of religion",
+      "Freedom of expression and the Right to bear arms",
+      "Freedom of speech and Freedom of assembly",
+      "Freedom of speech and Freedom to petition the government",
+      "Freedom of speech and Freedom of religion",
+      "Freedom of speech and the Right to bear arms",
+      "Freedom of assembly and Freedom to petition the government",
+      "Freedom of assembly and Freedom of religion",
+      "Freedom of assembly and the Right to bear arms",
+      "Freedom to petition the government and Freedom of religion",
+      "Freedom to petition the government and the Right to bear arms",
+      "Freedom of religion and the Right to bear arms"
+    ],
+    "incorrect_options": [
+      "Right to run for president and vote in federal elections",
+      "Right to a passport and to serve on a jury",
+      "Right to free housing and a job"
+    ]
+  },
+  {
+    "question": "What do we show loyalty to when we say the Pledge of Allegiance?",
+    "correct_options": [
+      "The United States",
+      "The flag"
+    ],
+    "incorrect_options": [
+      "The President",
+      "The Congress",
+      "Our state of residence"
+    ]
+  },
+  {
+    "question": "What is one promise you make when you become a United States citizen?",
+    "correct_options": [
+      "Give up loyalty to other countries",
+      "Defend the Constitution and laws of the United States",
+      "Obey the laws of the United States",
+      "Serve in the U.S. military (if needed)",
+      "Serve (do important work for) the nation (if needed)",
+      "Be loyal to the United States"
+    ],
+    "incorrect_options": [
+      "Never travel to another country",
+      "Join a political party",
+      "Work for the government"
+    ]
+  },
+  {
+    "question": "How old do citizens have to be to vote for President?",
+    "correct_options": [
+      "Eighteen (18) and older"
+    ],
+    "incorrect_options": [
+      "Sixteen (16)",
+      "Twenty-one (21)",
+      "Twenty-five (25)"
+    ]
+  },
+  {
+    "question": "What are two ways that Americans can participate in their democracy?",
+    "correct_options": [
+      "Vote and Join a political party",
+      "Vote and Help with a campaign",
+      "Vote and Join a civic group",
+      "Vote and Join a community group",
+      "Vote and Give an elected official your opinion on an issue",
+      "Vote and Call Senators and Representatives",
+      "Vote and Publicly support or oppose an issue or policy",
+      "Vote and Run for office",
+      "Vote and Write to a newspaper",
+      "Join a political party and Help with a campaign",
+      "Join a political party and Join a civic group",
+      "Join a political party and Join a community group",
+      "Join a political party and Give an elected official your opinion on an issue",
+      "Join a political party and Call Senators and Representatives",
+      "Join a political party and Publicly support or oppose an issue or policy",
+      "Join a political party and Run for office",
+      "Join a political party and Write to a newspaper",
+      "Help with a campaign and Join a civic group",
+      "Help with a campaign and Join a community group",
+      "Help with a campaign and Give an elected official your opinion on an issue",
+      "Help with a campaign and Call Senators and Representatives",
+      "Help with a campaign and Publicly support or oppose an issue or policy",
+      "Help with a campaign and Run for office",
+      "Help with a campaign and Write to a newspaper",
+      "Join a civic group and Join a community group",
+      "Join a civic group and Give an elected official your opinion on an issue",
+      "Join a civic group and Call Senators and Representatives",
+      "Join a civic group and Publicly support or oppose an issue or policy",
+      "Join a civic group and Run for office",
+      "Join a civic group and Write to a newspaper",
+      "Join a community group and Give an elected official your opinion on an issue",
+      "Join a community group and Call Senators and Representatives",
+      "Join a community group and Publicly support or oppose an issue or policy",
+      "Join a community group and Run for office",
+      "Join a community group and Write to a newspaper",
+      "Give an elected official your opinion on an issue and Call Senators and Representatives",
+      "Give an elected official your opinion on an issue and Publicly support or oppose an issue or policy",
+      "Give an elected official your opinion on an issue and Run for office",
+      "Give an elected official your opinion on an issue and Write to a newspaper",
+      "Call Senators and Representatives and Publicly support or oppose an issue or policy",
+      "Call Senators and Representatives and Run for office",
+      "Call Senators and Representatives and Write to a newspaper",
+      "Publicly support or oppose an issue or policy and Run for office",
+      "Publicly support or oppose an issue or policy and Write to a newspaper",
+      "Run for office and Write to a newspaper"
+    ],
+    "incorrect_options": [
+      "Pay taxes and obey the law",
+      "Get a driver's license and go to school",
+      "Fly a flag and own property"
+    ]
+  },
+  {
+    "question": "When is the last day you can send in federal income tax forms?",
+    "correct_options": [
+      "April 15"
+    ],
+    "incorrect_options": [
+      "January 1",
+      "July 4",
+      "December 31"
+    ]
+  },
+  {
+    "question": "When must all men register for the Selective Service?",
+    "correct_options": [
+      "AT age eighteen (18)",
+      "Between eighteen (18) and twenty-six (26)"
+    ],
+    "incorrect_options": [
+      "At age sixteen (16)",
+      "At age twenty-one (21)",
+      "When they get a driver's license"
+    ]
+  },
+  {
+    "question": "What is one reason colonists came to America?",
+    "correct_options": [
+      "Freedom",
+      "Political liberty",
+      "Religious freedom",
+      "Economic opportunity",
+      "Practice their religion",
+      "Escape persecution"
+    ],
+    "incorrect_options": [
+      "To join the British army",
+      "To become King",
+      "To explore the West"
+    ]
+  },
+  {
+    "question": "Who lived in America before the Europeans arrived?",
+    "correct_options": [
+      "American Indians",
+      "Native Americans"
+    ],
+    "incorrect_options": [
+      "Vikings",
+      "Canadians",
+      "No one"
+    ]
+  },
+  {
+    "question": "What group of people was taken to America and sold as slaves?",
+    "correct_options": [
+      "Africans",
+      "People from Africa"
+    ],
+    "incorrect_options": [
+      "Canadians",
+      "Dutch",
+      "Irish"
+    ]
+  },
+  {
+    "question": "Why did the colonists fight the British?",
+    "correct_options": [
+      "Because of high taxes (taxation without representation)",
+      "Because the British army stayed in their houses (boarding, quartering)",
+      "Because they didn't have self-government"
+    ],
+    "incorrect_options": [
+      "Because they wanted to be ruled by France",
+      "Because the British wanted to end slavery",
+      "Because they wanted to move to Canada"
+    ]
+  },
+  {
+    "question": "Who wrote the Declaration of Independence?",
+    "correct_options": [
+      "Thomas Jefferson"
+    ],
+    "incorrect_options": [
+      "George Washington",
+      "Abraham Lincoln",
+      "Benjamin Franklin"
+    ]
+  },
+  {
+    "question": "When was the Declaration of Independence adopted?",
+    "correct_options": [
+      "July 4, 1776"
+    ],
+    "incorrect_options": [
+      "December 7, 1941",
+      "September 17, 1787",
+      "November 11, 1918"
+    ]
+  },
+  {
+    "question": "There were 13 original states. Name three.",
+    "correct_options": [
+      "New Hampshire, Massachusetts, Rhode Island",
+      "New Hampshire, Massachusetts, Connecticut",
+      "New Hampshire, Massachusetts, New York",
+      "New Hampshire, Massachusetts, New Jersey",
+      "New Hampshire, Massachusetts, Pennsylvania",
+      "New Hampshire, Massachusetts, Delaware",
+      "New Hampshire, Massachusetts, Maryland",
+      "New Hampshire, Massachusetts, Virginia",
+      "New Hampshire, Massachusetts, North Carolina",
+      "New Hampshire, Massachusetts, South Carolina",
+      "New Hampshire, Massachusetts, Georgia",
+      "New Hampshire, Rhode Island, Connecticut",
+      "New Hampshire, Rhode Island, New York",
+      "New Hampshire, Rhode Island, New Jersey",
+      "New Hampshire, Rhode Island, Pennsylvania",
+      "New Hampshire, Rhode Island, Delaware",
+      "New Hampshire, Rhode Island, Maryland",
+      "New Hampshire, Rhode Island, Virginia",
+      "New Hampshire, Rhode Island, North Carolina",
+      "New Hampshire, Rhode Island, South Carolina",
+      "New Hampshire, Rhode Island, Georgia",
+      "New Hampshire, Connecticut, New York",
+      "New Hampshire, Connecticut, New Jersey",
+      "New Hampshire, Connecticut, Pennsylvania",
+      "New Hampshire, Connecticut, Delaware",
+      "New Hampshire, Connecticut, Maryland",
+      "New Hampshire, Connecticut, Virginia",
+      "New Hampshire, Connecticut, North Carolina",
+      "New Hampshire, Connecticut, South Carolina",
+      "New Hampshire, Connecticut, Georgia",
+      "New Hampshire, New York, New Jersey",
+      "New Hampshire, New York, Pennsylvania",
+      "New Hampshire, New York, Delaware",
+      "New Hampshire, New York, Maryland",
+      "New Hampshire, New York, Virginia",
+      "New Hampshire, New York, North Carolina",
+      "New Hampshire, New York, South Carolina",
+      "New Hampshire, New York, Georgia",
+      "New Hampshire, New Jersey, Pennsylvania",
+      "New Hampshire, New Jersey, Delaware",
+      "New Hampshire, New Jersey, Maryland",
+      "New Hampshire, New Jersey, Virginia",
+      "New Hampshire, New Jersey, North Carolina",
+      "New Hampshire, New Jersey, South Carolina",
+      "New Hampshire, New Jersey, Georgia",
+      "New Hampshire, Pennsylvania, Delaware",
+      "New Hampshire, Pennsylvania, Maryland",
+      "New Hampshire, Pennsylvania, Virginia",
+      "New Hampshire, Pennsylvania, North Carolina",
+      "New Hampshire, Pennsylvania, South Carolina",
+      "New Hampshire, Pennsylvania, Georgia",
+      "New Hampshire, Delaware, Maryland",
+      "New Hampshire, Delaware, Virginia",
+      "New Hampshire, Delaware, North Carolina",
+      "New Hampshire, Delaware, South Carolina",
+      "New Hampshire, Delaware, Georgia",
+      "New Hampshire, Maryland, Virginia",
+      "New Hampshire, Maryland, North Carolina",
+      "New Hampshire, Maryland, South Carolina",
+      "New Hampshire, Maryland, Georgia",
+      "New Hampshire, Virginia, North Carolina",
+      "New Hampshire, Virginia, South Carolina",
+      "New Hampshire, Virginia, Georgia",
+      "New Hampshire, North Carolina, South Carolina",
+      "New Hampshire, North Carolina, Georgia",
+      "New Hampshire, South Carolina, Georgia",
+      "Massachusetts, Rhode Island, Connecticut",
+      "Massachusetts, Rhode Island, New York",
+      "Massachusetts, Rhode Island, New Jersey",
+      "Massachusetts, Rhode Island, Pennsylvania",
+      "Massachusetts, Rhode Island, Delaware",
+      "Massachusetts, Rhode Island, Maryland",
+      "Massachusetts, Rh极 Island, Virginia",
+      "Massachusetts, Rhode Island, North Carolina",
+      "Massachusetts, Rhode Island, South Carolina",
+      "Massachusetts, Rhode Island, Georgia",
+      "Massachusetts, Connecticut, New York",
+      "Massachusetts, Connecticut, New Jersey",
+      "Massachusetts, Connecticut, Pennsylvania",
+      "Massachusetts, Connecticut, Delaware",
+      "Massachusetts, Connecticut, Maryland",
+      "Massachusetts, Connecticut, Virginia",
+      "Massachusetts, Connecticut, North Carolina",
+      "Massachusetts, Connecticut, South Carolina",
+      "Massachusetts, Connecticut, Georgia",
+      "Massachusetts, New York, New Jersey",
+      "Massachusetts, New York, Pennsylvania",
+      "Massachusetts, New York, Delaware",
+      "Massachusetts, New York, Maryland",
+      "Massachusetts, New York, Virginia",
+      "Massachusetts, New York, North Carolina",
+      "Massachusetts, New York, South Carolina",
+      "Massachusetts, New York, Georgia",
+      "Massachusetts, New Jersey, Pennsylvania",
+      "Massachusetts, New Jersey, Delaware",
+      "Massachusetts, New Jersey, Maryland",
+      "Massachusetts, New Jersey, Virginia",
+      "Massachusetts, New Jersey, North Carolina",
+      "Massachusetts, New Jersey, South Carolina",
+      "Massachusetts, New Jersey, Georgia",
+      "Massachusetts, Pennsylvania, Delaware",
+      "Massachusetts, Pennsylvania, Maryland",
+      "Massachusetts, Pennsylvania, Virginia",
+      "Massachusetts, Pennsylvania, North Carolina",
+      "Massachusetts, Pennsylvania, South Carolina",
+      "Massachusetts, Pennsylvania, Georgia",
+      "Massachusetts, Delaware, Maryland",
+      "Massachusetts, Delaware, Virginia",
+      "Massachusetts, Delaware, North Carolina",
+      "Massachusetts, Delaware, South Carolina",
+      "Massachusetts, Delaware, Georgia",
+      "Massachusetts, Maryland, Virginia",
+      "Massachusetts, Maryland, North Carolina",
+      "Massachusetts, Maryland, South Carolina",
+      "Massachusetts, Maryland, Georgia",
+      "Massachusetts, Virginia, North Carolina",
+      "Massachusetts, Virginia, South Carolina",
+      "Massachusetts, Virginia, Georgia",
+      "Massachusetts, North Carolina, South Carolina",
+      "Massachusetts, North Carolina, Georgia",
+      "Massachusetts, South Carolina, Georgia",
+      "Rhode Island, Connecticut, New York",
+      "Rhode Island, Connecticut, New Jersey",
+      "Rhode Island, Connecticut, Pennsylvania",
+      "Rhode Island, Connecticut, Delaware",
+      "Rhode Island, Connecticut, Maryland",
+      "Rhode Island, Connecticut, Virginia",
+      "Rhode Island, Connecticut, North Carolina",
+      "Rhode Island, Connecticut, South Carolina",
+      "Rhode Island, Connecticut, Georgia",
+      "Rhode Island, New York, New Jersey",
+      "Rhode Island, New York, Pennsylvania",
+      "Rhode Island, New York, Delaware",
+      "Rhode Island, New York, Maryland",
+      "Rhode Island, New York, Virginia",
+      "Rhode Island, New York, North Carolina",
+      "Rhode Island, New York, South Carolina",
+      "Rhode Island, New York, Georgia",
+      "Rhode Island, New Jersey, Pennsylvania",
+      "Rhode Island, New Jersey, Delaware",
+      "Rhode Island, New Jersey, Maryland",
+      "Rhode Island, New Jersey, Virginia",
+      "Rhode Island, New Jersey, North Carolina",
+      "Rhode Island, New Jersey, South Carolina",
+      "Rhode Island, New Jersey, Georgia",
+      "Rhode Island, Pennsylvania, Delaware",
+      "Rhode Island, Pennsylvania, Maryland",
+      "Rhode Island, Pennsylvania, Virginia",
+      "Rhode Island, Pennsylvania, North Carolina",
+      "Rhode Island, Pennsylvania, South Carolina",
+      "Rhode Island, Pennsylvania, Georgia",
+      "Rhode Island, Delaware, Maryland",
+      "Rhode Island, Delaware, Virginia",
+      "Rhode Island, Delaware, North Carolina",
+      "Rhode Island, Delaware, South Carolina",
+      "Rhode Island, Delaware, Georgia",
+      "Rhode Island, Maryland, Virginia",
+      "Rhode Island, Maryland, North Carolina",
+      "Rhode Island, Maryland, South Carolina",
+      "Rhode Island, Maryland, Georgia",
+      "Rhode Island, Virginia, North Carolina",
+      "Rhode Island, Virginia, South Carolina",
+      "Rhode Island, Virginia, Georgia",
+      "Rhode Island, North Carolina, South Carolina",
+      "Rhode Island, North Carolina, Georgia",
+      "Rhode Island, South Carolina, Georgia",
+      "Connecticut, New York, New Jersey",
+      "Connecticut, New York, Pennsylvania",
+      "Connecticut, New York, Delaware",
+      "Connecticut, New York, Maryland",
+      "Connecticut, New York, Virginia",
+      "Connecticut, New York, North Carolina",
+      "Connecticut, New York, South Carolina",
+      "Connecticut, 极 York, Georgia",
+      "Connecticut, New Jersey, Pennsylvania",
+      "Connecticut, New Jersey, Delaware",
+      "Connecticut, New Jersey, Maryland",
+      "Connecticut, New Jersey, Virginia",
+      "Connecticut, New Jersey, North Carolina",
+      "Connecticut, New Jersey, South Carolina",
+      "Connecticut, New Jersey, Georgia",
+      "Connecticut, Pennsylvania, Delaware",
+      "Connecticut, Pennsylvania, Maryland",
+      "Connecticut, Pennsylvania, Virginia",
+      "Connecticut, Pennsylvania, North Carolina",
+      "Connecticut, Pennsylvania, South Carolina",
+      "Connecticut, Pennsylvania, Georgia",
+      "Connecticut, Delaware, Maryland",
+      "Connecticut, Delaware, Virginia",
+      "Connecticut, Delaware, North Carolina",
+      "Connecticut, Delaware, South Carolina",
+      "Connecticut, Delaware, Georgia",
+      "Connecticut, Maryland, Virginia",
+      "Connecticut, Maryland, North Carolina",
+      "Connecticut, Maryland, South Carolina",
+      "Connecticut, Maryland, Georgia",
+      "Connecticut, Virginia, North Carolina",
+      "Connecticut, Virginia, South Carolina",
+      "Connecticut, Virginia, Georgia",
+      "Connecticut, North Carolina, South Carolina",
+      "Connecticut, North Carolina, Georgia",
+      "Connecticut, South Carolina, Georgia",
+      "New York, New Jersey, Pennsylvania",
+      "New York, New Jersey, Delaware",
+      "New York, New Jersey, Maryland",
+      "New York, New Jersey, Virginia",
+      "New York, New Jersey, North Carolina",
+      "New York, New Jersey, South Carolina",
+      "New York, New Jersey, Georgia",
+      "New York, Pennsylvania, Delaware",
+      "New York, Pennsylvania, Maryland",
+      "New York, Pennsylvania, Virginia",
+      "New York, Pennsylvania, North Carolina",
+      "New York, Pennsylvania, South Carolina",
+      "New York, Pennsylvania, Georgia",
+      "New York, Delaware, Maryland",
+      "New York, Delaware, Virginia",
+      "New York, Delaware, North Carolina",
+      "New York, Delaware, South Carolina",
+      "New York, Delaware, Georgia",
+      "New York, Maryland, Virginia",
+      "New York, Maryland, North Carolina",
+      "New York, Maryland, South Carolina",
+      "New York, Maryland, Georgia",
+      "New York, Virginia, North Carolina",
+      "New York, Virginia, South Carolina",
+      "New York, Virginia, Georgia",
+      "New York, North Carolina, South Carolina",
+      "New York, North Carolina, Georgia",
+      "New York, South Carolina, Georgia",
+      "New Jersey, Pennsylvania, Delaware",
+      "New Jersey, Pennsylvania, Maryland",
+      "New Jersey, Pennsylvania, Virginia",
+      "New Jersey, Pennsylvania, North Carolina",
+      "New Jersey, Pennsylvania, South Carolina",
+      "New Jersey, Pennsylvania, Georgia",
+      "New Jersey, Delaware, Maryland",
+      "New Jersey, Delaware, Virginia",
+      "New Jersey, Delaware, North Carolina",
+      "New Jersey, Delaware, South Carolina",
+      "New Jersey, Delaware, Georgia",
+      "New Jersey, Maryland, Virginia",
+      "New Jersey, Maryland, North Carolina",
+      "New Jersey, Maryland, South Carolina",
+      "New Jersey, Maryland, Georgia",
+      "New Jersey, Virginia, North Carolina",
+      "New Jersey, Virginia, South Carolina",
+      "New Jersey, Virginia, Georgia",
+      "New Jersey, North Carolina, South Carolina",
+      "New Jersey, North Carolina, Georgia",
+      "New Jersey, South Carolina, Georgia",
+      "Pennsylvania, Delaware, Maryland",
+      "Pennsylvania, Delaware, Virginia",
+      "Pennsylvania, Delaware, North Carolina",
+      "Pennsylvania, Delaware, South Carolina",
+      "Pennsylvania, Delaware, Georgia",
+      "Pennsylvania, Maryland, Virginia",
+      "Pennsylvania, Maryland, North Carolina",
+      "Pennsylvania, Maryland, South Carolina",
+      "Pennsylvania, Maryland, Georgia",
+      "Pennsylvania, Virginia, North Carolina",
+      "Pennsylvania, Virginia, South Carolina",
+      "Pennsylvania, Virginia, Georgia",
+      "Pennsylvania, North Carolina, South Carolina",
+      "Pennsylvania, North Carolina, Georgia",
+      "Pennsylvania, South Carolina, Georgia",
+      "Delaware, Maryland, Virginia",
+      "Delaware, Maryland, North Carolina",
+      "Delaware, Maryland, South Carolina",
+      "Delaware, Maryland, Georgia",
+      "Delaware, Virginia, North Carolina",
+      "Delaware, Virginia, South Carolina",
+      "Delaware, Virginia, Georgia",
+      "Delaware, North Carolina, South Carolina",
+      "Delaware, North Carolina, Georgia",
+      "Delaware, South Carolina, Georgia",
+      "Maryland, Virginia, North Carolina",
+      "Maryland, Virginia, South Carolina",
+      "Maryland, Virginia, Georgia",
+      "Maryland, North Carolina, South Carolina",
+      "Maryland, North Carolina, Georgia",
+      "Maryland, South Carolina, Georgia",
+      "Virginia, North Carolina, South Carolina",
+      "Virginia, North Carolina, Georgia",
+      "Virginia, South Carolina, Georgia",
+      "North Carolina, South Carolina, Georgia"
+    ],
+    "incorrect_options": [
+      "California, Texas, Florida",
+      "Washington, Oregon, California",
+      "Ohio, Michigan, Indiana"
+    ]
+  },
+  {
+    "question": "What happened at the Constitutional Convention?",
+    "correct_options": [
+      "The Constitution was written.",
+      "The Founding Fathers wrote the Constitution."
+    ],
+    "incorrect_options": [
+      "The Declaration of Independence was written.",
+      "The Emancipation Proclamation was signed.",
+      "George Washington was elected President."
+    ]
+  },
+  {
+    "question": "When was the Constitution written?",
+    "correct_options": [
+      "1787"
+    ],
+    "incorrect_options": [
+      "1776",
+      "1812",
+      "1865"
+    ]
+  },
+  {
+    "question": "The Federalist Papers supported the passage of the U.S. Constitution. Name one of the writers.",
+    "correct_options": [
+      "James Madison",
+      "Alexander Hamilton",
+      "John Jay",
+      "Publius"
+    ],
+    "incorrect_options": [
+      "Thomas Jefferson",
+      "George Washington",
+      "Abraham Lincoln"
+    ]
+  },
+  {
+    "question": "What is one thing Benjamin Franklin is famous for?",
+    "correct_options": [
+      "U.S. diplomat",
+      "Oldest member of the Constitutional Convention",
+      "First Postmaster General of the United States",
+      "Writer of 'Poor Richard's Almanac'",
+      "Started the first free libraries"
+    ],
+    "incorrect_options": [
+      "First President",
+      "Wrote the Declaration of Independence",
+      "General in the Revolutionary War"
+    ]
+  },
+  {
+    "question": "Who is the 'Father of Our Country'?",
+    "correct_options": [
+      "George Washington"
+    ],
+    "incorrect_options": [
+      "Abraham Lincoln",
+      "Thomas Jefferson",
+      "Benjamin Franklin"
+    ]
+  },
+  {
+    "question": "Who was the first President?",
+    "correct_options": [
+      "George Washington"
+    ],
+    "incorrect_options": [
+      "John Adams",
+      "Thomas Jefferson",
+      "Abraham Lincoln"
+    ]
+  },
+  {
+    "question": "What territory did the United States buy from France in 1803?",
+    "correct_options": [
+      "The Louisiana Territory",
+      "Louisiana"
+    ],
+    "incorrect_options": [
+      "Alaska",
+      "Florida",
+      "Hawaii"
+    ]
+  },
+  {
+    "question": "Name one war fought by the United States in the 1800s.",
+    "correct_options": [
+      "War of 1812",
+      "Mexican-American War",
+      "Civil War",
+      "Spanish-American War"
+    ],
+    "incorrect_options": [
+      "World War I",
+      "Revolutionary War",
+      "The Korean War"
+    ]
+  },
+  {
+    "question": "Name the U.S. war between the North and the South.",
+    "correct_options": [
+      "The Civil War",
+      "The War between the States"
+    ],
+    "incorrect_options": [
+      "The Revolutionary War",
+      "The War of 1812",
+      "The Mexican-American War"
+    ]
+  },
+  {
+    "question": "Name one problem that led to the Civil War.",
+    "correct_options": [
+      "Slavery",
+      "Economic reasons",
+      "States' rights"
+    ],
+    "incorrect_options": [
+      "Taxation without representation",
+      "The price of oil",
+      "The purchase of Alaska"
+    ]
+  },
+  {
+    "question": "What was one important thing that Abraham Lincoln did?",
+    "correct_options": [
+      "Freed the slaves (Emancipation Proclamation)",
+      "Saved (or preserved) the Union",
+      "Led the United States during the Civil War"
+    ],
+    "incorrect_options": [
+      "Wrote the Constitution",
+      "Was the first President",
+      "Purchased the Louisiana Territory"
+    ]
+  },
+  {
+    "question": "What did the Emancipation Proclamation do?",
+    "correct_options": [
+      "Freed the slaves",
+      "Freed slaves in the Confederacy",
+      "Freed slaves in the Confederate states",
+      "Freed slaves in most Southern states"
+    ],
+    "incorrect_options": [
+      "Gave women the right to vote",
+      "Ended the Revolutionary War",
+      "Declared independence from Britain"
+    ]
+  },
+  {
+    "question": "What did Susan B. Anthony do?",
+    "correct_options": [
+      "Fought for women's rights",
+      "Fought for civil rights"
+    ],
+    "incorrect_options": [
+      "Was the first woman in space",
+      "Sewed the first American flag",
+      "Was a Civil War nurse"
+    ]
+  },
+  {
+    "question": "Name one war fought by the United States in the 1900s.",
+    "correct_options": [
+      "World War I",
+      "World War II",
+      "Korean War",
+      "Vietnam War",
+      "(Persian) Gulf War"
+    ],
+    "incorrect_options": [
+      "The Civil War",
+      "The Revolutionary War",
+      "The War of 1812"
+    ]
+  },
+  {
+    "question": "Who was President during World War I?",
+    "correct_options": [
+      "Woodrow Wilson"
+    ],
+    "incorrect_options": [
+      "Abraham Lincoln",
+      "Franklin Roosevelt",
+      "Theodore Roosevelt"
+    ]
+  },
+  {
+    "question": "Who was President during the Great Depression and World War II?",
+    "correct_options": [
+      "Franklin Roosevelt"
+    ],
+    "incorrect_options": [
+      "Woodrow Wilson",
+      "Harry Truman",
+      "Dwight Eisenhower"
+    ]
+  },
+  {
+    "question": "Who did the United States fight in World War II?",
+    "correct_options": [
+      "Japan, Germany, and Italy"
+    ],
+    "incorrect_options": [
+      "Russia, China, and Korea",
+      "Great Britain, France, and Russia",
+      "Spain, Mexico, and Canada"
+    ]
+  },
+  {
+    "question": "Before he was President, Eisenhower was a general. What war was he in?",
+    "correct_options": [
+      "World War II"
+    ],
+    "incorrect_options": [
+      "The Civil War",
+      "World War I",
+      "The Spanish-American War"
+    ]
+  },
+  {
+    "question": "During the Cold War, what was the main concern of the United States?",
+    "correct_options": [
+      "Communism"
+    ],
+    "incorrect_options": [
+      "Slavery",
+      "Climate Change",
+      "Westward Expansion"
+    ]
+  },
+  {
+    "question": "What movement tried to end racial discrimination?",
+    "correct_options": [
+      "Civil Rights Movement"
+    ],
+    "incorrect_options": [
+      "The Women's Suffrage Movement",
+      "The Progressive Movement",
+      "The Prohibition Movement"
+    ]
+  },
+  {
+    "question": "What did Martin Luther King, Jr. do?",
+    "correct_options": [
+      "Fought for civil rights",
+      "Worked for equality for all Americans"
+    ],
+    "incorrect_options": [
+      "Became a U.S. Senator",
+      "Was an astronaut",
+      "Ran for President"
+    ]
+  },
+  {
+    "question": "What major event happened on September 11, 2001, in the United States?",
+    "correct_options": [
+      "Terrorists attacked the United States."
+    ],
+    "incorrect_options": [
+      "The stock market crashed",
+      "The U.S. landed on the moon",
+      "Hurricane Katrina struck"
+    ]
+  },
+  {
+    "question": "Name one American Indian tribe in the United States.",
+    "correct_options": [
+      "Cherokee",
+      "Navajo",
+      "Sioux",
+      "Chippewa",
+      "Choctaw",
+      "Pueblo",
+      "Apache",
+      "Iroquois",
+      "Creek",
+      "Blackfeet",
+      "Seminole",
+      "Cheyenne",
+      "Arawak",
+      "Shawnee",
+      "Mohegan",
+      "Huron",
+      "Oneida",
+      "Lakota",
+      "Crow",
+      "Teton",
+      "Hopi",
+      "Inuit"
+    ],
+    "incorrect_options": [
+      "Zulu",
+      "Maori",
+      "Sami"
+    ]
+  },
+  {
+    "question": "Name one of the two longest rivers in the United States.",
+    "correct_options": [
+      "Missouri River",
+      "Mississippi River"
+    ],
+    "incorrect_options": [
+      "Colorado River",
+      "Ohio River",
+      "Rio Grande"
+    ]
+  },
+  {
+    "question": "What ocean is on the West Coast of the United States?",
+    "correct_options": [
+      "Pacific Ocean"
+    ],
+    "incorrect_options": [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Arctic Ocean"
+    ]
+  },
+  {
+    "question": "What ocean is on the East Coast of the United States?",
+    "correct_options": [
+      "Atlantic Ocean"
+    ],
+    "incorrect_options": [
+      "Pacific Ocean",
+      "Indian Ocean",
+      "Arctic Ocean"
+    ]
+  },
+  {
+    "question": "Name one U.S. territory.",
+    "correct_options": [
+      "Puerto Rico",
+      "U.S. Virgin Islands",
+      "American Samoa",
+      "Northern Mariana Islands",
+      "Guam"
+    ],
+    "incorrect_options": [
+      "Hawaii",
+      "Alaska",
+      "Florida"
+    ]
+  },
+  {
+    "question": "Name one state that borders Canada.",
+    "correct_options": [
+      "Maine",
+      "New Hampshire",
+      "Vermont",
+      "New York",
+      "Pennsylvania",
+      "Ohio",
+      "Michigan",
+      "Minnesota",
+      "North Dakota",
+      "Montana",
+      "Idaho",
+      "Washington",
+      "Alaska"
+    ],
+    "incorrect_options": [
+      "California",
+      "Texas",
+      "Florida"
+    ]
+  },
+  {
+    "question": "Name one state that borders Mexico.",
+    "correct_options": [
+      "California",
+      "Arizona",
+      "New Mexico",
+      "Texas"
+    ],
+    "incorrect_options": [
+      "Nevada",
+      "Louisiana",
+      "Oregon"
+    ]
+  },
+  {
+    "question": "What is the capital of the United States?",
+    "correct_options": [
+      "Washington, D.C."
+    ],
+    "incorrect_options": [
+      "New York City, NY",
+      "Philadelphia, PA",
+      "Boston, MA"
+    ]
+  },
+  {
+    "question": "Where is the Statue of Liberty?",
+    "correct_options": [
+      "New York (Harbor)",
+      "Liberty Island",
+      "New Jersey",
+      "Near New York City",
+      "On the Hudson River"
+    ],
+    "incorrect_options": [
+      "Boston Harbor",
+      "San Francisco Bay",
+      "Washington, D.C."
+    ]
+  },
+  {
+    "question": "Why does the flag have 13 stripes?",
+    "correct_options": [
+      "Because there were 13 original colonies",
+      "Because the stripes represent the original colonies"
+    ],
+    "incorrect_options": [
+      "Because there were 13 signers of the Declaration of Independence",
+      "To represent the 13 amendments",
+      "To represent the first 13 presidents"
+    ]
+  },
+  {
+    "question": "Why does the flag have 50 stars?",
+    "correct_options": [
+      "Because there is one star for each state",
+      "Because each star represents a state",
+      "Because there are 50 states"
+    ],
+    "incorrect_options": [
+      "Because there were 50 original colonies",
+      "To represent the 50 senators",
+      "Because there are 50 amendments"
+    ]
+  },
+  {
+    "question": "What is the name of the national anthem?",
+    "correct_options": [
+      "The Star-Spangled Banner"
+    ],
+    "incorrect_options": [
+      "America the Beautiful",
+      "My Country, 'Tis of Thee",
+      "God Bless America"
+    ]
+  },
+  {
+    "question": "When do we celebrate Independence Day?",
+    "correct_options": [
+      "July 4"
+    ],
+    "incorrect_options": [
+      "January 1",
+      "The first Monday in September",
+      "The fourth Thursday in November"
+    ]
+  },
+  {
+    "question": "Name two national U.S. holidays.",
+    "correct_options": [
+      "New Year's Day and Martin Luther King, Jr. Day",
+      "New Year's Day and Presidents' Day",
+      "New Year's Day and Memorial Day",
+      "New Year's Day and Independence Day",
+      "New Year's Day and Labor Day",
+      "New Year's Day and Columbus Day",
+      "New Year's Day and Veterans Day",
+      "New Year's Day and Thanksgiving",
+      "New Year's Day and Christmas",
+      "Martin Luther King, Jr. Day and Presidents' Day",
+      "Martin Luther King, Jr. Day and Memorial Day",
+      "Martin Luther King, Jr. Day and Independence Day",
+      "Martin Luther King, Jr. Day and Labor Day",
+      "Martin Luther King, Jr. Day and Columbus Day",
+      "Martin Luther King, Jr. Day and Veterans Day",
+      "Martin Luther King, Jr. Day and Thanksgiving",
+      "Martin Luther King, Jr. Day and Christmas",
+      "Presidents' Day and Memorial Day",
+      "Presidents' Day and Independence Day",
+      "Presidents' Day and Labor Day",
+      "Presidents' Day and Columbus Day",
+      "Presidents' Day and Veterans Day",
+      "Presidents' Day and Thanksgiving",
+      "Presidents' Day and Christmas",
+      "Memorial Day and Independence Day",
+      "Memorial Day and Labor Day",
+      "Memorial Day and Columbus Day",
+      "Memorial Day and Veterans Day",
+      "Memorial Day and Thanksgiving",
+      "Memorial Day and Christmas",
+      "Independence Day and Labor Day",
+      "Independence Day and Columbus Day",
+      "Independence Day and Veterans Day",
+      "Independence Day and Thanksgiving",
+      "Independence Day and Christmas",
+      "Labor Day and Columbus Day",
+      "Labor Day and Veterans Day",
+      "Labor Day and Thanksgiving",
+      "Labor Day and Christmas",
+      "Columbus Day and Veterans Day",
+      "Columbus Day and Thanksgiving",
+      "Columbus Day and Christmas",
+      "Veterans Day and Thanksgiving",
+      "Veterans Day and Christmas",
+      "Thanksgiving and Christmas"
+    ],
+    "incorrect_options": [
+      "Super Bowl Sunday and Valentine's Day",
+      "April Fool's Day and Halloween",
+      "St. Patrick's Day and Mother's Day"
+    ]
+  }
+]

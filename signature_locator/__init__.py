@@ -1,0 +1,1 @@
+from .locator_agent import SignaturePositionLocatorApplication as SignaturePositionLocatorApplication

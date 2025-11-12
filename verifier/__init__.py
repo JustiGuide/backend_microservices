@@ -1,0 +1,1 @@
+from .verifier_agent import LawPersonnelVerifier as LawPersonnelVerifier
