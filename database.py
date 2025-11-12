@@ -1,8 +1,6 @@
 import os
-from typing import Any, Union
+from typing import Any, Union, Literal
 from pydantic import EmailStr
-from pydantic_core import CoreSchema, core_schema
-from rdflib import Literal
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.orm.attributes import flag_modified
 from dotenv import load_dotenv
@@ -180,27 +178,6 @@ class LawPersonnel(Base):
     def __repr__(self) -> str:
         return f"<LawPersonnel(email={self.email}, username={self.username}, firstName={self.firstName}, lastName={self.lastName}, personnel_type={self.personnel_type})>"
     
-
-    @staticmethod
-    def __get_pydantic_core_schema__(source_type: Any, handler: Any) -> CoreSchema:
-        return core_schema.json_or_python_schema(
-            python_schema=core_schema.is_instance_schema(LawPersonnel),
-            json_schema=core_schema.chain_schema(
-                [
-                    core_schema.is_instance_schema(LawPersonnel),
-                    core_schema.no_info_after_validator_function(
-                        lambda obj: obj.extract_data(),
-                        handler.generate_schema(
-                            dict[str, Union[str, EmailStr]]
-                        )
-                    )
-                ]
-            ),
-            serialization=core_schema.plain_serializer_function_ser_schema(
-                lambda instance: instance.extract_data(),
-                json_size=10
-            ),
-        )
 
 
 class LawPersonnelAIChat(Base):
