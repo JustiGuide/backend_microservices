@@ -1,19 +1,14 @@
 import os
-from typing import Any, Union, Literal
+from typing import Union, Literal
 from pydantic import EmailStr
 from sqlalchemy.orm import sessionmaker, declarative_base
-from sqlalchemy.orm.attributes import flag_modified
 from dotenv import load_dotenv
 from sqlalchemy import (
-    JSON,
     Column,
     Float,
-    Integer,
     String,
     Text,
     Boolean,
-    DateTime,
-    Date,
     create_engine,
 )
 
@@ -190,16 +185,16 @@ class LawyerCaseSubs(Base):
 
 class AllCases(Base):
     __tablename__ = "all_cases"
-    case_id = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
-    lawyer_email = Column(EncryptedText, nullable=False, index=True)
-    client_email = Column(EncryptedText, nullable=False, index=True)
-    case_name = Column(EncryptedText, nullable=False)
-    assignee_list = Column(EncryptedText, nullable=True)
-    task_list = Column(EncryptedText, nullable=True)
-    case_status = Column(EncryptedText, nullable=False, default="In Progress")
-    case_description = Column(EncryptedText, nullable=True)
-    form_submitted = Column(Boolean, nullable=False, default=False)
-    case_type = Column(EncryptedText, nullable=False)
+    case_id: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    lawyer_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
+    client_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
+    case_name: str = Column(EncryptedText, nullable=False)
+    assignee_list: list[EmailStr] = Column(EncryptedText, nullable=True)
+    task_list: list[str] = Column(EncryptedText, nullable=True)
+    case_status: Literal["In Progress", "Submitted", "Closed"] = Column(EncryptedText, nullable=False, default="In Progress")
+    case_description: str = Column(EncryptedText, nullable=True)
+    form_submitted: bool = Column(Boolean, nullable=False, default=False)
+    case_type: str = Column(EncryptedText, nullable=False)
 
     def to_dict(self):
         return {
@@ -547,6 +542,11 @@ class Functions:
             case_sub.is_paid = False
             db.commit()
         db.close()
+
+    def retrieve_lawpersonnel_case_subs(self, case_ids: list[str]):
+        db = self.Session()
+        case_subs = db.query(LawyerCaseSubs.case_id, LawyerCaseSubs.is_paid).filter(LawyerCaseSubs.case_id.in_(case_ids)).all()
+        return {sub[0]: sub[1] for sub in case_subs}
 
     def check_case(self, case_id: str) -> tuple[str, EmailStr, EmailStr]:
         # TODO: connect with case management

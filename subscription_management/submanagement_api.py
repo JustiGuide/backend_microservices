@@ -128,14 +128,19 @@ async def cancel_subscription(
     db_func.update_user_subscription(user_type=user_type, subscriber_email=payload.subscriber_email, subscription_type="free")
     db_func.update_subscription_details(user_email=payload.subscriber_email, sub_tier="free", checkout_id=None, sub_id=None)
 
-@app.post("/sub/lawpersonnel/cancel-case/{case_id}")
+
+@app.post("/sub/lawpersonnel/{to_cancel}-case/{case_id}")
 async def cancel_case_payment(
-    case_id: SubCaseID 
+    case_id: SubCaseID,
+    to_cancel: Literal["cancel", "restart"]
 ):
     case_sub = db_func.retrieve_lawyer_case_sub(case_id)
     if "case_sub_id" in case_sub and case_sub["case_sub_id"]:
         try:
-            stripe.Subscription.cancel(case_sub["case_sub_id"])
+            if_cancel = to_cancel == "cancel"
+            stripe.Subscription.modify(case_sub["case_sub_id"], cancel_at_period_end=if_cancel)
+            db_func.delete_lawyer_case_sub(case_id=case_id)
+            return {"success": True}
         except:
-            pass
-    db_func.delete_lawyer_case_sub(case_id=case_id)
+            return {"success": False}
+    return {"success": False}
