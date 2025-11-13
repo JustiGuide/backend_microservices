@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, EmailStr
 import uvicorn
 from autofill.autofill_api import app as autofill_api
 from chat.chat_api import app as chat_api
@@ -11,6 +12,10 @@ from recommendation.recommendation_api import app as recommender_api
 from signature_locator.locator_api import app as sign_locator_api
 from task_generator.taskgen_api import app as task_generator_api
 from twilio_handler.twilio_api import app as twilio_handler_api
+from database import Functions
+
+
+db_func=Functions()
 
 app = FastAPI()
 origins = ["*"]
@@ -21,6 +26,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+class LawPersonnelRemoval(BaseModel):
+    lawpersonnel_email: EmailStr
+    immigrant_email: EmailStr
+
+@app.post("/recommender/immigrant/remove-lawpersonnel")
+async def remove_lawpersonnel_recommendation(payload: LawPersonnelRemoval):
+    db_func.remove_lawyer_from_recommendations(
+        payload.immigrant_email, payload.lawpersonnel_email
+    )
 
 app.include_router(autofill_api)
 app.include_router(chat_api)
