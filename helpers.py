@@ -13,7 +13,7 @@ import requests
 
 
 class Helpers:
-    
+
     @staticmethod
     def add_notification(
         receiver: EmailStr,
@@ -65,4 +65,55 @@ class Helpers:
         #     db.add(notification_alert)
 
         # db.commit()
+        # TODO: Connect with user management service
+        pass
+
+    def delete_notification(
+        self,
+        email: EmailStr,
+        type: str = Literal[
+            "cases",
+            "tasks",
+            "connection",
+            "kyc",
+            "forms",
+            "teams",
+            "lawyer_chat",
+            "intake",
+            "case_payment",
+        ],
+        id: str = None,
+        data: dict[str, Any] = None,
+        content: str = None,
+    ):
+        # db = db_func.Session()
+        # notifications = (
+        #     db.query(NotificationAlerts)
+        #     .filter(
+        #         NotificationAlerts.receiver == email.lower(),
+        #         NotificationAlerts.type == type,
+        #     )
+        #     .all()
+        # )
+        # if notifications:
+        #     for notification in notifications:
+        #         if id is not None:
+        #             if notification.id == id:
+        #                 db.delete(notification)
+        #                 db.commit()
+        #             return "Deleted specific notification"
+        #         elif data is not None:
+        #             if notification.target_id == data:
+        #                 db.delete(notification)
+        #                 db.commit()
+        #             return "Deleted specific notification"
+        #         elif content is not None:
+        #             if notification.content == content:
+        #                 db.delete(notification)
+        #                 db.commit()
+        #         else:
+        #             return "Cannot delete specific notification"
+        # else:
+        #     return f"No notifications found for this user of type {type}"
+        # TODO: Connect with user management service
         pass

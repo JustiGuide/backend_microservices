@@ -29,6 +29,8 @@ load_dotenv()
 
 
 Base = declarative_base()
+
+
 class TwilioContext(Base):
     __tablename__ = "twilio_context"
     uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
@@ -198,6 +200,54 @@ class ExternalLawyer(Base):
         return f"<ExternalLawyer(username={self.username}, fullName={self.fullName}, email={self.email})>"
 
 
+class LiveChatMessage(Base):
+    __tablename__ = "live_chat_messages"
+    id: str = Column(
+        String(7), primary_key=True, index=True, default=Encrypt.generate_uuid
+    )
+    message: str = Column(EncryptedText, nullable=False)
+    sender_email: EmailStr = Column(EncryptedText, nullable=True)
+    recipient_email: EmailStr = Column(EncryptedText, nullable=True)
+    timestamp: datetime = Column(DateTime(timezone=True), default=func.now())
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "message": self.message,
+            "sender_email": self.sender_email,
+            "recipient_email": self.recipient_email,
+            "timestamp": self.timestamp,
+        }
+
+    def __repr__(self):
+        return f"<LiveChatMessage(id={self.id}, sender_email={self.sender_email}, recipient_email={self.recipient_email})>"
+
+
+class ChatMessage(Base):
+    __tablename__ = "chat_messages"
+    id = Column(String(7), primary_key=True, index=True, default=Encrypt.generate_uuid)
+    message = Column(EncryptedText)
+    starred = Column(Boolean, default=False)
+    sender_email = Column(EncryptedText, nullable=True)
+    recipient_email = Column(EncryptedText, nullable=True)
+    timestamp = Column(DateTime(timezone=True), default=func.now())
+    read = Column(Boolean, default=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "message": self.message,
+            "sender_email": self.sender_email,
+            "recipient_email": self.recipient_email,
+            "starred": self.starred,
+            "timestamp": self.timestamp,
+            "read": self.read,
+        }
+
+    def __repr__(self):
+        return f"<ChatMessage(id={self.id}, sender_email={self.sender_email}, recipient_email={self.recipient_email}, starred={self.starred}, read={self.read})>"
+
+
 class Connection:
     def __init__(self, database_actor="postgresql"):
         self.connection_string = f"""{database_actor}://{os.getenv("DB_USER")}:{os.getenv("DB_PASSWORD")}@{os.getenv("DB_HOST")}:{os.getenv("DB_PORT")}/{os.getenv("DB_NAME")}"""
@@ -332,7 +382,8 @@ class Functions:
         db.close()
         return user_context, ai_context
 
-    def update_twilio_conversation(self, 
+    def update_twilio_conversation(
+        self,
         user_num: str,
         messages: list[str],
         comm_type: Literal["call", "text", "whatsapp"],
@@ -497,6 +548,234 @@ class Functions:
         # TODO: Connect with relationship management
         pass
 
-    def start_password_reset(self, email_id: EmailStr, user_type: Literal["immigrant", "lawpersonnel"]) -> bool:
+    def start_password_reset(
+        self, email_id: EmailStr, user_type: Literal["immigrant", "lawpersonnel"]
+    ) -> bool:
         # TODO: Connect with user management
+        pass
+
+    def retrieve_connected_lawyers(
+        self, immigrant_email: EmailStr, case_id: str = None, only_emails: bool = False
+    ) -> list[dict[str, Union[str, bool, list[str]]]]:
+        # db = self.Session()
+        # lawyers = []
+        # connected_lawyers = (
+        #     db.query(ImmigrantLawyerConnection)
+        #     .filter(
+        #         ImmigrantLawyerConnection.immigrant_email == immigrant_email.lower(),
+        #         ImmigrantLawyerConnection.connected_boolean == True,
+        #     )
+        #     .all()
+        # )
+        # if connected_lawyers:
+        #     # print(f"Connected lawyers for {immigrant_email}: {len(connected_lawyers)}")
+        #     for connected_lawyer in connected_lawyers:
+        #         # print(f"Processing lawyer: {connected_lawyer.lawyer_email}")
+        #         if connected_lawyer.lawyer_case_ids is not None:
+        #             lawyer = self.get_lawpersonnel(connected_lawyer.lawyer_email)
+        #             if lawyer:
+        #                 lawyers.append(
+        #                     {
+        #                         "lawyer": lawyer.email,
+        #                         "Point of Contact": f"{lawyer.full_legal_name}",
+        #                         "Law Firm Name": getattr(lawyer, "law_firm_name", None),
+        #                         "Experience": getattr(lawyer, "experience", None),
+        #                         "Expertise": getattr(lawyer, "specialty", None),
+        #                         "Main Office": getattr(
+        #                             lawyer, "professional_address", None
+        #                         ),
+        #                         "Phone Number": getattr(lawyer, "contact_number", None),
+        #                         "Image link": getattr(lawyer, "profile_picture", None),
+        #                         "Email Address": getattr(lawyer, "email", None),
+        #                         "Verified": (
+        #                             getattr(lawyer, "verified", False)
+        #                             if hasattr(lawyer, "verified")
+        #                             else False
+        #                         ),
+        #                         "case_id": connected_lawyer.lawyer_case_ids,
+        #                     }
+        #                 )
+        # if case_id is not None:
+        #     db.close()
+        #     result = [
+        #         lawyer["lawyer"] for lawyer in lawyers if case_id in lawyer["case_id"]
+        #     ]
+        #     return result[0] if len(result) > 0 else None
+        # elif only_emails:
+        #     db.close()
+        #     return [lawyer["lawyer"] for lawyer in lawyers]
+        # else:
+        #     db.close()
+        #     return lawyers
+        # TODO: Connect with relationship manager
+        pass
+
+    def add_new_live_chat(
+        self, sender_email: EmailStr, recipient_email: EmailStr, message: str
+    ) -> None:
+        db = self.Session()
+        new_chat_message = LiveChatMessage(
+            sender_email=sender_email, recipient_email=recipient_email, message=message
+        )
+        db.add(new_chat_message)
+        db.commit()
+        db.close()
+
+    def add_new_case_chat(
+        self,
+        sender_email: EmailStr,
+        recipient_email: EmailStr,
+        message: str,
+        message_id: str,
+        read_status: bool = False
+    ) -> None:
+        # Create New Message Record
+        db = self.Session()
+        chat_message = ChatMessage(
+            sender_email=sender_email,
+            recipient_email=recipient_email,
+            message=message,
+            id=message_id,
+            read=read_status,
+        )
+
+        # Save Record
+        db.add(chat_message)
+        db.commit()
+        db.close()
+
+    def get_any_user(self, parameter: Union[str, EmailStr]) -> Union[Immigrants, LawPersonnel]:
+        return self.get_immigrant(parameter) or self.get_lawpersonnel(parameter)
+
+    def retrieve_live_chat_history(
+        self, sender_username: str, recipient_username: str
+    ) -> list[dict[str, Union[str, EmailStr, datetime]]]:
+        db = self.Session()
+        sender = self.get_any_user(sender_username)
+        recipient = self.get_any_user(recipient_username)
+        all_messages = db.query(LiveChatMessage).filter(((LiveChatMessage.sender_email == (sender.email)) & (LiveChatMessage.recipient_email == (recipient.email))) | ((LiveChatMessage.sender_email == (recipient.email)) & (LiveChatMessage.recipient_email == (sender.email)))).order_by(LiveChatMessage.timestamp).all()
+
+        chat_history = []
+        for message in all_messages:
+            message_receiver = self.get_any_user(message.recipient_email)
+            message_sender = self.get_any_user(message.sender_email)
+            chat_history.append(
+                {
+                    "id": message.id,
+                    "senderName": f"{message_sender.full_legal_name}",
+                    "senderUsername": message_sender.username,
+                    "senderProfilePicture": getattr(message_sender, "profile_pic", None) or getattr(message_sender, "profile_picture", None),
+                    "recipientName": f"{message_receiver.full_legal_name}",
+                    "recipientUsername": message_receiver.username,
+                    "recipientProfilePicture": getattr(message_receiver, "profile_pic", None)
+                    or getattr(message_receiver, "profile_picture", None),
+                    "message": message.message,
+                    "timestamp": message.timestamp,
+                }
+            )
+        db.close()
+        return chat_history
+
+    def retrieve_case_chat_history(
+        self, sender_username: str, recipient_username: str
+    ) -> list[dict[str, Union[str, EmailStr, bool, datetime]]]:
+        db = self.Session()
+        sender = self.get_any_user(sender_username)
+        recipient = self.get_any_user(recipient_username)
+        all_messages = (
+            db.query(ChatMessage)
+            .filter(
+                (
+                    (ChatMessage.sender_email == (sender.email))
+                    & (ChatMessage.recipient_email == (recipient.email))
+                )
+                | (
+                    (ChatMessage.sender_email == (recipient.email))
+                    & (ChatMessage.recipient_email == (sender.email))
+                )
+            )
+            .order_by(ChatMessage.timestamp)
+            .all()
+        )
+        chat_history = []
+        for message in all_messages:
+            message_receiver = self.get_any_user(message.recipient_email)
+            message_sender = self.get_any_user(message.sender_email)
+            chat_history.append(
+                {
+                    "id": message.id,
+                    "senderName": f"{message_sender.full_legal_name}",
+                    "senderUsername": message_sender.username,
+                    "senderProfilePicture": getattr(message_sender, "profile_pic", None)
+                    or getattr(message_sender, "profile_picture", None),
+                    "recipientName": f"{message_receiver.full_legal_name}",
+                    "recipientUsername": message_receiver.username,
+                    "recipientProfilePicture": getattr(
+                        message_receiver, "profile_pic", None
+                    )
+                    or getattr(message_receiver, "profile_picture", None),
+                    "message": message.message,
+                    "timestamp": message.timestamp,
+                    "starred": message.starred,
+                    "read": message.read,
+                }
+            )
+        db.close()
+        return chat_history
+
+    def retrieve_specific_live_chat_message(self, message_id: str) -> LiveChatMessage:
+        db = self.Session()
+        live_message = db.query(LiveChatMessage).filter(LiveChatMessage.id == message_id).first()
+        db.close()
+        return live_message
+
+    def retrieve_specific_case_chat_message(self, message_id: str) -> ChatMessage:
+        db = self.Session()
+        case_message = (
+            db.query(ChatMessage).filter(ChatMessage.id == message_id).first()
+        )
+        db.close()
+        return case_message
+
+    def star_case_chat_message(self, message_id: str, is_starred: bool = True) -> Union[dict[str, Union[str, int]], ChatMessage]:
+        db = self.Session()
+        case_message = (
+            db.query(ChatMessage).filter(ChatMessage.id == message_id).first()
+        )
+        if not case_message:
+            return {"status_code": 404, "error": "Message Not Found."}
+        
+        case_message.starred = is_starred
+        db.commit()
+        db.refresh(case_message)
+        db.close()
+        return case_message
+
+    def retrieve_notification_count(self, recipient_email: EmailStr, type: Literal["cases", "tasks", "connection", "kyc", "forms", "teams", "lawyer_chat", "intake", "case_payment"], sender_email: EmailStr):
+        # db = self.Session()
+        # notification = (
+        #     db.query(NotificationAlerts)
+        #     .filter(
+        #         NotificationAlerts.receiver == email.lower(),
+        #         NotificationAlerts.type == type,
+        #         NotificationAlerts.sender == sender.lower(),
+        #     )
+        #     .first()
+        # )
+        # count = 0
+        # notification_id = None
+        # message_string = "a new message"
+        # if notification:
+        #     notification_id = notification.id
+        #     if "a new message" in notification.content:
+        #         count = 1
+        #         message_string = " new messages"
+        #     else:
+        #         split_string = notification.content.split(" new messages")[0]
+        #         message_string = " new messages"
+        #         match = re.search(r"\d+", split_string)
+        #         if match:
+        #             count = int(match.group())
+        # return count, message_string, notification_id
+        # TODO: Connect with user managemebt
         pass

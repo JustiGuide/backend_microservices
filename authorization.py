@@ -14,10 +14,11 @@ from pydantic import (
 )
 import os
 from dotenv import load_dotenv
-from database import Connection, LawPersonnel
+from database import ChatMessage, Connection, Functions, LiveChatMessage
 import datetime
 
 load_dotenv()
+db_func = Functions()
 
 class Authorizer:
     SECRET_KEY = os.getenv("OAUTH_KEY")
@@ -63,6 +64,106 @@ class Authorizer:
             )
         return casetype
 
+    @staticmethod
+    def livechat_recipient_validator(sender_username: str = Form(...), recipient_username: str = Form(...)) -> str:
+        db = Authorizer.Session()
+        sender = db_func.get_immigrant(sender_username)
+        recipient = db_func.get_lawpersonnel(recipient_username)
+        if not sender and not recipient:
+            sender = db_func.get_lawpersonnel(sender_username)
+            recipient = db_func.get_immigrant(recipient_username)
+            if not sender and not recipient:
+                db.close()
+                raise HTTPException(status_code=405, detail="Sender or Recipient not found.")
+            db.close()
+            lawyer_email = sender.email
+            client_email = recipient.email
+        else:
+            lawyer_email = recipient.email
+            client_email = sender.email
+
+        if client_email not in db_func.retrieve_clients(lawyer_email=lawyer_email):
+            db.close()
+            raise HTTPException(
+                status_code=405, detail="Client is not connected to the consultant."
+            )
+        all_chats = db.query(
+                LiveChatMessage.sender_email, LiveChatMessage.recipient_email
+            ).all()
+        if recipient.email not in [
+            chat[1] for chat in all_chats if chat[0] == sender.email
+        ] or sender.email not in [
+            chat[0] for chat in all_chats if chat[1] == recipient.email
+        ]:
+            db.close()
+            raise HTTPException(
+                status_code=405, detail="Recipient and sender are not connected"
+            )
+        db.close()
+        return recipient_username
+
+    @staticmethod
+    def livechat_message_id_validator(message_id: str) -> str:
+        db = Authorizer.Session()
+        all_messages = db.query(LiveChatMessage.id).all()
+        if message_id not in [message[0] for message in all_messages]:
+            db.close()
+            raise HTTPException(status_code=405, detail="Chat message ID is not valid.")
+        db.close()
+        return message_id
+
+    @staticmethod
+    def casechat_recipient_validator(
+        sender_username: str = Form(...), recipient_username: str = Form(...)
+    ) -> str:
+        db = Authorizer.Session()
+        sender = db_func.get_immigrant(sender_username)
+        recipient = db_func.get_lawpersonnel(recipient_username)
+        if not sender and not recipient:
+            sender = db_func.get_lawpersonnel(sender_username)
+            recipient = db_func.get_immigrant(recipient_username)
+            if not sender and not recipient:
+                db.close()
+                raise HTTPException(
+                    status_code=405, detail="Sender or Recipient not found."
+                )
+            db.close()
+            lawyer_email = sender.email
+            client_email = recipient.email
+        else:
+            lawyer_email = recipient.email
+            client_email = sender.email
+
+        if client_email not in db_func.retrieve_clients(lawyer_email=lawyer_email):
+            db.close()
+            raise HTTPException(
+                status_code=405, detail="Client is not connected to the consultant."
+            )
+        all_chats = db.query(
+            ChatMessage.sender_email, ChatMessage.recipient_email
+        ).all()
+        if recipient.email not in [
+            chat[1] for chat in all_chats if chat[0] == sender.email
+        ] or sender.email not in [
+            chat[0] for chat in all_chats if chat[1] == recipient.email
+        ]:
+            db.close()
+            raise HTTPException(
+                status_code=405, detail="Recipient and sender are not connected"
+            )
+        db.close()
+        return recipient_username
+
+    @staticmethod
+    def casechat_message_id_validator(message_id: str) -> str:
+        db = Authorizer.Session()
+        all_messages = db.query(ChatMessage.id).all()
+        if message_id not in [message[0] for message in all_messages]:
+            db.close()
+            raise HTTPException(status_code=405, detail="Chat message ID is not valid.")
+        db.close()
+        return message_id
+
 
 PhoneNumber = Annotated[
     str,
@@ -72,4 +173,16 @@ PhoneNumber = Annotated[
 
 CaseType = Annotated[
     str, Field(description="Case type."), AfterValidator(Authorizer.casetype_validator)
+]
+
+LiveChatMessageID = Annotated[
+    str,
+    Field(description="Chat message ID."),
+    AfterValidator(Authorizer.livechat_message_id_validator),
+]
+
+CaseChatMessageID = Annotated[
+    str,
+    Field(description="Chat message ID."),
+    AfterValidator(Authorizer.casechat_message_id_validator),
 ]
