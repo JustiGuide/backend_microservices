@@ -1,0 +1,1 @@
+from .emailing_module import EmailService as EmailService
