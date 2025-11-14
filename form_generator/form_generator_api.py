@@ -20,5 +20,8 @@ async def generate_immigrant_form_template(payload: FormTemplateInput):
     form_data = docs.download_file(form_url)
     generator = UnifiedTemplateGenerator(payload.form_name)
     results = generator.generate_template()
-    docs.upload_file(f"./tmp/{payload.form_name}_template.pdf")
+    docs.upload_file(
+        f"./tmp/{payload.form_name}_template.pdf",
+        f"/generated/{payload.form_name}_template.pdf",
+    )
     # TODO: Complete implementation
