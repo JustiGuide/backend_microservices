@@ -216,7 +216,7 @@ class Helpers:
         filename: str,
         readable: bool = False,
     ) -> str:
-        # TODO: Connect with Utility Service
+        # TODO: Connect with docs Service
         # def get_file_size(file_size: int) -> str:
         #     if file_size < 1024:
         #         return f"{file_size} B"

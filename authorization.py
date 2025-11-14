@@ -6,7 +6,7 @@ import phonenumbers
 from pydantic import AfterValidator, BaseModel, EmailStr, Field, HttpUrl, ValidationError, model_validator
 import os
 from dotenv import load_dotenv
-from database import AllTasks, CaseTeams, Connection, AllCases, LawPersonnel
+from database import AllTasks, CaseTeams, Connection, AllCases, LawPersonnel, LawyerTeams
 import datetime
 
 load_dotenv()
@@ -93,23 +93,20 @@ class Authorizer:
     def lawyer_team_validator(
         lawpersonnel_email: EmailStr = Form(...), assignees: list[EmailStr] = Form(...)
     ) -> list[EmailStr]:
-        # db = db_base.SessionLocal()
-        # all_members = db.query(LawyerTeams.member_email, LawyerTeams.lawyer_email).all()
-        # if not all_members:
-        #     db.close()
-        #     raise HTTPException(status_code=405, detail="No members found.")
-        # if not all(
-        #     member
-        #     in [member[0] for member in all_members if member[1] == lawpersonnel_email]
-        #     for member in assignees
-        # ):
-        #     db.close()
-        #     raise HTTPException(status_code=405, detail="Invalid members.")
-        # db.close()
-        # return assignees
-        # TODO: Connect with teams ()
-        pass
-
+        db = Authorizer.Session()
+        all_members = db.query(LawyerTeams.member_email, LawyerTeams.lawyer_email).all()
+        if not all_members:
+            db.close()
+            raise HTTPException(status_code=405, detail="No members found.")
+        if not all(
+            member
+            in [member[0] for member in all_members if member[1] == lawpersonnel_email]
+            for member in assignees
+        ):
+            db.close()
+            raise HTTPException(status_code=405, detail="Invalid members.")
+        db.close()
+        return assignees
     @staticmethod
     def lawyer_case_validator(case_id: str, lawyer_email: EmailStr) -> str:
         db = Authorizer.Session()
@@ -166,8 +163,7 @@ class Authorizer:
         case_id: str, assignees_to_add: list[EmailStr] = []
     ) -> list[EmailStr]:
         db = Authorizer.Session()
-        # all_members = db.query(CaseTeams.member_email, CaseTeams.lawyer_case).all()
-        all_members = [] # TODO: Connect with teams
+        all_members = db.query(CaseTeams.member_email, CaseTeams.lawyer_case).all()
         if not all_members:
             db.close()
             raise HTTPException(status_code=405, detail="No members found.")

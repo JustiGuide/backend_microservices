@@ -707,7 +707,7 @@ class Functions:
         #     invite_success = True
         # db.close()
         # return invite_success
-        # TODO: connect with communication service
+        # TODO: connect with user service
         pass
 
     def retrieve_invitation_data(
@@ -838,7 +838,7 @@ class Functions:
         #     result = None
         # db.close()
         # return result
-        # TODO: connect with communication service
+        # TODO: connect with user service
         pass
 
     def delete_invitation_data(
@@ -911,7 +911,7 @@ class Functions:
         #     db.delete(invitation)
         #     db.commit()
         # db.close()
-        # TODO: connect with communication service
+        # TODO: connect with user service
         pass
 
     def remove_external_lawyer(self, email: EmailStr) -> None:
@@ -1120,7 +1120,7 @@ class Functions:
         return all_cases
 
     def delete_case(lawpersonnel_email: EmailStr, case_id: str):
-        # TODO: connect with user management
+        # TODO: connect with user management (cleanup)
         pass
 
     def get_all_tasks(
