@@ -704,7 +704,7 @@ class Functions:
         db.close()
 
     def retrieve_file(self, file_url: str, owner_email: EmailStr = None) -> AllFiles:
-        # TODO: Connect with Utility Service
+        # TODO: Connect with Documents Service (AllFiles)
         pass
 
     def process_immigrant_messages(
@@ -1093,7 +1093,7 @@ class Functions:
         filename: str,
         folder_name: str,
     ) -> tuple[str, str, str]:
-        # TODO: Connect with Case Management Service
+        # TODO: Connect with Docs Service
         pass
 
     def retrieve_case_info(

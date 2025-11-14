@@ -37,7 +37,7 @@ class AutofillGenerator:
         try:
             form_context = Helpers.get_form_context(form_name)
             form_fieldmap = Helpers.get_form_fieldmap(form_name)
-            form_analysis = Helpers.get_form_fieldmap(form_name)
+            form_analysis = Helpers.get_form_analysis(form_name)
             schema = {
                 "form_name": form_name,
                 "context": form_context,

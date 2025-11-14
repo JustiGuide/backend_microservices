@@ -61,7 +61,7 @@ class Helpers:
 
     @staticmethod
     def store_file(file: Union[UploadFile, UploadFile_Dummy], file_url: str, email_id: EmailStr, filename: str, readable: bool = False) -> str:
-        # TODO: Connect with Utility Service
+        # TODO: Connect with Docs Service
         # def get_file_size(file_size: int) -> str:
         #     if file_size < 1024:
         #         return f"{file_size} B"
@@ -344,13 +344,13 @@ class Helpers:
     def get_formname_from_case(case_type: str) -> str:
         all_case_types = Helpers.get_all_casetypes()
         return all_case_types[case_type]["form"]
-        # TODO: Connect with documents service to get forma name based on the case_type (case_type.json)
+        # TODO: Connect with case management service to get forma name based on the case_type (case_type.json)
 
     @staticmethod
     def retrieve_connected_lawyers(
         immigrant_email: EmailStr, case_id: str = None, only_emails: bool = False
     ) -> list[dict[str, Union[str, bool, list[str]]]]:
-        # TODO: Connect with appropriate microservice
+        # TODO: Connect with relationship microservice
         # db = self.Session()
         # lawyers = []
         # connected_lawyers = (
