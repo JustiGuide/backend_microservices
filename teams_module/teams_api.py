@@ -1,30 +1,20 @@
-import os
-from pathlib import Path
-from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, UploadFile
-from fastapi.concurrency import run_in_threadpool
+
+from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr
 from email_gateway import Email
 from database import Functions
 from authorization import (
-    Authorizer,
     MemberPermissions,
     LawyerCaseID,
     MemberEmail,
-    TaskDetails,
-    TaskVisibility,
-    TaskStatus,
-    DateString,
 )
-from encryptor import Encrypt
 from helpers import Helpers
 from scheduler import TaskScheduler
-from document_management import DocumentsGateway
 
 db_func = Functions()
 app = APIRouter()
 scheduler = TaskScheduler()
-docs = DocumentsGateway()
 
 class AddCaseTeammate(BaseModel):
     lawpersonnel_email: EmailStr

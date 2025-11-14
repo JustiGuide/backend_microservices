@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
-from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, UploadFile
-from fastapi.concurrency import run_in_threadpool
+from fastapi import APIRouter, Depends, File, Form, UploadFile
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr
 from database import Functions
@@ -9,7 +8,6 @@ from authorization import (
     Authorizer,
     LawyerCaseID,
     TaskDetails,
-    TaskDetailsValidator,
     TaskVisibility,
     TaskStatus,
     DateString,
@@ -17,7 +15,7 @@ from authorization import (
 from encryptor import Encrypt
 from helpers import Helpers
 from scheduler import TaskScheduler
-from document_management import DocumentsGateway
+from documents_gateway import DocumentsGateway
 
 db_func = Functions()
 app = APIRouter()
