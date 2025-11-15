@@ -333,3 +333,7 @@ async def getRecAct(
     return JSONResponse(recent_actions)
 
 
+@app.get("/cases/retrieve/case-types")
+async def retrieve_all_case_types():
+    case_types = db_func.retrieve_case_types()
+    return case_types

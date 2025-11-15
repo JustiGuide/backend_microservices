@@ -1,0 +1,1253 @@
+{
+    "nonimmigrant_worker": {
+        "case": "Non-Immigrant Worker",
+        "form": "i129",
+        "tasks": [
+            {
+                "name": "Employer and Beneficiary Documentation Gathering",
+                "description": "Collect all necessary documents from both the employer and the beneficiary. This includes the job offer letter, employment contract, corporate registration papers, and evidence that the beneficiary meets the position’s qualifications.",
+                "days": 5
+            },
+            {
+                "name": "Form I‑129 Completion and Supporting Evidence Assembly",
+                "description": "Accurately complete Form I‑129 by incorporating precise details about the job, the employer, and the beneficiary’s background. Attach supporting evidence like educational credentials and past work experience documents to reinforce the petition.",
+                "days": 12
+            },
+            {
+                "name": "Fee Processing and Application Package Preparation",
+                "description": "Review the USCIS fee requirements, process the appropriate payment, and ensure that all necessary supporting paperwork is organized according to USCIS guidelines. Careful assembly of the package minimizes the likelihood of delays due to formatting issues.",
+                "days": 14
+            },
+            {
+                "name": "Final Review and Submission",
+                "description": "Perform a detailed, final check of the entire application packet for accuracy, consistency, and completeness. Confirm that all documents are signed and compiled in the correct order before submitting the package via approved delivery methods.",
+                "days": 17
+            },
+            {
+                "name": "Post‑Submission Tracking and RFE Preparedness",
+                "description": "After submission, monitor the case status using the USCIS online tracking system and prepare to respond quickly if a Request for Evidence (RFE) is issued. Keep all copies of the submission and stay in contact with legal advisors for any necessary follow‑up actions.",
+                "days": 27
+            }
+        ],
+        "supplementary": {
+            "i129f": {
+                "name": "Alien Fiancé Petition",
+                "tasks": [
+                    {
+                        "name": "Petitioner and Beneficiary Docs Gathering",
+                        "description": "Gather petitioner's proof of U.S. citizenship and beneficiary's personal documents.",
+                        "days": 5
+                    },
+                    {
+                        "name": "Relationship Evidence Compilation",
+                        "description": "Compile evidence of bona fide relationship and meeting in person within the last two years.",
+                        "days": 12
+                    },
+                    {
+                        "name": "Form I-129F Completion",
+                        "description": "Complete Form I-129F with all required details about both parties.",
+                        "days": 16
+                    },
+                    {
+                        "name": "Package Assembly and Submission",
+                        "description": "Assemble final package with photos, G-1145, and filing fee. Submit to USCIS.",
+                        "days": 20
+                    },
+                    {
+                        "name": "Track Case and Prepare for Interview",
+                        "description": "Track case status and prepare beneficiary for consular interview.",
+                        "days": 30
+                    }
+                ]
+            }
+        }
+    },
+    "employment_auth": {
+        "case": "Employment Authorization",
+        "form": "i765",
+        "tasks": [
+            {
+                "name": "Eligibility Review and Supporting Document Collection",
+                "description": "Confirm that the beneficiary meets eligibility criteria for an Employment Authorization Document (EAD) and gather documents such as current I‑94 records, passport copies, and previous work permits. Clear evidence of status is essential to support the application.",
+                "days": 3
+            },
+            {
+                "name": "Form I‑765 Completion",
+                "description": "Complete Form I‑765 accurately, ensuring that all personal and status-related information matches the supporting documentation. Emphasize clarity and consistency to reduce travel time and potential requests for clarifications by USCIS.",
+                "days": 6
+            },
+            {
+                "name": "Compiling and Organizing the Supporting Materials",
+                "description": "Assemble documents like identification proofs, photographs, and copies of previous EADs or immigration documentation into a coherent package. This step ensures that USCIS receives a well‑organized file that expedites processing.",
+                "days": 7
+            },
+            {
+                "name": "Fee Verification and Payment Coordination",
+                "description": "Verify if a fee is required and prepare for payment using the accepted methods. Double‑check USCIS guidelines to avoid any miscalculations and ensure that all payment proofs are included in the submission.",
+                "days": 9
+            },
+            {
+                "name": "Final Package Review and Submission",
+                "description": "Conduct a comprehensive review of the complete application package with a focus on verifying all entries and attachments. Once assured that all parts are consistent and complete, submit the application and retain copies for your records.",
+                "days": 11
+            }
+        ],
+        "supplementary": {
+            "i765ws": {
+                "name": "EAD Worksheet",
+                "tasks": [
+                    {
+                        "name": "Determine Necessity",
+                        "description": "Confirm if I-765WS is required (e.g., for C(8) or C(33) EAD categories).",
+                        "days": 1
+                    },
+                    {
+                        "name": "Gather Financial Information",
+                        "description": "Collect personal financial information (income, assets, expenses).",
+                        "days": 3
+                    },
+                    {
+                        "name": "Form I-765WS Completion",
+                        "description": "Complete the worksheet to demonstrate economic necessity.",
+                        "days": 5
+                    },
+                    {
+                        "name": "Attach to Form I-765",
+                        "description": "Attach the completed worksheet to the main Form I-765 application.",
+                        "days": 6
+                    }
+                ]
+            }
+        }
+    },
+    "alien_rel": {
+        "case": "Alien Relative",
+        "form": "i130",
+        "tasks": [
+            {
+                "name": "Relationship Evidence Collection",
+                "description": "Gather all essential documents to substantiate the familial relationship between the petitioner and the alien relative. Typical evidence includes birth certificates, marriage certificates, photographs, and correspondence proving a bona fide relationship.",
+                "days": 5
+            },
+            {
+                "name": "Form I‑130 Completion",
+                "description": "Fill out Form I‑130 ensuring that every detail—personal data, relationship history, and supporting specifics—is accurate and consistent with the evidentiary documents. This careful entry minimizes processing delays related to discrepancies.",
+                "days": 9
+            },
+            {
+                "name": "Fee Processing and Package Assembly",
+                "description": "Determine the correct filing fee and prepare the payment as per USCIS guidelines. Assemble the completed form along with the evidence into a complete package ready for submission.",
+                "days": 11
+            },
+            {
+                "name": "Final Review and Submission",
+                "description": "Perform a detailed review of the entire packet to ensure the documentation is complete, well‑organized, and error‑free. Once confirmed, submit the packet using the recommended mailing or courier method and secure tracking details.",
+                "days": 14
+            },
+            {
+                "name": "Post‑Submission Monitoring and Response Preparation",
+                "description": "Monitor the case regularly through the USCIS website and be prepared to address any Requests for Evidence promptly. Maintaining open channels with legal counsel can help ensure quick responses if additional documentation is required.",
+                "days": 21
+            }
+        ],
+        "supplementary": {
+            "i130a": {
+                "name": "Spousal Supplement",
+                "tasks": [
+                    {
+                        "name": "Beneficiary Info Gathering",
+                        "description": "Collect spouse beneficiary's biographic information and 5-year address/employment history.",
+                        "days": 3
+                    },
+                    {
+                        "name": "Form I-130A Completion",
+                        "description": "Complete Form I-130A. This form is completed by the spouse beneficiary.",
+                        "days": 5
+                    },
+                    {
+                        "name": "Review and Sign",
+                        "description": "Review form for accuracy and obtain beneficiary's signature.",
+                        "days": 6
+                    },
+                    {
+                        "name": "Package with I-130",
+                        "description": "Combine signed I-130A with the main I-130 petition package for submission.",
+                        "days": 7
+                    }
+                ]
+            }
+        }
+    },
+    "asylum_removal": {
+        "case": "Asylum / Defense Removal",
+        "form": "i589",
+        "tasks": [
+            {
+                "name": "Personal Narrative and Evidence Compilation",
+                "description": "Collect detailed personal narratives, affidavits, and documentary evidence that support the claim for asylum. This includes country condition reports, personal records, and witness testimonies that detail persecution or fear of persecution.",
+                "days": 7
+            },
+            {
+                "name": "Form I‑589 Completion",
+                "description": "Fill out Form I‑589 comprehensively, ensuring that every section accurately reflects the applicant’s personal background and reasons for seeking asylum. The form should be supported by evidence from the gathered documents to bolster the claim.",
+                "days": 12
+            },
+            {
+                "name": "Expert Consultations and Affidavit Collection",
+                "description": "Arrange consultations with experienced immigration attorneys or human rights experts, and obtain expert affidavits and witness statements to support the asylum case. These documents add credibility and depth to the personal narrative by including independent validations.",
+                "days": 22
+            },
+            {
+                "name": "Comprehensive Package Review and Finalization",
+                "description": "Conduct a thorough review of the entire application package, ensuring that the narrative, evidentiary documents, expert opinions, and form entries are all aligned and error‑free. Make any necessary revisions and compile the final packet in the order mandated by USCIS guidelines.",
+                "days": 26
+            },
+            {
+                "name": "Interview Preparation and Post‑Submission Follow‑Up",
+                "description": "Prepare for the asylum interview by reviewing potential questions and organizing all documents in an accessible format. Stay informed about the case status and be ready to provide additional evidence or clarification as requested during the USCIS process.",
+                "days": 31
+            }
+        ],
+        "supplementary": {}
+    },
+    "naturalization": {
+        "case": "Naturalization",
+        "form": "n400",
+        "tasks": [
+            {
+                "name": "Eligibility Verification and Document Collection",
+                "description": "Confirm eligibility for naturalization by reviewing continuous residence, physical presence, and good moral character requirements. Gather essential documents, including your Green Card, tax records, travel history, and marital history documentation.",
+                "days": 7
+            },
+            {
+                "name": "Form N-400 Application Completion",
+                "description": "Carefully complete Form N-400, ensuring all personal history, residence, employment, and travel information is accurate and matches your supporting documents. Pay close attention to the questions regarding good moral character.",
+                "days": 12
+            },
+            {
+                "name": "Supporting Evidence Compilation and Biometrics Prep",
+                "description": "Organize all supporting evidence, such as tax transcripts, residence proofs, and photos, into a clear and logical package. Prepare for the biometrics appointment, which is a standard part of the process.",
+                "days": 16
+            },
+            {
+                "name": "Comprehensive Review and Application Submission",
+                "description": "Conduct a final, thorough review of the entire N-400 application package to check for accuracy, completeness, and consistency. Submit the application to the correct USCIS lockbox and keep a full copy for your records.",
+                "days": 19
+            },
+            {
+                "name": "Civics Test Study and Interview Preparation",
+                "description": "After submission, begin studying for the U.S. civics and English tests. Monitor your case status online and prepare for the naturalization interview by reviewing your application and practicing your answers to potential questions.",
+                "days": 29
+            }
+        ],
+        "supplementary": {}
+    },
+    "travel_document": {
+        "case": "Travel Document Application",
+        "form": "i131",
+        "tasks": [
+            {
+                "name": "Determine Document Type",
+                "description": "Identify need: Re-entry Permit, Refugee Travel Document, or Advance Parole.",
+                "days": 2
+            },
+            {
+                "name": "Gather Supporting Docs",
+                "description": "Collect copy of Green Card, I-485 receipt, or refugee/asylee status proof.",
+                "days": 5
+            },
+            {
+                "name": "Form I-131 Completion",
+                "description": "Complete Form I-131, including reason for travel and intended dates.",
+                "days": 7
+            },
+            {
+                "name": "Biometrics Prep and Submission",
+                "description": "Submit application with fee and photos. Prepare for biometrics appointment.",
+                "days": 10
+            }
+        ],
+        "supplementary": {}
+    },
+    "immigrant_worker": {
+        "case": "Immigrant Worker Petition",
+        "form": "i140",
+        "tasks": [
+            {
+                "name": "PERM Labor Certification Approval",
+                "description": "Obtain approved PERM Labor Certification (if required).",
+                "days": 5
+            },
+            {
+                "name": "Employer Financials and Beneficiary Docs",
+                "description": "Gather employer's ability to pay (tax returns, annual reports) and beneficiary's qualifications.",
+                "days": 15
+            },
+            {
+                "name": "Form I-140 Completion",
+                "description": "Complete Form I-140, selecting the correct employment-based category.",
+                "days": 20
+            },
+            {
+                "name": "Package Assembly and Submission",
+                "description": "Assemble petition with PERM, financials, and beneficiary documents. Submit to USCIS.",
+                "days": 25
+            },
+            {
+                "name": "Track and Consider Premium Processing",
+                "description": "Track case status. Consider and file for Premium Processing (I-907) if needed.",
+                "days": 28
+            }
+        ],
+        "supplementary": {}
+    },
+    "special_immigrant": {
+        "case": "Special Immigrant Petition",
+        "form": "i360",
+        "tasks": [
+            {
+                "name": "Determine Eligibility Basis",
+                "description": "Confirm eligibility (e.g., VAWA, religious worker, SIJ).",
+                "days": 3
+            },
+            {
+                "name": "Gather Basis-Specific Evidence",
+                "description": "Collect specific evidence required for the basis (e.g., proof of abuse, religious organization letter).",
+                "days": 14
+            },
+            {
+                "name": "Form I-360 Completion",
+                "description": "Complete Form I-360 with all details related to the specific category.",
+                "days": 20
+            },
+            {
+                "name": "Final Review and Submission",
+                "description": "Review package for completeness and submit to the correct USCIS service center.",
+                "days": 25
+            }
+        ],
+        "supplementary": {}
+    },
+    "adjustment_of_status": {
+        "case": "Adjustment of Status",
+        "form": "i485",
+        "tasks": [
+            {
+                "name": "Confirm Eligibility and Basis",
+                "description": "Confirm eligibility for adjustment (e.g., approved I-130/I-140, visa availability).",
+                "days": 5
+            },
+            {
+                "name": "Document Gathering (Birth Cert, Medicals)",
+                "description": "Collect birth certificate, passport, I-94, photos, and medical exam (I-693).",
+                "days": 15
+            },
+            {
+                "name": "Prepare Supporting Forms (I-864, I-765)",
+                "description": "Prepare supporting forms (I-864 Affidavit of Support, I-765, I-131).",
+                "days": 25
+            },
+            {
+                "name": "Form I-485 Completion",
+                "description": "Complete Form I-485 with all personal history and admissibility questions.",
+                "days": 30
+            },
+            {
+                "name": "Package Submission and Biometrics",
+                "description": "Submit complete adjustment package. Prepare for biometrics appointment and interview.",
+                "days": 35
+            }
+        ],
+        "supplementary": {}
+    },
+    "eb5_petition": {
+        "case": "EB-5 Petition",
+        "form": "i526",
+        "tasks": [
+            {
+                "name": "Investment and Enterprise Setup",
+                "description": "Identify/create new commercial enterprise and make the qualifying investment.",
+                "days": 30
+            },
+            {
+                "name": "Source of Funds Documentation",
+                "description": "Compile extensive documentation proving the lawful source of investment funds.",
+                "days": 60
+            },
+            {
+                "name": "Business Plan and Job Creation",
+                "description": "Develop a comprehensive business plan detailing job creation for at least 10 U.S. workers.",
+                "days": 75
+            },
+            {
+                "name": "Form I-526 Completion",
+                "description": "Complete Form I-526 with all details of the investment, enterprise, and funds.",
+                "days": 85
+            },
+            {
+                "name": "Submission and Tracking",
+                "description": "Submit the petition with all supporting evidence and track USCIS receipt.",
+                "days": 90
+            }
+        ],
+        "supplementary": {
+            "i526e": {
+                "name": "Regional Center",
+                "tasks": [
+                    {
+                        "name": "Regional Center Selection and Due Diligence",
+                        "description": "Conduct due diligence and select a designated USCIS Regional Center project.",
+                        "days": 20
+                    },
+                    {
+                        "name": "Source of Funds Documentation",
+                        "description": "Compile extensive documentation proving the lawful source of investment funds.",
+                        "days": 50
+                    },
+                    {
+                        "name": "Investment and Subscription Agreement",
+                        "description": "Make the qualifying investment and complete subscription agreements with the Regional Center.",
+                        "days": 55
+                    },
+                    {
+                        "name": "Form I-526E Completion",
+                        "description": "Complete Form I-526E, referencing the Regional Center's project.",
+                        "days": 65
+                    },
+                    {
+                        "name": "Submission and Tracking",
+                        "description": "Submit the petition with all supporting evidence and track USCIS receipt.",
+                        "days": 70
+                    }
+                ]
+            }
+        }
+    },
+    "change_status": {
+        "case": "Extend/Change Nonimmigrant Status",
+        "form": "i539",
+        "tasks": [
+            {
+                "name": "Confirm Eligibility and Timely Filing",
+                "description": "Confirm eligibility and timely filing (before current status expires).",
+                "days": 3
+            },
+            {
+                "name": "Gather Supporting Docs (I-94, Finances)",
+                "description": "Collect I-94, passport, visa, and proof of financial support.",
+                "days": 7
+            },
+            {
+                "name": "Form I-539 Completion",
+                "description": "Complete Form I-539, clearly explaining the reason for the request.",
+                "days": 10
+            },
+            {
+                "name": "Co-Applicant Forms (I-539A)",
+                "description": "If applicable, complete Form I-539A for each co-applicant.",
+                "days": 12
+            },
+            {
+                "name": "Submission and Biometrics Prep",
+                "description": "Submit application with fee. Prepare for biometrics appointment.",
+                "days": 15
+            }
+        ],
+        "supplementary": {
+            "i539a": {
+                "name": "Co-Applicant Supplement",
+                "tasks": [
+                    {
+                        "name": "Co-Applicant Document Gathering",
+                        "description": "Collect co-applicant's personal information, passport, and I-94.",
+                        "days": 2
+                    },
+                    {
+                        "name": "Form I-539A Completion",
+                        "description": "Complete Form I-539A for one co-applicant.",
+                        "days": 4
+                    },
+                    {
+                        "name": "Review and Sign",
+                        "description": "Review form for accuracy and obtain co-applicant's signature.",
+                        "days": 5
+                    },
+                    {
+                        "name": "Package with I-539",
+                        "description": "Combine signed I-539A with the primary I-539 application.",
+                        "days": 6
+                    }
+                ]
+            }
+        }
+    },
+    "inadmissibility_waiver": {
+        "case": "Inadmissibility Waiver (I-601)",
+        "form": "i601",
+        "tasks": [
+            {
+                "name": "Identify Inadmissibility Grounds",
+                "description": "Determine the specific grounds of inadmissibility (e.g., fraud, criminal).",
+                "days": 5
+            },
+            {
+                "name": "Identify Qualifying Relative",
+                "description": "Confirm a U.S. citizen or LPR spouse or parent as a qualifying relative.",
+                "days": 7
+            },
+            {
+                "name": "Compile Extreme Hardship Evidence",
+                "description": "Compile extensive evidence to prove extreme hardship to the qualifying relative.",
+                "days": 30
+            },
+            {
+                "name": "Form I-601 Completion",
+                "description": "Complete Form I-601, detailing the inadmissibility and basis for the waiver.",
+                "days": 35
+            },
+            {
+                "name": "Submission and Tracking",
+                "description": "Submit waiver package with supporting hardship evidence and fee.",
+                "days": 40
+            }
+        ],
+        "supplementary": {
+            "i601a": {
+                "name": "Provisional Waiver",
+                "tasks": [
+                    {
+                        "name": "Confirm Eligibility",
+                        "description": "Confirm eligibility (unlawful presence only, approved I-130/I-140, U.S. relative).",
+                        "days": 5
+                    },
+                    {
+                        "name": "Compile Extreme Hardship Evidence",
+                        "description": "Compile extensive evidence proving extreme hardship to U.S. citizen/LPR spouse or parent.",
+                        "days": 30
+                    },
+                    {
+                        "name": "Form I-601A Completion",
+                        "description": "Complete Form I-601A.",
+                        "days": 35
+                    },
+                    {
+                        "name": "Pay Department of State Fee",
+                        "description": "Pay Department of State immigrant visa fee and obtain receipt.",
+                        "days": 37
+                    },
+                    {
+                        "name": "Submission and Biometrics",
+                        "description": "Submit I-601A package. Attend biometrics. Await decision before consular processing.",
+                        "days": 42
+                    }
+                ]
+            }
+        }
+    },
+    "medical_exam": {
+        "case": "Immigration Medical Exam",
+        "form": "i693",
+        "tasks": [
+            {
+                "name": "Find Civil Surgeon",
+                "description": "Locate a USCIS-approved Civil Surgeon.",
+                "days": 1
+            },
+            {
+                "name": "Gather Medical Records",
+                "description": "Collect personal vaccination and medical history records.",
+                "days": 3
+            },
+            {
+                "name": "Schedule and Attend Exam",
+                "description": "Schedule and attend the medical examination.",
+                "days": 7
+            },
+            {
+                "name": "Receive Sealed Envelope",
+                "description": "Receive the completed, signed Form I-693 in a sealed envelope from the surgeon.",
+                "days": 10
+            },
+            {
+                "name": "Submit with I-485",
+                "description": "Submit the sealed envelope with the I-485 application or bring to the interview.",
+                "days": 11
+            }
+        ],
+        "supplementary": {}
+    },
+    "refugee_asylee_relative": {
+        "case": "Refugee/Asylee Relative Petition",
+        "form": "i730",
+        "tasks": [
+            {
+                "name": "Confirm Petitioner Status",
+                "description": "Verify petitioner's status as a refugee or asylee.",
+                "days": 2
+            },
+            {
+                "name": "Gather Relative's Documents",
+                "description": "Collect relative's (spouse/child) birth certificate, marriage certificate, and photos.",
+                "days": 10
+            },
+            {
+                "name": "Compile Relationship Evidence",
+                "description": "Compile evidence of the qualifying relationship (e.g., photos, correspondence).",
+                "days": 15
+            },
+            {
+                "name": "Form I-730 Completion (within 2 years)",
+                "description": "Complete Form I-730 within 2 years of petitioner's admission/asylum grant.",
+                "days": 18
+            },
+            {
+                "name": "Submission and Tracking",
+                "description": "Submit petition and supporting evidence. Await consular processing for beneficiary.",
+                "days": 21
+            }
+        ],
+        "supplementary": {}
+    },
+    "remove_conditions_residence": {
+        "case": "Remove Conditions on Residence",
+        "form": "i751",
+        "tasks": [
+            {
+                "name": "Check Filing Window (90 days)",
+                "description": "Confirm filing window (90-day period before 2-year Green Card expires).",
+                "days": 3
+            },
+            {
+                "name": "Gather Bona Fide Marriage Evidence",
+                "description": "Collect joint documents (leases, bank statements, photos) from the last 2 years.",
+                "days": 20
+            },
+            {
+                "name": "Form I-751 Completion",
+                "description": "Complete Form I-751 (jointly or with waiver request).",
+                "days": 25
+            },
+            {
+                "name": "Package Assembly and Submission",
+                "description": "Assemble package with I-751, evidence, and copy of Green Card. Submit to USCIS.",
+                "days": 30
+            },
+            {
+                "name": "Biometrics and Interview Prep",
+                "description": "Receive receipt notice (extends Green Card). Prepare for biometrics and potential interview.",
+                "days": 35
+            }
+        ],
+        "supplementary": {}
+    },
+    "action_on_approved_petition": {
+        "case": "Action on Approved Petition",
+        "form": "i824",
+        "tasks": [
+            {
+                "name": "Identify Need for Action",
+                "description": "Determine need (e.g., duplicate approval, notify consulate, notify NVC).",
+                "days": 2
+            },
+            {
+                "name": "Locate Approval Notice (I-797)",
+                "description": "Find the original Form I-797 Approval Notice for the petition.",
+                "days": 3
+            },
+            {
+                "name": "Form I-824 Completion",
+                "description": "Complete Form I-824, specifying the exact action requested.",
+                "days": 5
+            },
+            {
+                "name": "Submission with Fee",
+                "description": "Submit the form with the required filing fee and a copy of the approval notice.",
+                "days": 7
+            }
+        ],
+        "supplementary": {}
+    },
+    "eb5_remove_conditions": {
+        "case": "EB-5 Remove Conditions (I-829)",
+        "form": "i829",
+        "tasks": [
+            {
+                "name": "Check Filing Window (90 days)",
+                "description": "Confirm filing window (90-day period before 2-year conditional Green Card expires).",
+                "days": 3
+            },
+            {
+                "name": "Gather Investment Sustained Evidence",
+                "description": "Compile evidence that the full investment was sustained throughout the 2-year period.",
+                "days": 30
+            },
+            {
+                "name": "Job Creation Documentation",
+                "description": "Gather proof of job creation (payroll, I-9s) for 10 U.S. workers.",
+                "days": 45
+            },
+            {
+                "name": "Form I-829 Completion",
+                "description": "Complete Form I-829 with details of the investment and job creation.",
+                "days": 50
+            },
+            {
+                "name": "Submission and Biometrics Prep",
+                "description": "Submit petition with all supporting evidence. Receive receipt and prepare for biometrics.",
+                "days": 55
+            }
+        ],
+        "supplementary": {}
+    },
+    "affidavit_of_support": {
+        "case": "Affidavit of Support",
+        "form": "i864",
+        "tasks": [
+            {
+                "name": "Identify Sponsor",
+                "description": "Identify a petitioner/sponsor who meets 125% of the poverty guideline.",
+                "days": 3
+            },
+            {
+                "name": "Gather Sponsor Financials (Tax Return)",
+                "description": "Sponsor collects most recent federal tax return, W-2s, and proof of income/assets.",
+                "days": 10
+            },
+            {
+                "name": "Form I-864 Completion",
+                "description": "Sponsor completes Form I-864, including household size and income.",
+                "days": 14
+            },
+            {
+                "name": "Review and Sign",
+                "description": "Sponsor reviews and signs the legally binding affidavit.",
+                "days": 15
+            },
+            {
+                "name": "Submit to NVC or with I-485",
+                "description": "Submit the signed I-864 package with the I-485 or to the NVC.",
+                "days": 17
+            }
+        ],
+        "supplementary": {}
+    },
+    "replace_green_card": {
+        "case": "Replace Green Card",
+        "form": "i90",
+        "tasks": [
+            {
+                "name": "Determine Reason for Replacement",
+                "description": "Identify reason (e.g., lost, stolen, expired, incorrect).",
+                "days": 1
+            },
+            {
+                "name": "Gather Supporting Docs",
+                "description": "Collect copy of current Green Card (if available), passport, or proof of identity.",
+                "days": 3
+            },
+            {
+                "name": "Form I-90 Completion",
+                "description": "Complete Form I-90, either online or paper.",
+                "days": 5
+            },
+            {
+                "name": "Submission and Biometrics",
+                "description": "Submit application with fee. Prepare for biometrics appointment.",
+                "days": 8
+            }
+        ],
+        "supplementary": {}
+    },
+    "t_visa": {
+        "case": "T Visa (Victim of Trafficking)",
+        "form": "i914",
+        "tasks": [
+            {
+                "name": "Victim Narrative and Evidence",
+                "description": "Compile detailed personal narrative of trafficking and any corroborating evidence.",
+                "days": 10
+            },
+            {
+                "name": "Request Law Enforcement Declaration (I-914B)",
+                "description": "Request I-914 Supplement B, Declaration from a Law Enforcement Agency (LEA).",
+                "days": 20
+            },
+            {
+                "name": "Form I-914 Completion",
+                "description": "Complete Form I-914, detailing the facts of the trafficking.",
+                "days": 25
+            },
+            {
+                "name": "Personal Statement (Helpfulness)",
+                "description": "Write a personal statement demonstrating compliance with LEA requests (if over 18).",
+                "days": 30
+            },
+            {
+                "name": "Submission and Tracking",
+                "description": "Submit complete package. Prepare for potential RFE or interview.",
+                "days": 35
+            }
+        ],
+        "supplementary": {
+            "i914supa": {
+                "name": "Family Supplement",
+                "tasks": [
+                    {
+                        "name": "Identify Eligible Family Members",
+                        "description": "Identify eligible family members (spouse, children, parents, siblings).",
+                        "days": 2
+                    },
+                    {
+                        "name": "Gather Family Member Docs",
+                        "description": "Collect relative's birth certificate, marriage certificate, and photos.",
+                        "days": 7
+                    },
+                    {
+                        "name": "Form I-914A Completion",
+                        "description": "Complete Form I-914A for each eligible family member.",
+                        "days": 10
+                    },
+                    {
+                        "name": "Package with I-914",
+                        "description": "Combine I-914A forms with the principal I-914 application or file separately.",
+                        "days": 12
+                    }
+                ]
+            },
+            "i914supb": {
+                "name": "LEA Declaration",
+                "tasks": [
+                    {
+                        "name": "Identify LEA Contact",
+                        "description": "Identify the relevant Law Enforcement Agency (LEA) and a contact person.",
+                        "days": 5
+                    },
+                    {
+                        "name": "Provide Case Information to LEA",
+                        "description": "Provide case details and trafficking information to the LEA.",
+                        "days": 10
+                    },
+                    {
+                        "name": "Request Declaration Completion",
+                        "description": "Formally request the LEA official complete and sign the I-914B.",
+                        "days": 15
+                    },
+                    {
+                        "name": "Follow-up and Obtain Signed Form",
+                        "description": "Follow up with the LEA and obtain the signed declaration.",
+                        "days": 25
+                    },
+                    {
+                        "name": "Include with I-914 Application",
+                        "description": "Include the signed I-914B with the principal I-914 application.",
+                        "days": 26
+                    }
+                ]
+            }
+        }
+    },
+    "u_visa": {
+        "case": "U Visa (Victim of Crime)",
+        "form": "i918",
+        "tasks": [
+            {
+                "name": "Confirm Qualifying Crime",
+                "description": "Confirm victimization from a qualifying criminal activity.",
+                "days": 3
+            },
+            {
+                "name": "Obtain Law Enforcement Certification (I-918B)",
+                "description": "Request I-918 Supplement B certification from a qualifying agency (police, prosecutor).",
+                "days": 30
+            },
+            {
+                "name": "Write Personal Statement",
+                "description": "Write a detailed personal statement describing the crime and helpfulness.",
+                "days": 40
+            },
+            {
+                "name": "Form I-918 Completion",
+                "description": "Complete Form I-918 with personal details and crime information.",
+                "days": 45
+            },
+            {
+                "name": "Submission and Tracking",
+                "description": "Submit complete package (I-918, Supp B, statement). Await processing.",
+                "days": 50
+            }
+        ],
+        "supplementary": {
+            "i918supa": {
+                "name": "Family Supplement",
+                "tasks": [
+                    {
+                        "name": "Identify Eligible Family Members",
+                        "description": "Identify eligible family members (spouse, children, etc.).",
+                        "days": 2
+                    },
+                    {
+                        "name": "Gather Family Member Docs",
+                        "description": "Collect relative's birth certificate, marriage certificate, and photos.",
+                        "days": 7
+                    },
+                    {
+                        "name": "Form I-918A Completion",
+                        "description": "Complete Form I-918A for each eligible family member.",
+                        "days": 10
+                    },
+                    {
+                        "name": "Package with I-918",
+                        "description": "Combine I-918A forms with the principal I-918 application.",
+                        "days": 12
+                    }
+                ]
+            },
+            "i918supb": {
+                "name": "LEA Certification",
+                "tasks": [
+                    {
+                        "name": "Identify Certifying Agency",
+                        "description": "Identify the LEA, prosecutor's office, or judge with knowledge of the case.",
+                        "days": 5
+                    },
+                    {
+                        "name": "Provide Case Information",
+                        "description": "Provide case details, police reports, and evidence of helpfulness.",
+                        "days": 10
+                    },
+                    {
+                        "name": "Request Certification",
+                        "description": "Formally request the agency official complete and sign the I-918B.",
+                        "days": 15
+                    },
+                    {
+                        "name": "Follow-up and Obtain Signed Form",
+                        "description": "Follow up with the agency and obtain the signed certification (valid for 6 months).",
+                        "days": 30
+                    },
+                    {
+                        "name": "Include with I-918 Application",
+                        "description": "Include the signed I-918B with the principal I-918 application.",
+                        "days": 31
+                    }
+                ]
+            }
+        }
+    },
+    "eb5_reg_center_designation": {
+        "case": "EB-5 Regional Center Designation",
+        "form": "i956",
+        "tasks": [
+            {
+                "name": "Develop Organizational Structure",
+                "description": "Form the legal entity for the Regional Center and define its structure.",
+                "days": 20
+            },
+            {
+                "name": "Define Geographic Scope and Methodology",
+                "description": "Define the proposed geographic scope and economic impact methodology.",
+                "days": 30
+            },
+            {
+                "name": "Develop Business Plans and Projections",
+                "description": "Develop comprehensive business plans and economic projections for proposed projects.",
+                "days": 50
+            },
+            {
+                "name": "Form I-956 Completion",
+                "description": "Complete Form I-956 with all required operational and compliance details.",
+                "days": 60
+            },
+            {
+                "name": "Submission and Fee",
+                "description": "Submit the extensive application package with the required fee to USCIS.",
+                "days": 65
+            }
+        ],
+        "supplementary": {
+            "i956f": {
+                "name": "Project Approval",
+                "tasks": [
+                    {
+                        "name": "Develop Project Business Plan",
+                        "description": "Create a detailed business plan for the specific capital investment project.",
+                        "days": 20
+                    },
+                    {
+                        "name": "Commission Economic Impact Analysis",
+                        "description": "Commission an economic impact analysis detailing job creation.",
+                        "days": 30
+                    },
+                    {
+                        "name": "Prepare Offering Documents",
+                        "description": "Prepare securities offering documents (PPM, subscription agreement).",
+                        "days": 40
+                    },
+                    {
+                        "name": "Form I-956F Completion",
+                        "description": "Complete Form I-956F with all project-specific details.",
+                        "days": 45
+                    },
+                    {
+                        "name": "Submission by Regional Center",
+                        "description": "The Regional Center submits the I-956F application to USCIS for project approval.",
+                        "days": 50
+                    }
+                ]
+            },
+            "i956g": {
+                "name": "Annual Report",
+                "tasks": [
+                    {
+                        "name": "Gather Annual Data (Capital, Jobs)",
+                        "description": "Collect data on capital invested and jobs created/maintained for the fiscal year.",
+                        "days": 15
+                    },
+                    {
+                        "name": "Review Compliance",
+                        "description": "Review all Regional Center activities for compliance with designation.",
+                        "days": 20
+                    },
+                    {
+                        "name": "Form I-956G Completion",
+                        "description": "Complete Form I-956G, reporting on all investor and project activities.",
+                        "days": 25
+                    },
+                    {
+                        "name": "Submission by Deadline",
+                        "description": "Submit the annual report to USCIS by the December 29th deadline.",
+                        "days": 30
+                    }
+                ]
+            }
+        }
+    },
+    "guide_b1b2_medical": {
+        "case": "Guide: B-1/B-2 Medical Treatment",
+        "form": "m1087",
+        "tasks": [
+            {
+                "name": "Review Guide",
+                "description": "Review the M-1087 guide for rules on B-1/B-2 medical treatment.",
+                "days": 1
+            },
+            {
+                "name": "Document Gathering Plan",
+                "description": "Create a plan to gather required documents (doctor's letter, proof of funds).",
+                "days": 2
+            },
+            {
+                "name": "Consular Interview Prep",
+                "description": "Prepare for consular interview questions based on the guide.",
+                "days": 3
+            }
+        ],
+        "supplementary": {}
+    },
+    "guide_us_citizenship": {
+        "case": "Guide: U.S. Citizenship",
+        "form": "m1097",
+        "tasks": [
+            {
+                "name": "Review Guide",
+                "description": "Review the M-1097 guide for an overview of the naturalization process.",
+                "days": 1
+            },
+            {
+                "name": "Eligibility Self-Check",
+                "description": "Use the guide to perform an initial eligibility check.",
+                "days": 2
+            },
+            {
+                "name": "Study Plan Creation",
+                "description": "Create a study plan for the civics and English tests.",
+                "days": 3
+            }
+        ],
+        "supplementary": {}
+    },
+    "guide_opt": {
+        "case": "Guide: F-1 OPT",
+        "form": "m735",
+        "tasks": [
+            {
+                "name": "Review Guide",
+                "description": "Review the M-735 guide for OPT eligibility and application timelines.",
+                "days": 1
+            },
+            {
+                "name": "DSO Coordination Plan",
+                "description": "Plan coordination with the Designated School Official (DSO).",
+                "days": 2
+            },
+            {
+                "name": "I-765 Prep List",
+                "description": "Create a document checklist for the Form I-765 application.",
+                "days": 3
+            }
+        ],
+        "supplementary": {}
+    },
+    "guide_ssn": {
+        "case": "Guide: Applying for SSN",
+        "form": "m736",
+        "tasks": [
+            {
+                "name": "Review Guide",
+                "description": "Review the M-736 guide for SSN eligibility and application procedures.",
+                "days": 1
+            },
+            {
+                "name": "Document Checklist",
+                "description": "Create a checklist of required documents (passport, I-94, EAD).",
+                "days": 2
+            },
+            {
+                "name": "SSA Office Visit Plan",
+                "description": "Plan visit to a Social Security Administration (SSA) office.",
+                "days": 3
+            }
+        ],
+        "supplementary": {}
+    },
+    "guide_religious_workers": {
+        "case": "Guide: Religious Workers",
+        "form": "m737",
+        "tasks": [
+            {
+                "name": "Review Guide",
+                "description": "Review M-737 for R-1 visa and I-360 religious worker requirements.",
+                "days": 1
+            },
+            {
+                "name": "Organization Document Review",
+                "description": "Check if the religious organization's documents meet guide standards.",
+                "days": 3
+            },
+            {
+                "name": "Petition Prep Plan",
+                "description": "Create a plan for preparing the R-1 or I-360 petition.",
+                "days": 5
+            }
+        ],
+        "supplementary": {}
+    },
+    "naturalization_hearing_req": {
+        "case": "Naturalization Hearing Request",
+        "form": "n336",
+        "tasks": [
+            {
+                "name": "Review N-400 Denial Notice",
+                "description": "Receive and review the Form N-400 denial notice.",
+                "days": 3
+            },
+            {
+                "name": "Gather Counter-Evidence/Arguments",
+                "description": "Gather new evidence or legal arguments to challenge the denial.",
+                "days": 15
+            },
+            {
+                "name": "Form N-336 Completion",
+                "description": "Complete Form N-336, clearly stating the reasons for the appeal.",
+                "days": 20
+            },
+            {
+                "name": "Submission (within 30 days)",
+                "description": "Submit the N-336 with fee within 30 days of the denial decision.",
+                "days": 25
+            }
+        ],
+        "supplementary": {}
+    },
+    "military_service_cert": {
+        "case": "Military Service Certification",
+        "form": "n426",
+        "tasks": [
+            {
+                "name": "Obtain Form N-426",
+                "description": "Download the most current Form N-426.",
+                "days": 1
+            },
+            {
+                "name": "Applicant Completion (Part 1)",
+                "description": "Applicant completes Part 1 of the form.",
+                "days": 2
+            },
+            {
+                "name": "Submit to Military for Certification",
+                "description": "Submit the form to the appropriate military service branch for certification.",
+                "days": 5
+            },
+            {
+                "name": "Receive Certified Form",
+                "description": "Receive the certified N-426 back from the military.",
+                "days": 20
+            },
+            {
+                "name": "Submit with N-400",
+                "description": "Include the certified N-426 with the Form N-400 naturalization application.",
+                "days": 21
+            }
+        ],
+        "supplementary": {}
+    },
+    "replace_citizenship_doc": {
+        "case": "Replace Citizenship Document",
+        "form": "n565",
+        "tasks": [
+            {
+                "name": "Determine Reason",
+                "description": "Identify reason for replacement (lost, stolen, name change).",
+                "days": 1
+            },
+            {
+                "name": "Gather Evidence",
+                "description": "Collect proof of identity, photos, and evidence of the original document (if possible) or name change.",
+                "days": 5
+            },
+            {
+                "name": "Form N-565 Completion",
+                "description": "Complete Form N-565.",
+                "days": 7
+            },
+            {
+                "name": "Submission with Fee",
+                "description": "Submit the application with fee and supporting documents.",
+                "days": 10
+            }
+        ],
+        "supplementary": {}
+    },
+    "citizenship_certificate": {
+        "case": "Certificate of Citizenship",
+        "form": "n600",
+        "tasks": [
+            {
+                "name": "Determine Eligibility Basis",
+                "description": "Confirm eligibility (e.g., child of U.S. citizen, acquisition/derivation).",
+                "days": 5
+            },
+            {
+                "name": "Gather Parental Docs",
+                "description": "Collect parents' birth certificates, marriage certificates, and proof of U.S. citizenship.",
+                "days": 15
+            },
+            {
+                "name": "Gather Applicant Docs",
+                "description": "Collect applicant's birth certificate and proof of LPR status (if applicable).",
+                "days": 20
+            },
+            {
+                "name": "Form N-600 Completion",
+                "description": "Complete Form N-600 with all required biographic and parental information.",
+                "days": 25
+            },
+            {
+                "name": "Submission and Interview Prep",
+                "description": "Submit application package. Prepare for potential interview.",
+                "days": 30
+            }
+        ],
+        "supplementary": {}
+    }
+}

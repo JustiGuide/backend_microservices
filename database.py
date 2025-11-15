@@ -1,3 +1,4 @@
+import json
 import os
 from typing import Union, Literal
 from pydantic import EmailStr
@@ -1495,3 +1496,9 @@ class Functions:
         db.commit()
         db.refresh(case)
         db.close()
+    
+    def retrieve_case_types(self) -> dict[str, dict[str, Union[str, list[dict[str, Union[str, int]]], dict[str, dict[str, Union[str, list[dict[str, Union[str, int]]]]]]]]]:
+        case_types = {}
+        with open("./data/case_types.json", "r") as fp:
+            case_types = json.load(fp)
+        return case_types
