@@ -337,7 +337,7 @@ class Helpers:
 
     @staticmethod
     def get_all_casetypes() -> dict[str, dict[str, Union[str, list[dict[str, Union[str, int]]]]]]:
-        # TODO: Connect with case management service to get case type based on form_name (case_type.json)
+        # TODO: Connect with case management service to get all case type (case_type.json)
         pass
 
     @staticmethod
