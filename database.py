@@ -708,7 +708,7 @@ class Functions:
         #     invite_success = True
         # db.close()
         # return invite_success
-        # TODO: connect with user service
+        # TODO: connect with relationship service
         pass
 
     def retrieve_invitation_data(
@@ -839,7 +839,7 @@ class Functions:
         #     result = None
         # db.close()
         # return result
-        # TODO: connect with user service
+        # TODO: connect with relationship service
         pass
 
     def delete_invitation_data(
@@ -912,7 +912,7 @@ class Functions:
         #     db.delete(invitation)
         #     db.commit()
         # db.close()
-        # TODO: connect with user service
+        # TODO: connect with relationship service
         pass
 
     def remove_external_lawyer(self, email: EmailStr) -> None:
