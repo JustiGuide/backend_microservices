@@ -1,0 +1,212 @@
+{
+  "form_name": "m1097",
+  "pages": [
+    {
+      "page_number": 1,
+      "fields": [
+        {
+          "field_id": "95589a25-548a-46d4-8203-895e056ca81c",
+          "page": 1,
+          "orig_name": "CheckBox1[0]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.i129.completed_and_signed.included.checkbox",
+          "explain": "This is a checklist checkbox next to “A completed and properly signed USCIS Form I-129.” Placed under supporting_evidence.checklist; single widget encoded with option token 'included' before .checkbox.",
+          "normalized_label": "a_completed_and_properly_signed_uscis_form_i129",
+          "recommend_other_text": false,
+          "choice_options": [
+            "included"
+          ],
+          "ai_extracted_option": "included",
+          "description": "Indicate that a completed and properly signed Form I-129 is included.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "c7552ae0-0894-46da-9091-b7aa5807f448",
+          "page": 1,
+          "orig_name": "CheckBox1[1]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.i129.h_classification_supplement.completed_and_signed.included.checkbox",
+          "explain": "This checkbox aligns with the item “A completed and properly signed H Classification Supplement to Form I-129.” Encoded as checklist evidence with single option token 'included'.",
+          "normalized_label": "a_completed_and_properly_signed_h_classification_supplement_to_form_i129",
+          "recommend_other_text": false,
+          "choice_options": [
+            "included"
+          ],
+          "ai_extracted_option": "included",
+          "description": "Indicate that the H Classification Supplement to Form I-129 is completed, signed, and included.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "fields": [
+        {
+          "field_id": "500ec11f-6c92-4d45-89b0-6641b48bcddd",
+          "page": 2,
+          "orig_name": "CheckBox1[2]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.payment_of_base_petition_fee.checkbox",
+          "explain": "Checkbox next to the line item 'Payment of the base petition fee plus additional fees'; mapped under supporting_evidence checklist.",
+          "normalized_label": "payment_of_the_base",
+          "recommend_other_text": false,
+          "choice_options": [
+            "payment_of_base_petition_fee"
+          ],
+          "ai_extracted_option": "payment_of_base_petition_fee",
+          "description": "Indicates inclusion of the payment of the base petition fee (and any additional fees) with the filing.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "d59862bd-58a1-4d18-8095-fe77ed526860",
+          "page": 2,
+          "orig_name": "CheckBox1[3]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.evidence_of_continued_business_operations.checkbox",
+          "explain": "Checkbox beside the optional section listing evidence of continued business operations (DBA, licenses, tax returns, bank statements).",
+          "normalized_label": "optional_evidence_name_doing_business",
+          "recommend_other_text": false,
+          "choice_options": [
+            "evidence_of_continued_business_operations"
+          ],
+          "ai_extracted_option": "evidence_of_continued_business_operations",
+          "description": "Marks that evidence of the petitioner’s continued business operations is included.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "39f51df8-b908-47de-9e3c-d86648654b65",
+          "page": 2,
+          "orig_name": "CheckBox1[4]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.approved_eta_form_9142.checkbox",
+          "explain": "Checkbox aligned with 'An approved ETA Form 9142 from DOL.'",
+          "normalized_label": "an_approved_eta",
+          "recommend_other_text": false,
+          "choice_options": [
+            "approved_eta_form_9142"
+          ],
+          "ai_extracted_option": "approved_eta_form_9142",
+          "description": "Indicates submission of an approved ETA Form 9142 from DOL.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "ba52aaf0-d75f-4900-9a71-eeecb20782b2",
+          "page": 2,
+          "orig_name": "CheckBox1[5]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.cover_letter.checkbox",
+          "explain": "Checkbox beside 'Optional: A cover letter from the petitioner or employer...'",
+          "normalized_label": "optional_a_cover",
+          "recommend_other_text": false,
+          "choice_options": [
+            "cover_letter"
+          ],
+          "ai_extracted_option": "cover_letter",
+          "description": "Indicates inclusion of a cover letter describing the employer’s business and job need.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "fields": [
+        {
+          "field_id": "cea69b02-c28c-46da-953a-21ef4e3f92ba",
+          "page": 3,
+          "orig_name": "CheckBox1[6]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.h2a.additional_docs.multiple_workers_single_petition.checkbox",
+          "explain": "Checkbox at the start of the section about filing one petition for multiple workers. Mapped under supporting_evidence for H‑2A additional documentation.",
+          "normalized_label": "additional_documentation_conditions",
+          "recommend_other_text": null,
+          "choice_options": [
+            "multiple_workers_single_petition",
+            "special_requirements_on_eta9142",
+            "status_change_extension_amendment",
+            "amended_petition_substitution"
+          ],
+          "ai_extracted_option": "multiple_workers_single_petition",
+          "description": "Select if filing a single petition for multiple workers requesting the same action and timeframe/location.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "c974cf83-7b01-4da0-9765-3474ae029395",
+          "page": 3,
+          "orig_name": "CheckBox1[9]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.h2a.additional_docs.special_requirements_on_eta9142.checkbox",
+          "explain": "Checkbox preceding text about ETA Form 9142 indicating education/training/special requirements evidence.",
+          "normalized_label": "additional_documentation_conditions",
+          "recommend_other_text": null,
+          "choice_options": [
+            "multiple_workers_single_petition",
+            "special_requirements_on_eta9142",
+            "status_change_extension_amendment",
+            "amended_petition_substitution"
+          ],
+          "ai_extracted_option": "special_requirements_on_eta9142",
+          "description": "Select if ETA Form 9142 lists special requirements; attach evidence each worker meets them.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "ea6d15b1-da9d-4fbc-abcb-c22a1d7483c6",
+          "page": 3,
+          "orig_name": "CheckBox1[8]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.h2a.additional_docs.status_change_extension_amendment.checkbox",
+          "explain": "Checkbox for the section about requesting change of status, extension of stay, or amendment of stay and providing prior status evidence.",
+          "normalized_label": "additional_documentation_conditions",
+          "recommend_other_text": null,
+          "choice_options": [
+            "multiple_workers_single_petition",
+            "special_requirements_on_eta9142",
+            "status_change_extension_amendment",
+            "amended_petition_substitution"
+          ],
+          "ai_extracted_option": "status_change_extension_amendment",
+          "description": "Select if requesting change/extension/amendment of status; provide evidence of prior nonimmigrant status.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "07b7b958-16a2-49d1-80c5-42c0346cbe3c",
+          "page": 3,
+          "orig_name": "CheckBox1[7]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.h2a.additional_docs.amended_petition_substitution.checkbox",
+          "explain": "Checkbox tied to the section about filing an amended petition requesting substitution of unavailable H‑2A workers.",
+          "normalized_label": "additional_documentation_conditions",
+          "recommend_other_text": null,
+          "choice_options": [
+            "multiple_workers_single_petition",
+            "special_requirements_on_eta9142",
+            "status_change_extension_amendment",
+            "amended_petition_substitution"
+          ],
+          "ai_extracted_option": "amended_petition_substitution",
+          "description": "Select if filing an amended petition for worker substitution; attach the listed supporting items.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    }
+  ]
+}

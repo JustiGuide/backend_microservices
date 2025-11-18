@@ -1,0 +1,356 @@
+{
+  "form_name": "m735",
+  "pages": [
+    {
+      "page_number": 1,
+      "fields": [
+        {
+          "field_id": "707ca63f-4237-49b5-99a7-aec438cf16eb",
+          "page": 1,
+          "orig_name": "CheckBox1[0]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.fees.asylum_program_fee.yes.checkbox",
+          "explain": "Checkbox under the Proper fees section confirming the Asylum Program fee is enclosed; modeled as checklist → fees → asylum_program_fee.",
+          "normalized_label": "asylum_program_fee",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Select if the Asylum Program fee is enclosed, when applicable.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "51cf176f-dce0-4177-9859-3d07d8df4fef",
+          "page": 1,
+          "orig_name": "CheckBox1[1]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.payments_signed_and_payable_to_dhs.yes.checkbox",
+          "explain": "Checklist item stating all checks/money orders are signed and payable to DHS; placed in submission checklist.",
+          "normalized_label": "payments_signed_and_payable_to_dhs",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm checks or money orders are signed and payable to the U.S. Department of Homeland Security.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "e3418c4e-bbb1-4b98-bcc5-376f6e0275a0",
+          "page": 1,
+          "orig_name": "CheckBox1[2]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.proper_fees_enclosed.yes.checkbox",
+          "explain": "Top-line checkbox for the Proper fees are enclosed statement; modeled as submission checklist item.",
+          "normalized_label": "proper_fees_enclosed",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm that the proper filing fees are enclosed.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "2f8ef49a-8ded-498d-a7c9-9b3cc2dccbcd",
+          "page": 1,
+          "orig_name": "CheckBox1[3]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.fees.base_fee.yes.checkbox",
+          "explain": "Sub-item of fees confirming the base filing fee is enclosed.",
+          "normalized_label": "base_fee",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Select if the base filing fee is enclosed.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "59ccc90b-38b0-425b-b493-951e9c3da320",
+          "page": 1,
+          "orig_name": "CheckBox1[4]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.fees.acwia_fee.yes.checkbox",
+          "explain": "Sub-item of fees for the ACWIA fee (American Competitiveness and Workforce Improvement Act).",
+          "normalized_label": "acwia_fee",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Select if the ACWIA fee is enclosed, when applicable.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "c894fbc1-d950-4e40-b8fc-9fb8a2790d6c",
+          "page": 1,
+          "orig_name": "CheckBox1[5]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.fees.fraud_prevention_detection_fee.yes.checkbox",
+          "explain": "Fees sub-item confirming the Fraud Prevention and Detection fee is enclosed.",
+          "normalized_label": "fraud_prevention_and_detection_fee",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Select if the Fraud Prevention and Detection fee is enclosed, when applicable.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "6996886e-e5c9-42e3-b956-635761884d8a",
+          "page": 1,
+          "orig_name": "CheckBox1[6]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.fees.pl_114_113_fee.yes.checkbox",
+          "explain": "Fees sub-item for the Public Law 114-113 fee.",
+          "normalized_label": "public_law_114_113_fee",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Select if the Public Law 114-113 fee is enclosed, when applicable.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "2e2a8f87-cc9a-4ef2-ae99-996f1f2278d5",
+          "page": 1,
+          "orig_name": "CheckBox1[7]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.original_signatures_included.yes.checkbox",
+          "explain": "Checklist item confirming all necessary original signatures are included.",
+          "normalized_label": "original_signatures_included",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm that all required original signatures are present and compliant.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "eabd1425-1f5f-4109-9ac9-67747511d317",
+          "page": 1,
+          "orig_name": "CheckBox1[8]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.forms_completed_and_enclosed.yes.checkbox",
+          "explain": "Checklist item stating all sections of Form I-129 and supplements are complete and enclosed.",
+          "normalized_label": "all_forms_completed_and_enclosed",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm that Form I-129, supplements, and required pages are completed and enclosed.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "b5af442d-db3c-43c0-a7b3-dfd8a6dc77d6",
+          "page": 1,
+          "orig_name": "CheckBox1[9]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.premium_processing_i907_enclosed_if_applicable.yes.checkbox",
+          "explain": "Checklist item about including a completed Form I-907 when applying for premium processing with the H-1B filing.",
+          "normalized_label": "i907_submitted_if_applying_premium_processing",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm a signed Form I-907 is enclosed when premium processing is requested with this petition.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "f81bc58f-572f-4fb1-8983-443799b47633",
+          "page": 1,
+          "orig_name": "CheckBox1[10]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.fees.premium_processing_fee.yes.checkbox",
+          "explain": "Fees sub-item confirming the Premium Processing Service fee is enclosed.",
+          "normalized_label": "premium_processing_fee",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Select if the premium processing fee is enclosed, when applicable.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "a7870f82-2d0b-47c7-879b-57402ab92872",
+          "page": 1,
+          "orig_name": "CheckBox1[11]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.lca_certified_and_signed_enclosed.yes.checkbox",
+          "explain": "Checklist item about including a certified LCA signed by petitioner and representative, if applicable.",
+          "normalized_label": "lca_certified_and_signed_enclosed",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm the certified LCA (DOL) signed by required parties is enclosed.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "1e9ec472-0b70-41b7-a89e-7a01365bca1d",
+          "page": 1,
+          "orig_name": "CheckBox1[12]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.checklist.mailed_to_correct_address_with_labels.yes.checkbox",
+          "explain": "Checklist item confirming the petition is mailed with appropriate labels to the correct filing location.",
+          "normalized_label": "mailed_to_correct_address_with_labels",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm you mailed the petition to the proper address with correct labels per USCIS instructions.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "fields": [
+        {
+          "field_id": "1135fdc9-a1ed-4778-ab58-eb839f6264c7",
+          "page": 2,
+          "orig_name": "CheckBox1[13]",
+          "control_type": "checkbox",
+          "canonical_name": "eligibility.h1b_cap.cap_gap.checkbox",
+          "explain": "This checkbox marks the H-1B cap-gap filing condition; mapped under eligibility.h1b_cap with option token cap_gap.",
+          "normalized_label": "cap_gap_petitions",
+          "recommend_other_text": false,
+          "choice_options": [
+            "regular",
+            "advanced_degree",
+            "cap_gap",
+            "chile_singapore_h1b1"
+          ],
+          "ai_extracted_option": "cap_gap",
+          "description": "Select if filing a cap-gap petition (F-1 to H-1B change of status under cap-gap).",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "caa042b8-521b-491b-b139-44df0fec74ab",
+          "page": 2,
+          "orig_name": "CheckBox1[14]",
+          "control_type": "checkbox",
+          "canonical_name": "eligibility.h1b_cap.advanced_degree.checkbox",
+          "explain": "This checkbox indicates the H-1B Advanced Degree Exemption category; placed under eligibility.h1b_cap with option token advanced_degree.",
+          "normalized_label": "h_1b_advanced_degree_exemption",
+          "recommend_other_text": false,
+          "choice_options": [
+            "regular",
+            "advanced_degree",
+            "cap_gap",
+            "chile_singapore_h1b1"
+          ],
+          "ai_extracted_option": "advanced_degree",
+          "description": "Select if the beneficiary qualifies for the H-1B advanced degree exemption.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "f8bc5259-895e-424c-9615-d0f79c459163",
+          "page": 2,
+          "orig_name": "CheckBox1[15]",
+          "control_type": "checkbox",
+          "canonical_name": "eligibility.h1b_cap.regular.checkbox",
+          "explain": "This checkbox marks the standard H-1B Regular Cap; modeled as eligibility.h1b_cap with option token regular.",
+          "normalized_label": "h_1b_regular_cap",
+          "recommend_other_text": false,
+          "choice_options": [
+            "regular",
+            "advanced_degree",
+            "cap_gap",
+            "chile_singapore_h1b1"
+          ],
+          "ai_extracted_option": "regular",
+          "description": "Select if filing under the regular H-1B cap.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "27ccbadb-9c3b-48b8-8815-5ea857ce7d00",
+          "page": 2,
+          "orig_name": "CheckBox1[16]",
+          "control_type": "checkbox",
+          "canonical_name": "eligibility.h1b_cap.chile_singapore_h1b1.checkbox",
+          "explain": "Checkbox for the Chile/Singapore H‑1B1 cap; grouped under eligibility.h1b_cap with option token chile_singapore_h1b1.",
+          "normalized_label": "chile_singapore_h_1b1_cap",
+          "recommend_other_text": false,
+          "choice_options": [
+            "regular",
+            "advanced_degree",
+            "cap_gap",
+            "chile_singapore_h1b1"
+          ],
+          "ai_extracted_option": "chile_singapore_h1b1",
+          "description": "Select if filing under the Chile/Singapore H‑1B1 cap category.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "fields": [
+        {
+          "field_id": "fe1a8d4e-9068-412d-95db-fd7e668ced1f",
+          "page": 3,
+          "orig_name": "CheckBox1[17]",
+          "control_type": "checkbox",
+          "canonical_name": "eligibility.h1b.cap_exempt_or_non_cap_extension.yes.checkbox",
+          "explain": "Single checkbox near the heading indicates whether the filing is H‑1B cap‑exempt or a non‑cap H‑1B extension; modeled as a boolean checkbox with the token yes.",
+          "normalized_label": "h_1b_cap_exempt_or_non_cap_h_1b_extension_of_stay",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Check if the petition is H-1B cap‑exempt or a non‑cap H‑1B extension of stay.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": null
+        }
+      ]
+    }
+  ]
+}

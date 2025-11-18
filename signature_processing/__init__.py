@@ -1,0 +1,1 @@
+from .sign_processing import SignGenerator as SignGenerator

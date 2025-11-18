@@ -1,0 +1,202 @@
+{
+  "form_name": "m1087",
+  "pages": [
+    {
+      "page_number": 1,
+      "fields": [
+        {
+          "field_id": "ff379d4e-195d-4058-93e8-99be14965e58",
+          "page": 1,
+          "orig_name": "CheckBox1[0]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.general_petition_requirements.i129_completed_signed.included.checkbox",
+          "explain": "This is a checklist box under General Petition Requirements confirming inclusion of a completed and properly signed Form I-129; placed in supporting_evidence.checklist with the specific item token i129_completed_signed and the widget option token included.",
+          "normalized_label": "completed_and_properly_signed_form_i_129",
+          "recommend_other_text": null,
+          "choice_options": [
+            "included"
+          ],
+          "ai_extracted_option": "included",
+          "description": "Indicates the packet includes a completed and properly signed Form I-129 (most recent version).",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "3e4565bd-9b7c-4054-8c92-9099a3e57c9e",
+          "page": 1,
+          "orig_name": "CheckBox1[1]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.general_petition_requirements.h_classification_supplement_completed_signed.included.checkbox",
+          "explain": "Second checklist box under General Petition Requirements confirming inclusion of the H Classification Supplement to Form I-129; modeled as a supporting_evidence checklist item with included option.",
+          "normalized_label": "completed_and_properly_signed_h_classification_supplement_to_form_i_129",
+          "recommend_other_text": null,
+          "choice_options": [
+            "included"
+          ],
+          "ai_extracted_option": "included",
+          "description": "Indicates the packet includes a completed and properly signed H Classification Supplement to Form I-129.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "fields": [
+        {
+          "field_id": "60dc822c-bb04-4f00-800e-24e9b66966f3",
+          "page": 2,
+          "orig_name": "CheckBox1[2]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checks.payment_base_fee.checkbox",
+          "explain": "Checkbox next to the line 'Payment of the base petition fee...' indicating inclusion of proof of base fee payment.",
+          "normalized_label": "payment_base_fee",
+          "recommend_other_text": false,
+          "choice_options": [
+            "payment_base_fee"
+          ],
+          "ai_extracted_option": "payment_base_fee",
+          "description": "Indicates you are including evidence of payment of the base petition fee (and any applicable additional fees).",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "1930dada-d044-4386-a89d-9a57301c9c7b",
+          "page": 2,
+          "orig_name": "CheckBox1[5]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checks.fraud_detection_fee.checkbox",
+          "explain": "Checkbox for 'Payment of the fraud prevention and detection fee.'",
+          "normalized_label": "fraud_detection_fee",
+          "recommend_other_text": false,
+          "choice_options": [
+            "fraud_detection_fee"
+          ],
+          "ai_extracted_option": "fraud_detection_fee",
+          "description": "Indicates you are including evidence of payment of the fraud prevention and detection fee.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "65475f39-55f5-49d4-bf06-056d1e81b2f8",
+          "page": 2,
+          "orig_name": "CheckBox1[3]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checks.temporary_labor_certification.checkbox",
+          "explain": "Checkbox tied to 'An approved temporary labor certification.'",
+          "normalized_label": "temporary_labor_certification",
+          "recommend_other_text": false,
+          "choice_options": [
+            "temporary_labor_certification"
+          ],
+          "ai_extracted_option": "temporary_labor_certification",
+          "description": "Indicates an approved temporary labor certification is included.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "2a8ec7bb-57e8-42a6-893f-b6be9b421687",
+          "page": 2,
+          "orig_name": "CheckBox1[4]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checks.cover_letter.checkbox",
+          "explain": "Checkbox next to 'Optional: A cover letter...' from petitioner/employer.",
+          "normalized_label": "cover_letter",
+          "recommend_other_text": false,
+          "choice_options": [
+            "cover_letter"
+          ],
+          "ai_extracted_option": "cover_letter",
+          "description": "Indicates an optional cover letter describing the business, duties, need, and worker qualifications is included.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "5a586f26-f5c8-46bf-b44d-43c570bc1d1c",
+          "page": 2,
+          "orig_name": "CheckBox1[6]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checks.multi_worker_single_petition.checkbox",
+          "explain": "Checkbox at the start of the section 'You may file for more than one worker on a single petition if...'",
+          "normalized_label": "multi_worker_single_petition",
+          "recommend_other_text": false,
+          "choice_options": [
+            "multi_worker_single_petition"
+          ],
+          "ai_extracted_option": "multi_worker_single_petition",
+          "description": "Indicates documentation is provided when filing for more than one worker on a single petition per listed conditions.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "0928eaab-e138-4a2c-b65d-b3276f4bec6f",
+          "page": 2,
+          "orig_name": "CheckBox1[7]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checks.special_requirements_proof.checkbox",
+          "explain": "Checkbox tied to 'If the temporary labor certification states the workers require certain education, training, experience...'",
+          "normalized_label": "special_requirements_proof",
+          "recommend_other_text": false,
+          "choice_options": [
+            "special_requirements_proof"
+          ],
+          "ai_extracted_option": "special_requirements_proof",
+          "description": "Indicates inclusion of worker naming and proof that each worker meets any stated education/training/experience requirements.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "fields": [
+        {
+          "field_id": "b27016f8-4647-45d1-9bb2-85d58767c143",
+          "page": 3,
+          "orig_name": "CheckBox1[8]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.request_context.change_of_status_extension_amendment.checkbox",
+          "explain": "Square box next to paragraph beginning “If you are requesting a change of status, extension of stay, or amendment of stay…”, indicating the evidence set that applies.",
+          "normalized_label": "change_of_status_extension_amendment",
+          "recommend_other_text": false,
+          "choice_options": [
+            "change_of_status_extension_amendment",
+            "substitution_unavailability"
+          ],
+          "ai_extracted_option": "change_of_status_extension_amendment",
+          "description": "Select if the filing involves change of status, extension, or amendment; indicates inclusion of listed evidence.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "ec40388b-b8d7-4b8e-aee1-79803edbc25e",
+          "page": 3,
+          "orig_name": "CheckBox1[9]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.request_context.substitution_unavailability.checkbox",
+          "explain": "Square box next to paragraph beginning “If you are filing an amended petition requesting substitution due to the unavailability of H‑2B workers…”, marking the applicable evidence list.",
+          "normalized_label": "substitution_unavailability",
+          "recommend_other_text": false,
+          "choice_options": [
+            "change_of_status_extension_amendment",
+            "substitution_unavailability"
+          ],
+          "ai_extracted_option": "substitution_unavailability",
+          "description": "Select if filing an amended petition for substitution due to worker unavailability; indicates inclusion of listed evidence.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    }
+  ]
+}

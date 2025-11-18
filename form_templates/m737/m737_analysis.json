@@ -1,0 +1,339 @@
+{
+  "form_name": "m737",
+  "pages": [
+    {
+      "page_number": 1,
+      "fields": [
+        {
+          "field_id": "4b7e9e96-a501-4f6f-8b72-b5c8ba43be73",
+          "page": 1,
+          "orig_name": "CheckBox1[0]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.organization.irs_determination_letter.provided.checkbox",
+          "explain": "Mapped to supporting_evidence; checkbox indicates providing the IRS determination letter proving tax‑exempt status.",
+          "normalized_label": "irs_determination_letter_tax_exempt_org",
+          "recommend_other_text": null,
+          "choice_options": [
+            "provided"
+          ],
+          "ai_extracted_option": "provided",
+          "description": "Check if you are including a current IRS determination letter establishing the organization is tax‑exempt.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "780a6578-34a6-4bf1-a84a-3bc437c675eb",
+          "page": 1,
+          "orig_name": "CheckBox1[1]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.form_checklist.complete_all_sections.yes.checkbox",
+          "explain": "Form checklist item; boolean that petitioner reviewed and completed all applicable sections.",
+          "normalized_label": "did_you_complete_all_sections",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm you completed all sections that apply to petitioner and beneficiary.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "169f5d4c-a93b-4aa0-8ce6-7edd9fe9c508",
+          "page": 1,
+          "orig_name": "CheckBox1[2]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.form_checklist.signed_and_dated.yes.checkbox",
+          "explain": "Form checklist item for signature/date completion.",
+          "normalized_label": "did_you_sign_and_date_petition",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm you signed and dated the petition in the appropriate part.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "74dc2aa2-0106-403b-8c3f-58b00939a968",
+          "page": 1,
+          "orig_name": "CheckBox1[3]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.form_checklist.correct_filing_fee.yes.checkbox",
+          "explain": "Form checklist item to confirm correct filing fee submitted.",
+          "normalized_label": "did_you_submit_correct_filing_fee",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm the correct filing fee was submitted.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "44538835-307a-42b2-ade3-6193bd0fdebc",
+          "page": 1,
+          "orig_name": "CheckBox1[4]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.form_checklist.current_mailing_addresses_provided.yes.checkbox",
+          "explain": "Form checklist item; confirms petitioner and beneficiary mailing addresses provided.",
+          "normalized_label": "did_you_provide_current_mailing_addresses",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm current mailing addresses for petitioner and beneficiary are provided.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "d83d1bb3-f918-4435-bd34-bb57296be4c9",
+          "page": 1,
+          "orig_name": "CheckBox1[5]",
+          "control_type": "checkbox",
+          "canonical_name": "submission.form_checklist.part9_information_provided.yes.checkbox",
+          "explain": "Form checklist item referencing providing Part 9 information and required signatures.",
+          "normalized_label": "did_you_provide_part_9_information",
+          "recommend_other_text": null,
+          "choice_options": [
+            "yes"
+          ],
+          "ai_extracted_option": "yes",
+          "description": "Confirm Part 9 information, including signatures, is provided.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "2bf523e1-6983-4ee0-9313-37d6f3280254",
+          "page": 1,
+          "orig_name": "CheckBox1[6]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.organization.group_tax_exemption_determination_letter.provided.checkbox",
+          "explain": "Filing checklist item for organizations under a group exemption; providing IRS group determination letter.",
+          "normalized_label": "group_tax_exemption_determination_letter",
+          "recommend_other_text": null,
+          "choice_options": [
+            "provided"
+          ],
+          "ai_extracted_option": "provided",
+          "description": "Check if you included the IRS letter establishing the group’s tax‑exempt status.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "8a6ac4d6-fcfa-46b7-b523-aac1ee289e35",
+          "page": 1,
+          "orig_name": "CheckBox1[7]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.affiliated_org.irs_determination_letter.provided.checkbox",
+          "explain": "Within bona fide affiliated organization section; providing IRS determination letter for the affiliated org.",
+          "normalized_label": "affiliated_org_irs_determination_letter",
+          "recommend_other_text": null,
+          "choice_options": [
+            "provided"
+          ],
+          "ai_extracted_option": "provided",
+          "description": "Include affiliated organization’s IRS determination letter showing tax‑exempt status.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "e0b20a1d-6ab1-4098-9908-bc865ca18328",
+          "page": 1,
+          "orig_name": "CheckBox1[8]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.affiliated_org.religious_purpose_documentation.provided.checkbox",
+          "explain": "Evidence establishing religious nature/purpose (organizing instrument, etc.).",
+          "normalized_label": "documentation_establishing_religious_purpose",
+          "recommend_other_text": null,
+          "choice_options": [
+            "provided"
+          ],
+          "ai_extracted_option": "provided",
+          "description": "Provide documentation showing the religious nature and purpose of the organization.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "e46c409e-0727-4e1b-ba3f-352c82c56b25",
+          "page": 1,
+          "orig_name": "CheckBox1[9]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.affiliated_org.organizational_literature.provided.checkbox",
+          "explain": "Evidence type is organizational literature describing religious purpose/activities.",
+          "normalized_label": "organizational_literature_describing_religious_purpose",
+          "recommend_other_text": null,
+          "choice_options": [
+            "provided"
+          ],
+          "ai_extracted_option": "provided",
+          "description": "Provide literature (books, brochures, flyers, etc.) describing religious purpose and activities.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "26b5ae64-70f5-402e-a404-b1d1ebb7cafc",
+          "page": 1,
+          "orig_name": "CheckBox1[10]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.affiliated_org.religious_denomination_certification.provided.checkbox",
+          "explain": "Document specified as Religious Denomination Certification in Part 9 of Form I‑360.",
+          "normalized_label": "religious_denomination_certification_part_9",
+          "recommend_other_text": null,
+          "choice_options": [
+            "provided"
+          ],
+          "ai_extracted_option": "provided",
+          "description": "Include the completed, signed Religious Denomination Certification from Part 9 of Form I‑360.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "fields": [
+        {
+          "field_id": "e3658f7d-9ace-4c48-a710-99a4687cd00b",
+          "page": 2,
+          "orig_name": "CheckBox1[11]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.certified_english_translations.checkbox",
+          "explain": "Checklist item for providing certified English translations of foreign-language documents; mapped under supporting_evidence.checklist as a single checkbox option.",
+          "normalized_label": "certified english translations of foreign-language documents",
+          "recommend_other_text": null,
+          "choice_options": [
+            "certified_english_translations"
+          ],
+          "ai_extracted_option": "certified_english_translations",
+          "description": "Indicate that certified English translations for any foreign-language documents are included.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "5fb5e6cc-2956-4e11-adc8-32e42d026abb",
+          "page": 2,
+          "orig_name": "CheckBox1[12]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.g28_or_g28i_attached.checkbox",
+          "explain": "Checkbox for including a completed Form G-28 or G-28I; categorized as supporting evidence checklist.",
+          "normalized_label": "completed form g-28 or g-28i",
+          "recommend_other_text": null,
+          "choice_options": [
+            "g28_or_g28i_attached"
+          ],
+          "ai_extracted_option": "g28_or_g28i_attached",
+          "description": "Indicate that a completed Form G‑28 or G‑28I is included if represented by an attorney or accredited representative.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "de22aa46-e734-442f-a701-031dba1032b3",
+          "page": 2,
+          "orig_name": "CheckBox1[13]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.prospective_employer_attestation.checkbox",
+          "explain": "Item E refers to the Prospective Employer Attestation; modeled as its own checklist checkbox option.",
+          "normalized_label": "prospective employer attestation",
+          "recommend_other_text": null,
+          "choice_options": [
+            "prospective_employer_attestation"
+          ],
+          "ai_extracted_option": "prospective_employer_attestation",
+          "description": "Confirm inclusion of the Prospective Employer Attestation and related certification.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "900638f0-bed9-4e71-b053-9353eb898221",
+          "page": 2,
+          "orig_name": "CheckBox1[14]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.employer_compensation_evidence.checkbox",
+          "explain": "Checklist item F asks for evidence of how the employer will compensate the beneficiary; encoded as a specific checklist option.",
+          "normalized_label": "verifiable evidence of compensation",
+          "recommend_other_text": null,
+          "choice_options": [
+            "employer_compensation_evidence"
+          ],
+          "ai_extracted_option": "employer_compensation_evidence",
+          "description": "Indicate that verifiable evidence of compensation (salaried or non‑salaried) is provided.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "df07da6f-cf33-46ed-bd1a-84f09bfa2b03",
+          "page": 2,
+          "orig_name": "CheckBox1[15]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.religious_denomination_membership_2_years.checkbox",
+          "explain": "Checklist item G requires proof of denomination membership for at least two years prior to filing; represented as a checklist option.",
+          "normalized_label": "evidence of denomination membership for two years",
+          "recommend_other_text": null,
+          "choice_options": [
+            "religious_denomination_membership_2_years"
+          ],
+          "ai_extracted_option": "religious_denomination_membership_2_years",
+          "description": "Confirm evidence that the beneficiary was a member of the religious denomination for at least two years preceding the petition.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "cf1e1709-bdab-4be2-9963-b3f2010e6aa9",
+          "page": 2,
+          "orig_name": "CheckBox1[16]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.continuous_work_2_years_evidence.checkbox",
+          "explain": "Checklist item H seeks evidence of continuous qualifying work for the two years before filing; encoded as a checklist option.",
+          "normalized_label": "evidence of continuous work for two years",
+          "recommend_other_text": null,
+          "choice_options": [
+            "continuous_work_2_years_evidence"
+          ],
+          "ai_extracted_option": "continuous_work_2_years_evidence",
+          "description": "Indicate inclusion of evidence the beneficiary worked continuously for two years in a qualifying position.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "7cb5e190-664e-44b9-8cfe-184bec8313ca",
+          "page": 2,
+          "orig_name": "CheckBox1[17]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.checklist.qualified_for_offered_position_evidence.checkbox",
+          "explain": "Checklist item I requires evidence the beneficiary is qualified for the offered position; modeled as a checklist checkbox.",
+          "normalized_label": "evidence beneficiary is qualified to perform duties",
+          "recommend_other_text": null,
+          "choice_options": [
+            "qualified_for_offered_position_evidence"
+          ],
+          "ai_extracted_option": "qualified_for_offered_position_evidence",
+          "description": "Confirm evidence that the beneficiary is qualified to perform the duties of the offered position.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    }
+  ]
+}

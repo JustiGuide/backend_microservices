@@ -1,0 +1,105 @@
+{
+  "form_name": "m736",
+  "pages": [
+    {
+      "page_number": 1,
+      "fields": [
+        {
+          "field_id": "ebb77b7a-5057-4ace-8c8e-0ad953efbeb0",
+          "page": 1,
+          "orig_name": "Checkbox_1[0]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.requirements.form_i129_including_r1_supplement.checkbox",
+          "explain": "This is an optional checklist item under Requirements for the Petitioner confirming inclusion of Form I-129 and the R-1 Supplement; mapped to supporting_evidence.requirements.* with the item token before .checkbox.",
+          "normalized_label": "form_i129_including_r1_supplement_signed_by_petitioner",
+          "recommend_other_text": null,
+          "choice_options": [
+            "form_i129_including_r1_supplement"
+          ],
+          "ai_extracted_option": "form_i129_including_r1_supplement",
+          "description": "Check to indicate the packet includes Form I-129 and the R-1 Supplement signed by the petitioner.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        },
+        {
+          "field_id": "2922fddd-a2e1-48f7-a968-32f27e8128ff",
+          "page": 1,
+          "orig_name": "Checkbox_2[0]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.requirements.salaried_or_non_salaried_compensation.checkbox",
+          "explain": "Another checklist item confirming inclusion of compensation evidence; grouped under supporting_evidence.requirements with the item token appended before .checkbox.",
+          "normalized_label": "salaried_or_non_salaried_compensation",
+          "recommend_other_text": null,
+          "choice_options": [
+            "salaried_or_non_salaried_compensation"
+          ],
+          "ai_extracted_option": "salaried_or_non_salaried_compensation",
+          "description": "Check to indicate evidence about salaried or non‑salaried compensation (or self‑support) is included.",
+          "required": false,
+          "validation_passed": true,
+          "validation_errors": []
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "fields": [
+        {
+          "field_id": "dda7d672-bd03-4fd5-a576-75cce5b697fe",
+          "page": 2,
+          "orig_name": "Checkbox_3[0]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.petitioner.extension_of_stay_r1_previous_employment.checkbox",
+          "explain": "This is a checklist box under petitioner evidence for R‑1 extension; tokenized from the bullet 'For extension of stay... evidence of previous R‑1 employment.'",
+          "normalized_label": "for_extension_of_stay_as_an_r_1_provide_initial_evidence_of_previous_r_1_employment",
+          "recommend_other_text": null,
+          "choice_options": [
+            "extension_of_stay_r1_previous_employment"
+          ],
+          "ai_extracted_option": "extension_of_stay_r1_previous_employment",
+          "description": "Indicates inclusion of initial evidence of previous R‑1 employment for an extension of stay.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": null
+        },
+        {
+          "field_id": "17526e1e-4c4f-47e9-902d-e46560a41c15",
+          "page": 2,
+          "orig_name": "Checkbox_4[0]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.beneficiary.membership_religious_denomination_2_years.checkbox",
+          "explain": "Checklist item under beneficiary requirements; reflects evidence of two years’ membership in a qualifying religious denomination.",
+          "normalized_label": "evidence_of_membership_in_a_religious_denomination_having_a_bona_fide_non_profit_religious_organization_in_the_united_states_for_at_least_2_years_immediately_preceding_the_filing_of_the_petition",
+          "recommend_other_text": null,
+          "choice_options": [
+            "membership_religious_denomination_2_years"
+          ],
+          "ai_extracted_option": "membership_religious_denomination_2_years",
+          "description": "Check to confirm evidence of at least 2 years’ membership in a qualifying U.S. religious denomination is provided.",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": null
+        },
+        {
+          "field_id": "1fa9b066-cd23-4afe-aaa9-25b32d0e725f",
+          "page": 2,
+          "orig_name": "Checkbox_5[0]",
+          "control_type": "checkbox",
+          "canonical_name": "supporting_evidence.beneficiary.minister_ordination_evidence.checkbox",
+          "explain": "Beneficiary checklist for ministers; covers ordination and qualification documents listed in the section.",
+          "normalized_label": "if_the_beneficiary_is_a_minister_provide_ordination_and_qualification_documents",
+          "recommend_other_text": null,
+          "choice_options": [
+            "minister_ordination_evidence"
+          ],
+          "ai_extracted_option": "minister_ordination_evidence",
+          "description": "Indicates submission of minister-related evidence (ordination and qualifications).",
+          "required": null,
+          "validation_passed": true,
+          "validation_errors": null
+        }
+      ]
+    }
+  ]
+}
