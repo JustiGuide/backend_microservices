@@ -540,6 +540,7 @@ class Functions:
         # else:
         #     db.close()
         #     return lawyers
+        # TODO: Connect with relationship management
         pass
 
     def add_recent_action(
@@ -559,6 +560,7 @@ class Functions:
         # db.add(new_action)
         # db.commit()
         # db.close()
+        # TODO: Connect with case management
         pass
 
     def update_lawyer_stat(self, lawyer_email: EmailStr, stat_type: str) -> None:
@@ -602,6 +604,7 @@ class Functions:
         #     db.commit()
         #     db.refresh(case)
         # db.close()
+        # TODO: Connect with case management
         pass
 
     def retrieve_intake_form(
@@ -618,4 +621,5 @@ class Functions:
         #     form_name = intake_form.form_name
         # db.close()
         # return form_url, form_name.
+        # TODO: Connect with user management
         pass

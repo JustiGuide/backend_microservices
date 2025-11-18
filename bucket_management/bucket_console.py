@@ -219,6 +219,35 @@ class BucketConsole:
                         immigrant_files[subfolder].append(f"{self.base_url}/{file_key}")
         return immigrant_files
 
+    def retrieve_all_lawpersonnel_files(
+        self, lawpersonnel_username: str, lawpersonnel_type: Literal["lawyers", "nonlawyers", "paralegals", "lawstudents"]
+    ) -> dict[str, list[str]]:
+        lawpersonnel_files: dict[str, list[str]] = {}
+        file_subfolders = ["ai_chat_files", "personal_files", "profile_picture", "government_ids"]
+        if lawpersonnel_type == "lawyers":
+            file_subfolders.extend(
+                ["intakes", "professional_licenses", "address_proofs"]
+            )
+        for subfolder in file_subfolders:
+            lawpersonnel_files[subfolder] = []
+            response = self.s3_client.list_objects_v2(
+                Bucket=self.bucket_name,
+                Prefix=f"{lawpersonnel_type}/{lawpersonnel_username.lower()}/{subfolder}/",
+            )
+            if "Contents" in response:
+                for obj in response["Contents"]:
+                    file_key: str = obj["Key"]
+                    filename = file_key.split("/")[-1]
+                    if (
+                        filename
+                        and "blob" not in filename
+                        and not self._is_image(filename)
+                    ):
+                        lawpersonnel_files[subfolder].append(
+                            f"{self.base_url}/{file_key}"
+                        )
+        return lawpersonnel_files
+
     def retrieve_all_case_files(self, immigrant_username: str, lawyer_map: dict[str, list[str]] = None) -> list[dict[str, Union[str, bytes]]]:
         all_immigrant_case_files = []
         directories = [f"immigrants/{immigrant_username.lower()}"]
@@ -295,7 +324,7 @@ class BucketConsole:
             new_directory = new_directory.removeprefix(f"{self.base_url}/")
         elif new_directory.startswith("https"):
             return
-        
+
         for obj in self.bucket.objects.filter(Prefix=old_directory):
             old_source = {"Bucket": self.bucket_name, "Key": obj.key}
             new_key = obj.key.replace(old_directory, new_directory, 1)
