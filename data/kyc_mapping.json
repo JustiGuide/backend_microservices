@@ -1,0 +1,193 @@
+{
+    "purpose": {
+        "value": "What is your primary purpose for coming to the United States?",
+        "Tourism": "Tourism or business meetings (less than 90 days)",
+        "Study": "Study/education",
+        "Temporary Work": "Work temporarily",
+        "Permanent Work": "Work with intention to immigrate permanently",
+        "Join Family": "Join family member",
+        "Investment": "Investment opportunity"
+    },
+    "visaStatus": {
+        "value": "Do you currently have a visa to the United States?",
+        "Yes": "Yes (please specify type)",
+        "No": "No",
+        "ESTA": "I have ESTA/Visa Waiver Program eligibility",
+        "textboxes": {
+            "visaType": "Visa Type",
+            "assoc": "Yes (please specify type)"
+        }
+    },
+    "immiStatus": {
+        "value": "What is your current immigration status? (if applicable)",
+        "Not in US": "Not in the U.S. yet",
+        "Temporary Visa": "In the U.S. on a temporary visa",
+        "Student Visa": "In the U.S. as a student",
+        "Work Visa": "In the U.S. on a work visa",
+        "Other": "Other (please specify)",
+        "textboxes": {
+            "immiStatusOther": "Current immigrant status",
+            "assoc": "Other (please specify)"
+        }
+    },
+    "education": {
+        "value": "What is your highest level of education?",
+        "High school diploma": "High school diploma",
+        "Bachelor's degree": "Bachelor's degree",
+        "Master's degree": "Master's degree",
+        "PhD or equivalent": "PhD or equivalent",
+        "Professional degree (MD, JD, etc.)": "Professional degree (MD, JD, etc.)"
+    },
+    "workExp": {
+        "value": "How many years of professional work experience do you have in your field?",
+        "Less than 1 year": "Less than 1 year",
+        "1-3 years": "1-3 years",
+        "3-5 years": "3-5 years",
+        "5-10 years": "5-10 years",
+        "More than 10 years": "More than 10 years"
+    },
+    "achievements": {
+        "value": "Do you have any of the following achievements? (Select all that apply)",
+        "Published Research": "Published research or articles in professional journals",
+        "Awards Recognition": "Awards or recognition in your field",
+        "Professional Memberships": "Membership in professional associations requiring outstanding achievement",
+        "High Salary": "High salary compared to others in your field",
+        "Patents Innovations": "Patents, innovations, or significant contributions to your industry",
+        "Media Coverage": "Media coverage about your work or achievements",
+        "Judged Work of Others": "Judged the work of others in your field",
+        "None of the Above": "None of the above",
+        "checkbox": "True"
+    },
+    "emplSts": {
+        "value": "What is your current employment situation?",
+        "Student": "Student",
+        "Employed by a U.S. company": "Employed by a U.S. company",
+        "Employed by a non-U.S. company": "Employed by a non-U.S. company",
+        "Self-employed/business owner": "Self-employed/business owner",
+        "Investor": "Investor",
+        "Unemployed/seeking opportunities": "Unemployed/seeking opportunities",
+        "Other (please specify)": "Other (please specify)",
+        "textboxes": {
+            "emplStsOther": "Current employment situation",
+            "assoc": "Other (please specify)"
+        }
+    },
+    "visa": {
+        "value": "If employed, has your employer expressed willingness to sponsor your visa?",
+        "Yes, they have already started the process": "Yes, they have already started the process",
+        "Yes, they are willing but haven't started the process": "Yes, they are willing but haven't started the process",
+        "No": "No",
+        "I don't know": "I don't know",
+        "Not applicable": "Not applicable"
+    },
+    "affiliate": {
+        "value": "If you work for a company outside the U.S., does it have a U.S. branch, affiliate, or subsidiary?",
+        "Yes": "Yes",
+        "No": "No",
+        "I don't know": "I don't know",
+        "Not applicable": "Not applicable"
+    },
+    "splPos": {
+        "value": "Have you held a senior managerial position or specialized knowledge position at your company?",
+        "Yes, for less than 1 year": "Yes, for less than 1 year",
+        "Yes, for more than 1 year": "Yes, for more than 1 year",
+        "No": "No",
+        "Not applicable": "Not applicable"
+    },
+    "invest": {
+        "value": "Are you considering investing in a U.S. business?",
+        "Yes, I plan to invest substantially and actively manage the business": "Yes, I plan to invest substantially and actively manage the business",
+        "Yes, but as a passive investor only": "Yes, but as a passive investor only",
+        "No": "No",
+        "Undecided": "Undecided"
+    },
+    "investAmt": {
+        "value": "If considering investment, what amount are you prepared to invest?",
+        "Under $100,000": "Under $100,000",
+        "$100,000 - $500,000": "$100,000 - $500,000",
+        "$500,000 - $1,000,000": "$500,000 - $1,000,000",
+        "Over $1,000,000": "Over $1,000,000",
+        "Not applicable": "Not applicable"
+    },
+    "treatyCitizen": {
+        "value": "Are you a citizen of a country that has an investment treaty with the U.S.?",
+        "Yes": "Yes",
+        "No": "No",
+        "I don't know": "I don't know"
+    },
+    "familyCitizen": {
+        "value": "Do you have any immediate family members who are U.S. citizens or permanent residents?",
+        "Spouse is a U.S. citizen": "Spouse is a U.S. citizen",
+        "Spouse is a U.S. permanent resident": "Spouse is a U.S. permanent resident",
+        "Parent is a U.S. citizen": "Parent is a U.S. citizen",
+        "Child (over 21) is a U.S. citizen": "Child (over 21) is a U.S. citizen",
+        "Other relative": "Other relative",
+        "None": "None"
+    },
+    "familyAcc": {
+        "value": "If applicable, are family members planning to accompany you to the U.S.?",
+        "Yes, spouse only": "Yes, spouse only",
+        "Yes, spouse and children": "Yes, spouse and children",
+        "Yes, children only": "Yes, children only",
+        "No": "No",
+        "Not applicable": "Not applicable"
+    },
+    "workImpact": {
+        "value": "Has your work had a significant positive impact on your field or industry?",
+        "Yes, with documented evidence": "Yes, with documented evidence",
+        "Yes, but limited documentation": "Yes, but limited documentation",
+        "No": "No",
+        "Not sure": "Not sure"
+    },
+    "benefit": {
+        "value": "Can you demonstrate that your entry to the U.S. would substantially benefit the nation (through contributions to science, culture, business, etc.)?",
+        "Yes, with strong evidence": "Yes, with strong evidence",
+        "Possibly, with some evidence": "Possibly, with some evidence",
+        "No": "No",
+        "Not sure": "Not sure"
+    },
+    "academic": {
+        "value": "For students: What is your current academic status?",
+        "Currently enrolled in U.S. school (F-1 visa)": "Currently enrolled in U.S. school (F-1 visa)",
+        "Recently graduated from U.S. institution": "Recently graduated from U.S. institution",
+        "Currently in OPT period": "Currently in OPT period",
+        "Currently in STEM OPT extension": "Currently in STEM OPT extension",
+        "Not a student/not applicable": "Not a student/not applicable"
+    },
+    "profField": {
+        "value": "For H-1B consideration: What is your professional field?",
+        "IT/Software Development": "IT/Software Development",
+        "Engineering": "Engineering",
+        "Finance/Accounting": "Finance/Accounting",
+        "Healthcare": "Healthcare",
+        "Education": "Education",
+        "Other specialty occupation requiring at least a bachelor's degree": "Other specialty occupation requiring at least a bachelor's degree",
+        "Not applicable": "Not applicable"
+    },
+    "recog": {
+        "value": "For O-1 consideration: Have you received any of these forms of recognition?",
+        "Nationally or internationally recognized prizes/awards": "Nationally or internationally recognized prizes/awards",
+        "Membership in associations requiring outstanding achievement": "Membership in associations requiring outstanding achievement",
+        "Published material about you in professional publications": "Published material about you in professional publications",
+        "Original scientific, scholarly, or business-related contributions of major significance": "Original scientific, scholarly, or business-related contributions of major significance",
+        "None of the above": "None of the above",
+        "checkbox": "True"
+    },
+    "visaDeny": {
+        "value": "Have you previously been denied a U.S. visa or had immigration issues?",
+        "Yes (please explain)": "Yes (please explain)",
+        "No": "No",
+        "textboxes": {
+            "reason": "Write your reason here...",
+            "assoc": "Yes (please explain)"
+        }
+    },
+    "timeline": {
+        "value": "What is your timeline for immigration?",
+        "Immediate (0-3 months)": "Immediate (0-3 months)",
+        "Short-term (3-6 months)": "Short-term (3-6 months)",
+        "Medium-term (6-12 months)": "Medium-term (6-12 months)",
+        "Long-term (1+ years)": "Long-term (1+ years)",
+        "Flexible": "Flexible"
+    }
+}
