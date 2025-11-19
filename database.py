@@ -3,7 +3,7 @@ import os
 from typing import Union, Literal
 from fastapi import HTTPException
 from pydantic import EmailStr, HttpUrl
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base, validates
 from dotenv import load_dotenv
 from sqlalchemy import (
     JSON,
@@ -114,6 +114,44 @@ class LawPersonnel(Base):
     def __repr__(self) -> str:
         return f"<LawPersonnel(email={self.email}, username={self.username}, firstName={self.firstName}, lastName={self.lastName}, personnel_type={self.personnel_type})>"
 
+
+class ExternalLawyer(Base):
+    __tablename__ = "external_lawyers"
+    firstName: str = Column(EncryptedText, nullable=False)
+    lastName: str = Column(EncryptedText, nullable=False)
+    fullName: str = Column(EncryptedText, nullable=False)
+    username: str = Column(EncryptedText, primary_key=True, nullable=False)
+    email: EmailStr = Column(EncryptedText, nullable=False)
+    lawFirmName: str = Column(EncryptedText, nullable=True)
+    expertise: str = Column(String, nullable=True)
+    experience: str = Column(String, nullable=True)
+    professionalAddress: str = Column(EncryptedText, nullable=True)
+    contactNumber: str = Column(EncryptedText, nullable=True)
+    profilePicture: str = Column(
+        EncryptedText,
+        nullable=False,
+        default="https://doloreschatbucket.s3.us-east-2.amazonaws.com/lawyer-connections/template-pp.png",
+    )
+
+    def to_dict(self) -> dict[str, Union[str, EmailStr]]:
+        return {
+            "firstName": self.firstName,
+            "lastName": self.lastName,
+            "fullName": self.fullName,
+            "username": self.username,
+            "email": self.email,
+            "lawFirmName": self.lawFirmName,
+            "expertise": self.expertise,
+            "experience": self.experience,
+            "professionalAddress": self.professionalAddress,
+            "contactNumber": self.contactNumber,
+            "profilePicture": self.profilePicture,
+        }
+
+    def __repr__(self) -> str:
+        return f"<ExternalLawyer(username={self.username}, fullName={self.fullName}, email={self.email})>"
+
+
 class ImmigrantLawyerConnection(Base):
     __tablename__ = "immigrant_lawyer_connection"
     uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
@@ -188,9 +226,41 @@ class AllClients(Base):
             "client_number": self.client_number,
             "client_address": self.client_address
         }
-    
+
     def __repr__(self):
         return f"<AllClients(uuid={self.uuid}, lawyer_email={self.lawyer_email}, client_email={self.client_email}, client_number={self.client_number}, client_address={self.client_address})>"
+
+
+class AllCases(Base):
+    __tablename__ = "all_cases"
+    case_id = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    lawyer_email = Column(EncryptedText, nullable=False, index=True)
+    client_email = Column(EncryptedText, nullable=False, index=True)
+    case_name = Column(EncryptedText, nullable=False)
+    assignee_list = Column(EncryptedText, nullable=True)
+    task_list = Column(EncryptedText, nullable=True)
+    case_status = Column(EncryptedText, nullable=False, default="In Progress")
+    case_description = Column(EncryptedText, nullable=True)
+    form_submitted = Column(Boolean, nullable=False, default=False)
+    case_type = Column(EncryptedText, nullable=False)
+
+    def to_dict(self):
+        return {
+            "case_id": self.case_id,
+            "lawyer_email": self.lawyer_email,
+            "client_email": self.client_email,
+            "case_name": self.case_name,
+            "assignee_list": self.assignee_list,
+            "task_list": self.task_list,
+            "case_status": self.case_status,
+            "case_description": self.case_description,
+            "form_submitted": self.form_submitted,
+            "case_type": self.case_type,
+        }
+
+    def __repr__(self):
+        return f"<AllCases(case_id={self.case_id}, lawyer_email={self.lawyer_email}, client_email={self.client_email}, case_name={self.case_name}, assignee_list={self.assignee_list}, task_list={self.task_list}, case_status={self.case_status}, case_description={self.case_description}, form_submitted={self.form_submitted}, case_type={self.case_type})>"
+
 
 class ClientIntake(Base):
     __tablename__ = "client_intake"
@@ -258,6 +328,35 @@ class Connection:
         )
 
 
+class ConnectionRequests(Base):
+    __tablename__ = "connection_requests"
+    id = Column(String(7), primary_key=True, index=True, default=Encrypt.generate_uuid)
+    message = Column(EncryptedText, nullable=False)
+    sender_email = Column(EncryptedText, nullable=True)
+    recipient_email = Column(EncryptedText, nullable=True)
+    status = Column(String, default="Pending")
+    status_changed = Column(DateTime, nullable=True)
+    timestamp = Column(DateTime, default=func.now())
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "message": self.message,
+            "sender_email": self.sender_email,
+            "recipient_email": self.recipient_email,
+            "status": self.status,
+        }
+
+    def __repr__(self):
+        return f"<SentMessage(id={self.id}, sender_email={self.sender_email}, recipient_email={self.recipient_email}, status={self.status})>"
+
+    @validates("status")
+    def validate_status(self, key, value):
+        if value:
+            self.status_changed = func.now()
+        return value
+
+
 class Functions:
     db = Connection()
     Session = db.SessionLocal
@@ -300,6 +399,10 @@ class Functions:
         # return lawpersonnel
         pass
 
+    def get_external_lawyer(self, parameter: Union[EmailStr, str]) -> ExternalLawyer:
+        # TODO: Connect with User Management
+        pass
+
     def update_lawyer_stat(self, lawyer_email: EmailStr, stat_type: str) -> None:
         # db = self.Session()
         # today = date.today()
@@ -339,6 +442,10 @@ class Functions:
     def get_all_casename_slugs(self) -> list[str]:
         all_casetypes = self.get_all_casetypes()
         return [case for case in all_casetypes.keys()]
+
+    def get_casename(self, case_type: str) -> str:
+        all_casetypes = self.get_all_casetypes()
+        return all_casetypes[case_type]['case']
 
     def update_clients(
         self,
@@ -1213,11 +1320,13 @@ class Functions:
         )
         form_url = None
         form_name = None
+        form_owner = None
         if intake_form:
             form_url = intake_form.form_url
             form_name = intake_form.form_name
+            form_owner = intake_form.lawyer_email
         db.close()
-        return form_url, form_name
+        return form_url, form_name, form_owner
 
     def retrieve_intake_form_ids(self, lawyer_email: EmailStr) -> list[str]:
         db = self.Session()
@@ -1250,4 +1359,417 @@ class Functions:
         # )
         # return lawyer_email
         # TODO: connect to case management
+        pass
+
+    def add_new_connection_request(self, message: str, sender_email: EmailStr, recipient_email: EmailStr) -> str:
+        db = self.Session()
+        new_message = ConnectionRequests(
+            message=message,
+            sender_email=sender_email,
+            recipient_email=recipient_email
+        )
+        db.add(new_message)
+        db.commit()
+        message_id = new_message.id
+        db.close()
+        return message_id
+
+    def retrieve_all_connection_requests(self) -> list[dict[str, str]]:
+        db = self.Session()
+        all_conn = db.query(ConnectionRequests).filter(ConnectionRequests).all()
+        all_connection_requests = []
+        if all_conn:
+            for connection_request in all_conn:
+                all_connection_requests.append({
+                    "date_sent": connection_request.timestamp,
+                    "status": connection_request.status,
+                    "date_status_change": connection_request.status_changed if connection_request.status_changed else ""
+                })
+        db.close()
+        return all_connection_requests
+
+    def retrieve_specific_connection_request(self, connection_id: str) -> ConnectionRequests:
+        db = self.Session()
+        connection_request = db.query(ConnectionRequests).filter(ConnectionRequests.id == connection_id).first()
+        if connection_request:
+            db.close()
+            return connection_request
+        db.close()
+
+    def retrieve_all_sent_requests(self, sender_email: EmailStr) -> list[ConnectionRequests]:
+        db = self.Session()
+        all_sent = db.query(ConnectionRequests).filter(ConnectionRequests.sender_email == sender_email).all()
+        if all_sent:
+            db.close()
+            return [conn_req for conn_req in all_sent]
+        db.close()
+
+    def retrieve_all_recieved_requests(
+        self, recipient_email: EmailStr
+    ) -> list[ConnectionRequests]:
+        db = self.Session()
+        all_rec = (
+            db.query(ConnectionRequests)
+            .filter(ConnectionRequests.recipient_email == recipient_email)
+            .all()
+        )
+        if all_rec:
+            db.close()
+            return [conn_req for conn_req in all_rec]
+        db.close()
+
+    def add_new_approved_request(
+        self, message: str, sender_email: EmailStr, recipient_email: EmailStr
+    ) -> None:
+        db = self.Session()
+        new_message = ConnectionRequests(
+            message=message, sender_email=sender_email, recipient_email=recipient_email, status="Approved"
+        )
+        db.add(new_message)
+        db.commit()
+        db.close()
+
+    def change_connection_request_status(
+        self, connection_id: str, new_status: Literal["Pending", "Approved", "Denied"]
+    ) -> ConnectionRequests:
+        db = self.Session()
+        connection_request = (
+            db.query(ConnectionRequests)
+            .filter(ConnectionRequests.id == connection_id)
+            .first()
+        )
+        if connection_request:
+            connection_request.status = new_status
+            db.commit()
+            db.refresh(connection_request)
+            db.close()
+            return connection_request
+        db.close()
+
+    def retrieve_connection_ids(self) -> list[str]:
+        db = self.Session()
+        all_conn_ids = db.query(ConnectionRequests.id).all()
+        if all_conn_ids:
+            db.close()
+            return [all_conn_id[0] for all_conn_id in all_conn_ids]
+        db.close()
+        return []
+
+    def delete_all_user_requests(self, lawyer_email: EmailStr, immigrant_email: EmailStr) -> None:
+        db = self.Session()
+        all_requests = db.query(ConnectionRequests).filter(
+            or_(
+                (ConnectionRequests.recipient_email == lawyer_email.lower())
+                & (ConnectionRequests.sender_email == immigrant_email.lower()),
+                (ConnectionRequests.sender_email == lawyer_email.lower())
+                & (ConnectionRequests.recipient_email == immigrant_email.lower()),
+            )
+        ).all()
+        if all_requests:
+            for request in all_requests:
+                db.delete(request)
+            db.commit()
+        db.close()
+
+    def check_existing_case(
+        self,
+        lawyer_email: EmailStr,
+        immigrant_email: EmailStr,
+        case_type: str = Literal[
+            "nonimmigrant_worker",
+            "employment_auth",
+            "alien_rel",
+            "asylum_removal",
+            "naturalization",
+        ],
+    ) -> str:
+        # db = self.Session()
+        # case_id = None
+        # exist_case = (
+        #     db.query(AllCases)
+        #     .filter(
+        #         AllCases.lawyer_email == lawyer_email.lower(),
+        #         AllCases.client_email == immigrant_email.lower(),
+        #         AllCases.case_type == case_type.lower(),
+        #     )
+        #     .first()
+        # )
+        # if exist_case:
+        #     case_id = exist_case.case_id
+        # db.close()
+        # return case_id
+        # TODO: Connect with case management service
+        pass
+
+    def create_case(
+        self,
+        lawyer_email: EmailStr,
+        case_details: dict[str, EmailStr, Union[str, list[EmailStr]]],
+    ) -> None:
+        # db = self.Session()
+        # self.update_clients(
+        #     lawyer_email,
+        #     case_details["client_email"],
+        #     case_details["client_number"],
+        #     case_details["client_address"],
+        # )
+        # new_case = AllCases(
+        #     case_id=case_details["case_id"],
+        #     lawyer_email=lawyer_email.lower(),
+        #     client_email=case_details["client_email"].lower(),
+        #     case_name=case_details["case_name"],
+        #     assignee_list=[
+        #         assignee.lower() for assignee in case_details["assignee_list"]
+        #     ],
+        #     case_description=case_details["description"],
+        #     case_type=case_details["case_type"],
+        # )
+
+        # db.add(new_case)
+        # db.commit()
+        # db.close()
+        # TODO: Connect with case management
+        pass
+
+    def add_task(
+        self,
+        task_details: dict[str, Union[str, list[str], list[EmailStr], datetime]],
+        lawyer_email: EmailStr,
+    ) -> None:
+        # db = self.Session()
+        # task_documents = [
+        #     document.replace(" ", "+") for document in task_details["document_list"]
+        # ]
+        # task_details["document_list"] = task_documents
+        # if "id" not in task_details:
+        #     task_details["id"] = generate_uuid()
+
+        # case = (
+        #     db.query(AllCases)
+        #     .filter(AllCases.case_id == task_details["case_id"])
+        #     .first()
+        # )
+        # if case:
+        #     # print("Creating new task")
+        #     new_task = AllTasks(
+        #         uuid=task_details["id"],
+        #         lawyer_email=lawyer_email.lower(),
+        #         task_name=task_details["name"],
+        #         task_visibility=task_details["visibility"],
+        #         case_name=task_details["case_name"],
+        #         case_id=task_details["case_id"],
+        #         task_assignees=[
+        #             assignee.lower() for assignee in task_details["assignee_list"]
+        #         ],
+        #         task_status=task_details["status"],
+        #         task_deadline=task_details["deadline"],
+        #         task_documents=task_details["document_list"],
+        #         task_description=task_details["description"],
+        #     )
+        #     # print(new_task)
+        #     db.add(new_task)
+        #     db.commit()
+        #     db.refresh(new_task)
+        # db.close()
+        # TODO: connect with case management
+        pass
+
+    def add_tasks_to_case(self, task_list: list[str], case_id: str) -> None:
+        # db = self.Session()
+        # case = db.query(AllCases).filter(AllCases.case_id == case_id).first()
+        # if case:
+        #     prev_tasklist = []
+        #     if case.task_list is not None:
+        #         prev_tasklist.extend(case.task_list)
+        #     new_tasklist = [task for task in task_list if task not in prev_tasklist]
+        #     prev_tasklist.extend(new_tasklist)
+        #     case.task_list = prev_tasklist
+        #     db.commit()
+        #     db.refresh(case)
+        # db.close()
+        # TODO: Connect with case management
+        pass
+
+    def remove_recommended_lawpersonnel(
+        self, immigrant_email, lawpersonnel_email
+    ) -> bool:
+        # TODO: connect with ai agent module
+        pass
+
+    def remove_external_lawyer(self, email: EmailStr) -> None:
+        # db = self.Session()
+        # external_lawyer = self.get_external_lawyer(email)
+        # if external_lawyer:
+        #     db.delete(external_lawyer)
+        #     db.commit()
+        # db.close()
+        # TODO: connect with user management
+        pass
+
+    def remove_lawyer_from_recommendations(
+        self, client_email: EmailStr, lawyer_email: EmailStr
+    ) -> None:
+        # db = self.Session()
+        # lawyer_recommendations = (
+        #     db.query(LawyerRecommendations)
+        #     .filter(LawyerRecommendations.client_email == client_email.lower())
+        #     .first()
+        # )
+        # if lawyer_recommendations:
+        #     registered_lawyers = [
+        #         lawyer
+        #         for lawyer in lawyer_recommendations.registered_lawyers
+        #         if lawyer != lawyer_email.lower()
+        #     ]
+        #     unregistered_lawyers = [
+        #         lawyer
+        #         for lawyer in lawyer_recommendations.unregistered_lawyers
+        #         if lawyer != lawyer_email.lower()
+        #     ]
+        #     lawyer_recommendations.registered_lawyers = registered_lawyers
+        #     lawyer_recommendations.unregistered_lawyers = unregistered_lawyers
+        #     db.commit()
+        #     db.refresh(lawyer_recommendations)
+        # db.close()
+        # TODO: Connect with ai agents service
+        pass
+
+    def add_recent_action(
+        self, lawyer_email: EmailStr, case_id: str, action: str, actor: str, role: str
+    ) -> None:
+        # db = self.Session()
+        # action_time = datetime.now(timezone.utc)
+        # new_action = CaseRecentActions(
+        #     lawyer_email=lawyer_email.lower(),
+        #     lawyer_case=case_id,
+        #     action=action,
+        #     actor=actor,
+        #     role=role,
+        #     action_time=action_time,
+        # )
+
+        # db.add(new_action)
+        # db.commit()
+        # db.close()
+        # TODO: connect with case management
+        pass
+
+    def check_case(self, case_id: str) -> AllCases:
+        # db = self.Session()
+        # case = db.query(AllCases).filter(AllCases.case_id == case_id).first()
+        # if case:
+        #     return case
+        # db.close()
+        # return None
+        # TODO: Connect to case management
+        pass
+
+    def retrieve_case_specific_tasks(
+        self, lawyer_email: EmailStr, case_id: str
+    ) -> list[dict[str, Union[str, list[str], list[EmailStr], datetime]]]:
+        # db = self.Session()
+        # all_tasks = []
+        # today = datetime.now(timezone.utc).date()
+
+        # case = (
+        #     db.query(AllCases)
+        #     .filter(
+        #         AllCases.lawyer_email == lawyer_email.lower(),
+        #         AllCases.case_id == case_id,
+        #     )
+        #     .first()
+        # )
+
+        # if case and case.task_list is not None:
+        #     for task_id in case.task_list:
+        #         task = self.retrieve_task(lawyer_email, task_id)
+        #         if task:
+        #             all_tasks.append(task)
+
+        # completed_tasks = [task for task in all_tasks if task.get("status") == "Done"]
+        # pending_tasks = [task for task in all_tasks if task.get("status") != "Done"]
+
+        # for task in pending_tasks:
+        #     if task.get("deadline") and isinstance(task.get("deadline"), str):
+        #         task["deadline_date"] = datetime.strptime(
+        #             task["deadline"], "%Y-%m-%d"
+        #         ).date()
+        #     else:
+        #         task["deadline_date"] = datetime.max.date()
+
+        # for task in completed_tasks:
+        #     if task.get("task_completed_date") and isinstance(
+        #         task.get("task_completed_date"), str
+        #     ):
+        #         task["completed_date"] = datetime.strptime(
+        #             task["task_completed_date"], "%Y-%m-%d"
+        #         ).date()
+        #     if task.get("deadline") and isinstance(task.get("deadline"), str):
+        #         task["completed_date"] = datetime.strptime(
+        #             task["deadline"], "%Y-%m-%d"
+        #         ).date()
+        #     else:
+        #         task["completed_date"] = datetime.max.date()
+
+        # pending_tasks.sort(key=lambda x: (x.get("deadline_date") - today).days)
+        # completed_tasks.sort(key=lambda x: (x.get("completed_date") - today).days)
+        # sorted_tasks = pending_tasks + completed_tasks
+        # for task in sorted_tasks:
+        #     if "deadline_date" in task:
+        #         del task["deadline_date"]
+        #     if "completed_date" in task:
+        #         del task["completed_date"]
+        # db.close()
+        # return sorted_tasks
+        # TODO: Connect with case management
+        pass
+
+    def update_task_status(
+        self,
+        lawyer_email: EmailStr,
+        task_id: str,
+        status: str = Literal["To-Do", "In-Progress", "In-Review", "Done", "Rejected"],
+    ) -> tuple[int, str, str]:
+        # db = self.Session()
+        # task = (
+        #     db.query(AllTasks)
+        #     .filter(
+        #         AllTasks.lawyer_email == lawyer_email.lower(), AllTasks.uuid == task_id
+        #     )
+        #     .first()
+        # )
+        # success = 0
+        # task_name = None
+        # case_id = None
+        # if task:
+        #     task.task_status = status
+        #     if status == "Done":
+        #         task.task_completed_date = datetime.now(timezone.utc).date().isoformat()
+        #     success = 1
+        #     task_name = task.task_name
+        #     case_id = task.case_id
+        #     db.commit()
+        #     db.refresh(task)
+
+        # db.close()
+        # return success, task_name, case_id
+        # TODO: connect with case management
+        pass
+
+    def retrieve_case_name(self, lawyer_email: EmailStr, case_id: str) -> str:
+        # db = self.Session()
+        # case_name = None
+        # case = (
+        #     db.query(AllCases)
+        #     .filter(
+        #         AllCases.lawyer_email == lawyer_email.lower(),
+        #         AllCases.case_id == case_id,
+        #     )
+        #     .first()
+        # )
+        # if case:
+        #     case_name = case.case_name
+        # db.close()
+        # return case_name
+        # TODO: connect with case management
         pass
