@@ -116,15 +116,11 @@ class Stripe:
             success_url=f"{domain}dashboard/profile/success",
             cancel_url=f"{domain}dashboard/profile/{cancel}"
         )
-        # db_func.update_checkout_id()
         return checkout_session.id
 
     def create_case_session(
         self,
-        # sub_email: EmailStr,
         case_type: str = "naturalization",
-        # client_username: str = None,
-        # case_id: str = None,
         debug: bool = False,
         user: Literal["immigrant", "lawpersonnel"] = "immigrant"
     ):
@@ -166,129 +162,7 @@ class Stripe:
             success_url=f"{domain}dashboard/profile/{success}",
             cancel_url=f"{domain}dashboard/profile/{cancel}",
         )
-        # if user == "immigrant":
-        #     db_func.update_naturalization_checkout_id()
-        # else:
-        #     db_func.update_lawyer_case_sub()
         return checkout_session.id
-
-    # def checkOutSess(
-    #     self,
-    #     tier: Literal["plus", "nonlawyer", "lawyer", "clinic", "enterprise"],
-    #     duration: Literal["monthly", "yearly"],
-    #     email: EmailStr,
-    # ) -> str:
-    #     self.tier = tier
-    #     self.email = email
-    #     if self.tier != "pay":
-    #         subscriptionData = {
-    #             "trial_settings": {"end_behavior": {"missing_payment_method": "pause"}},
-    #             "trial_period_days": 3,
-    #         }
-    #         mode = "subscription"
-    #     else:
-    #         subscriptionData = {}
-    #         mode = "payment"
-    #     checkoutSess = stripe.checkout.Session.create(
-    #         payment_method_types=self.comprehensive_payment_methods,
-    #         line_items=[
-    #             {
-    #                 "price": self.priceID[tier.lower()][duration.lower()],
-    #                 "quantity": 1,
-    #             },
-    #         ],
-    #         subscription_data=subscriptionData,
-    #         mode=mode,
-    #         success_url=f"{self.immigrant_frontend}dashboard/profile/success",
-    #         cancel_url=f"{self.immigrant_frontend}dashboard/profile/error",
-    #     )
-    #     self.sessID = checkoutSess.id
-    #     db_func.update_checkout_id(email, checkoutSess.id, tier)
-    #     return checkoutSess.id
-
-    # def lawyer_checkOutSess(
-    #     self,
-    #     tier: Literal["plus", "nonlawyer", "lawyer", "clinic", "enterprise"],
-    #     duration: Literal["monthly", "yearly"],
-    #     email: EmailStr,
-    # ) -> str:
-    #     subscriptionData = {
-    #         "trial_settings": {"end_behavior": {"missing_payment_method": "pause"}},
-    #         "trial_period_days": 3,
-    #     }
-    #     mode = "subscription"
-    #     checkoutSess = stripe.checkout.Session.create(
-    #         payment_method_types=self.comprehensive_payment_methods,
-    #         line_items=[
-    #             {
-    #                 "price": self.priceID[tier.lower()][duration.lower()],
-    #                 "quantity": 1,
-    #             },
-    #         ],
-    #         subscription_data=subscriptionData,
-    #         mode=mode,
-    #         success_url=f"{self.lawpersonnel_frontend}dashboard/profile/success",
-    #         cancel_url=f"{self.lawpersonnel_frontend}dashboard/profile/failure",
-    #     )
-    #     db_func.update_checkout_id(email, checkoutSess.id, tier)
-    #     return checkoutSess.id
-
-    # def user_naturalization_checkoutSess(self, email: EmailStr) -> str:
-    #     lineItems = [
-    #         {
-    #             "price": self.lawyerCases_priceIDs["naturalization"]["one_time"],
-    #             "quantity": 1,
-    #         }
-    #     ]
-    #     checkout = stripe.checkout.Session.create(
-    #         payment_method_types=self.comprehensive_payment_methods,
-    #         line_items=lineItems,
-    #         mode="payment",
-    #         # mode="subscription",
-    #         # subscription_data={
-    #         #     "trial_settings": {"end_behavior": {"missing_payment_method": "pause"}},
-    #         #     "trial_period_days": 3,
-    #         # },
-    #         success_url=f"{self.immigrant_frontend}dashboard/profile/n400_success",
-    #         cancel_url=f"{self.immigrant_frontend}dashboard/profile/n400_error",
-    #     )
-    #     db_func.update_naturalization_checkout_id(email, checkout.id)
-    #     return checkout.id
-
-    # def case_checkoutSess(
-    #     self,
-    #     case_type: Literal[
-    #         "nonimmigrant_worker", "employment_auth", "alien_rel", "asylum_removal"
-    #     ],
-    #     lawyer_email: EmailStr,
-    #     client_username: str,
-    #     case_id: str,
-    # ) -> str:
-    #     lineItems = [
-    #         {"price": self.lawyerCases_priceIDs[case_type]["one_time"], "quantity": 1},
-    #         {"price": self.lawyerCases_priceIDs[case_type]["recurring"], "quantity": 1},
-    #     ]
-    #     subscriptionData = {
-    #         "trial_settings": {"end_behavior": {"missing_payment_method": "pause"}},
-    #         "trial_period_days": 30,
-    #     }
-    #     checkout = stripe.checkout.Session.create(
-    #         payment_method_types=self.comprehensive_payment_methods,
-    #         line_items=lineItems,
-    #         subscription_data=subscriptionData,
-    #         mode="subscription",
-    #         success_url=f"{self.lawpersonnel_frontend}case_payment/unsuccessful_casepayment",
-    #         cancel_url=f"{self.lawpersonnel_frontend}case_payment/successful_casepayment",
-    #     )
-    #     client = db_func.get_user(client_username)
-    #     db_func.update_lawyer_case_sub(
-    #         case_id=case_id,
-    #         lawyer_email=lawyer_email,
-    #         case_type=case_type,
-    #         client_email=client.email,
-    #         case_checkout_id=checkout.id,
-    #     )
-    #     return checkout.id
 
     def retrieve_checkout_details(self, checkout_id: str, is_single: bool = False) -> Union[str, bool]:
         session = stripe.checkout.Session.retrieve(checkout_id)
@@ -311,37 +185,3 @@ class Stripe:
         user_sub_details = stripe.Subscription.retrieve(subscription_id)
         end_date = datetime.fromtimestamp(user_sub_details.current_period_end)
         return end_date.strftime("%m/%d/%Y")
-
-        # def updateDB(self, email: EmailStr) -> None:
-        #     _, checkout_id, _ = db_func.retrieve_subscription_details(email)
-        #     if checkout_id is not None:
-        #         session = stripe.checkout.Session.retrieve(checkout_id)
-        #         if session.subscription:
-        #             db_func.update_subscription_id(email, session.subscription)
-
-        # def updateLawyerDB(self, email: EmailStr) -> None:
-        #     _, checkout_id, _ = db_func.retrieve_subscription_details(email)
-        #     if checkout_id is not None:
-        #         session = stripe.checkout.Session.retrieve(checkout_id)
-        #         if session.subscription:
-        #             db_func.update_subscription_id(email, session.subscription)
-
-        # def updateLawyerCaseSub(self, case_id: str) -> EmailStr:
-        #     result = db_func.retrieve_lawyer_case_sub(case_id)
-        #     case_sessID = result["case_checkout_id"]
-        #     if case_sessID is not None:
-        #         case_session = stripe.checkout.Session.retrieve(case_sessID)
-        #         if case_session.subscription:
-        #             db_func.update_lawyer_case_sub(
-        #                 case_id=case_id,
-        #                 lawyer_email=result["lawyer_email"],
-        #                 case_sub_id=case_session.subscription,
-        #             )
-        #     return result["lawyer_email"]
-
-        # def update_naturalizationDB(self, email: EmailStr) -> None:
-        checkout_id = db_func.retrieve_naturalization_checkout_id(email)
-        if checkout_id is not None:
-            session = stripe.checkout.Session.retrieve(checkout_id)
-            if session.payment_status == "paid":
-                db_func.paid_naturalization(email, checkout_id)
