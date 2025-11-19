@@ -1496,9 +1496,55 @@ class Functions:
         db.commit()
         db.refresh(case)
         db.close()
-    
+
     def retrieve_case_types(self) -> dict[str, dict[str, Union[str, list[dict[str, Union[str, int]]], dict[str, dict[str, Union[str, list[dict[str, Union[str, int]]]]]]]]]:
         case_types = {}
         with open("./data/case_types.json", "r") as fp:
             case_types = json.load(fp)
         return case_types
+
+    def update_task_status(
+        self,
+        lawyer_email: EmailStr,
+        task_id: str,
+        status: str = Literal["To-Do", "In-Progress", "In-Review", "Done", "Rejected"],
+    ) -> tuple[int, str, str]:
+        db = self.Session()
+        task = (
+            db.query(AllTasks)
+            .filter(
+                AllTasks.lawyer_email == lawyer_email.lower(), AllTasks.uuid == task_id
+            )
+            .first()
+        )
+        success = 0
+        task_name = None
+        case_id = None
+        if task:
+            task.task_status = status
+            if status == "Done":
+                task.task_completed_date = datetime.now(timezone.utc).date().isoformat()
+            success = 1
+            task_name = task.task_name
+            case_id = task.case_id
+            db.commit()
+            db.refresh(task)
+
+        db.close()
+        return success, task_name, case_id
+
+    def retrieve_case_name(self, lawyer_email: EmailStr, case_id: str) -> str:
+        db = self.Session()
+        case_name = None
+        case = (
+            db.query(AllCases)
+            .filter(
+                AllCases.lawyer_email == lawyer_email.lower(),
+                AllCases.case_id == case_id,
+            )
+            .first()
+        )
+        if case:
+            case_name = case.case_name
+        db.close()
+        return case_name
