@@ -7,7 +7,7 @@ from database import Functions
 from authorization import PhoneNumber
 from encryptor import Encrypt
 from helpers import Helpers
-from relationship_management.email_gateway import Email
+from email_gateway import Email
 from scheduler import TaskScheduler
 from cleanup_gateway import DisconnectLawyer
 
