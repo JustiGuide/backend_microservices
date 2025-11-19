@@ -1,8 +1,11 @@
 from datetime import datetime
+import mimetypes
+import os
 import string
 import re
 from typing import Any, Literal, Union
 from pydantic import BaseModel, EmailStr
+import requests
 from database import Functions
 
 db_func = Functions()
@@ -120,3 +123,53 @@ class Helpers:
 
         # db.commit()
         pass
+
+    @staticmethod
+    def get_case_checkout(
+        self,
+        case_type: str = "naturalization",
+        debug: bool = False,
+        user: Literal["immigrant", "lawpersonnel"] = "immigrant"
+    ):
+        # TODO: Connect with billing module
+        pass
+
+    @staticmethod
+    def get_url_file_size(file_url: str) -> str:
+        size = ""
+        response = requests.head(file_url, timeout=10)
+        response.raise_for_status()
+        file_size = int(response.headers.get("Content-Length"))
+        if file_size < 1024:
+            size = f"{file_size} B"
+        elif file_size < 1024**2:
+            size = f"{file_size / 1024:.2f} KB"
+        elif file_size < 1024**3:
+            size = f"{file_size / 1024**2:.2f} MB"
+        else:
+            size = f"{file_size / 1024**3:.2f} GB"
+        return size
+
+    @staticmethod
+    def create_dummy_upload(local_file_path: str) -> UploadFile_Dummy:
+        if local_file_path.startswith("http"):
+            response = requests.head(local_file_path, timeout=10)
+            response.raise_for_status()
+            file_size = int(response.headers.get("Content-Length"))
+        else:
+            file_size = os.path.getsize(local_file_path)
+        content_type, _ = mimetypes.guess_type(local_file_path)
+        local_file = UploadFile_Dummy(size=file_size, content_type=content_type)
+        return local_file
+
+    @staticmethod
+    def get_file_size(file_size: int) -> str:
+        # print(file_size)
+        if file_size < 1024:
+            return f"{file_size} B"
+        elif file_size < 1024**2:
+            return f"{file_size / 1024:.2f} KB"
+        elif file_size < 1024**3:
+            return f"{file_size / 1024**2:.2f} MB"
+        else:
+            return f"{file_size / 1024**3:.2f} GB"

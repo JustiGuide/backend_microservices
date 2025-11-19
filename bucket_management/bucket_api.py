@@ -1,13 +1,17 @@
 import base64
 import json
+import mimetypes
 from typing import Literal
-from fastapi import APIRouter, File, Form, UploadFile
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel, EmailStr, HttpUrl
+
+from documents_management.email_gateway import Email
+from documents_management.helpers import Helpers
 from .bucket_console import BucketConsole, DummyFile
 from database import Functions
 import os
-from authorization import S3FileUrl, S3DirUrl, S3FileKey
+from authorization import Authorizer, S3FileUrl, S3DirUrl, S3FileKey
 from PIL import Image
 import io
 
@@ -178,3 +182,205 @@ async def transfer_web_file(payload: WebTransfer):
 
     bucket_file_url = bucket.upload_web_file(web_url=str(payload.web_url), file_key=payload.file_key)
     return {"new_url": bucket_file_url}
+
+@app.post("/documents/{user_type}/upload-to-case")
+async def upload_case_documents(
+    document_list: list[UploadFile] = File(...),
+    lawpersonnel_email: EmailStr = Form(...),
+    client_email: EmailStr = Form(...),
+    user_type: str = Literal[
+        "immigrant", "lawyer", "nonlawyer", "lawstudent", "paralegal"
+    ],
+    case_id: str = Form(...),
+    folder_name: str = Form(...)
+):
+    lawpersonnel = db_func.get_lawpersonnel(lawpersonnel_email)
+    client = db_func.get_immigrant(client_email)
+    is_sender_client = user_type == "immigrants"
+    file_sender = client if is_sender_client else lawpersonnel
+    destination_dir = f"{lawpersonnel.personnel_type}/{lawpersonnel.username}/{case_id}/{folder_name}"
+    file_count = 0
+    response = {}
+    assignees, client_email = db_func.retrieve_specific_case(
+        lawpersonnel.email, case_id
+    )
+    if not db_func.check_if_paid(case_id):
+        case_type = db_func.retrieve_case_type(lawpersonnel.email, case_id)
+        case_checkoutId = Helpers.get_case_checkout(
+            case_type, "lawpersonnel"
+        )
+        Helpers.add_notification(
+            receiver=lawpersonnel.email,
+            sender=client.email,
+            type="case_payment",
+            content=f"Please complete the case payment to upload documents for case #{case_id}",
+            target_id={"case_checkout": case_checkoutId, "case_id": case_id},
+        )
+        Email.send_case_creation(
+            f"{lawpersonnel.full_legal_name}",
+            lawpersonnel.email,
+            f"{lawpersonnel.full_legal_name}",
+            case_checkoutId,
+            case_id,
+        )
+        raise HTTPException(
+            status_code=403,
+            detail="This case is not paid for. Please pay to upload documents.",
+        )
+    for file in document_list:
+        if file.filename != "blob":
+            filename, ext = os.path.splitext(Helpers.get_legal_filename(file.filename))
+            content_type, _ = mimetypes.guess_type(filename)
+            file_contents = await file.read()
+            document = DummyFile(
+                content=file_contents,
+                size=len(file_contents),
+                name=filename,
+                ext=ext,
+                content_type=content_type
+            )
+            file_url = bucket.upload_file(
+                file=document, bucket_directory=destination_dir
+            )
+            db_func.add_lawpersonnel_filedetails(lawpersonnel_email=lawpersonnel.email, file_url=file_url, file_type="case_docs")
+            file_count += 1
+            filename, document_url, file_id = db_func.add_case_document(
+                lawyer_email=lawpersonnel.email,
+                case_id=case_id,
+                document_url=file_url,
+                filename=filename,
+                folder_name=folder_name,
+            )
+            response[filename] = {"url": document_url, "id": file_id}
+
+    role = lawpersonnel.personnel_type.capitalize() if not is_sender_client else "Client"
+    plural_str = "file"
+    if file_count > 1:
+        plural_str += "s"
+    db_func.add_recent_action(
+        lawyer_email=lawpersonnel.email,
+        case_id=case_id,
+        action=f"has added {file_count} {plural_str} to {folder_name}",
+        actor=f"{file_sender.full_legal_name}",
+        role=role,
+    )
+    if folder_name == "chat":
+        Helpers.add_notification(
+            receiver=client.email if is_sender_client else lawpersonnel.email,
+            sender=file_sender.email,
+            type="lawyer_chat",
+            content=f"{file_sender.full_legal_name} has added {file_count} {plural_str} to {folder_name}",
+            target_id={"sender": file_sender.email},
+            one_time=True,
+        )
+    else:
+        for assignee in assignees:
+            Helpers.add_notification(
+                receiver=assignee,
+                sender=file_sender.email,
+                type="cases",
+                content=f"{file_sender.full_legal_name} has added {file_count} {plural_str} to {folder_name}",
+                target_id={"case_id": case_id, "folder_name": folder_name},
+            )
+    return JSONResponse(response)
+
+class FileListRetrieval(BaseModel):
+    user_email: EmailStr
+    file_type: Literal["ai_chat_files", "forms", "personal_files", "filled_forms", "case_docs"]
+    case_id: str = None
+
+@app.post("/documents/{user_type}/retrieve-specific")
+async def retrieve_specific_filelist(
+    payload: FileListRetrieval,
+    user_type: str = Literal["immigrant", "lawyer", "nonlawyer", "lawstudent", "paralegal"]
+):
+    user = db_func.get_immigrant(payload.user_email) or db_func.get_lawpersonnel(payload.user_email)
+    all_files = bucket.retrieve_all_immigrant_files(user.username) if user_type == "immigrant" else bucket.retrieve_all_lawpersonnel_files(user.username, f"{user.personnel_type}s")
+    output_dict = []
+    for file_url in all_files:
+        file_object = db_func.retrieve_file(user_email=payload.user_email, file_url=file_url, user_type=user_type)
+        if file_object.file_type == payload.file_type:
+            filename = file_object.file_url.split("/")[-1]
+            file_details = {"title": filename, "url": f"{os.getenv('BACKEND')}file/{file_object.uuid}", "size": Helpers.get_url_file_size(file_object.file_url)}
+            if file_details not in output_dict:
+                output_dict.append(file_details)
+
+    return JSONResponse(output_dict)
+
+class CaseFolderInput(BaseModel):
+    immigrant_email: EmailStr
+    lawpersonnel_email: EmailStr
+    case_id: str
+    folder_name: str
+
+
+@app.post("/documents/{user_type}/retrieve-case-files")
+async def retrieve_case_documents(
+    payload: CaseFolderInput,
+    user_type: str = Literal["immigrant", "lawyer", "nonlawyer", "lawstudent", "paralegal"]
+):
+    immigrant = db_func.get_immigrant(payload.immigrant_email)
+    lawpersonnel = db_func.get_lawpersonnel(payload.lawpersonnel_email)
+    is_actor_immigrant = True if user_type == "immigrant" else False
+    all_documents=db_func.retrieve_case_documents(payload.lawpersonnel_email, payload.case_id, payload.folder_name)
+
+    if not db_func.check_if_paid(payload.case_id):
+        case_type = db_func.retrieve_case_type(lawpersonnel.email, payload.case_id)
+        case_checkoutId = Helpers.get_case_checkout(case_type, "lawpersonnel")
+        Helpers.add_notification(
+            receiver=lawpersonnel.email,
+            sender=immigrant.email,
+            type="case_payment",
+            content=f"Please complete the case payment to upload documents for case #{payload.case_id}",
+            target_id={"case_checkout": case_checkoutId, "case_id": payload.case_id},
+        )
+        Email.send_case_creation(
+            f"{lawpersonnel.full_legal_name}",
+            lawpersonnel.email,
+            f"{lawpersonnel.full_legal_name}",
+            case_checkoutId,
+            payload.case_id,
+        )
+        raise HTTPException(
+            status_code=403,
+            detail="This case is not paid for. Please pay to upload documents.",
+        )
+    documents = []
+    for file_id in all_documents:
+        all_documents[file_id]["id"] = file_id
+        url = all_documents[file_id]["url"]
+        file = Helpers.create_dummy_upload(url)
+        all_documents[file_id]["size"] = Helpers.get_file_size(file.size)
+        all_documents[file_id]["content_type"] = file.content_type
+        documents.append(all_documents[file_id])
+
+    return JSONResponse(documents)
+
+class StorageCheck(BaseModel):
+    immigrant_email: EmailStr
+
+
+@app.post("/documents/immigrant/retrieve-storage-details/")
+async def coveredStorage(
+    payload: StorageCheck,
+):
+    immigrant = db_func.get_immigrant(payload.immigrant_email)
+    tier2storage = {
+        "free": 1 * (1024**3),
+        "pay": 1 * (1024**3),
+        "plus": 10 * (1024**3),
+        "enterprise": 100 * (1024**3),
+    }
+    if immigrant:
+        used_storage = db_func.retrieve_used_storage(immigrant.email)
+        coverPercent = used_storage / tier2storage[immigrant.subscription_type.lower()]
+        return {"percent": coverPercent}
+    else:
+        return HTTPException(status_code=404, detail="User not found.")
+
+
+"""
+TODO:
+/image/{file_id}/{filename}
+/file/{file_id}/{filename}
+"""

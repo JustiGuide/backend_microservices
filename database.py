@@ -225,6 +225,28 @@ class AllFiles(Base):
     def __repr__(self) -> str:
         return f"<AllFiles(uuid={self.uuid}, file_name={self.file_name}, file_url={self.file_url}, file_type={self.file_type}, upload_date={self.upload_date}, file_size={self.file_size}, open_read={self.open_read}, owner={self.owner}, owner_type={self.owner_type})>"
 
+class CaseDocuments(Base):
+    __tablename__ = "case_documents"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    filename = Column(String(255), nullable=False)
+    document_url = Column(EncryptedText, nullable=False)
+    folder_name = Column(EncryptedText, nullable=False)
+    lawyer_email = Column(EncryptedText, nullable=False, index=True)
+    lawyer_case = Column(String(7), nullable=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "filename": self.filename,
+            "document_url": self.document_url,
+            "folder_name": self.folder_name,
+            "lawyer_email": self.lawyer_email,
+            "lawyer_case": self.lawyer_case
+        }
+    
+    def __repr__(self):
+        return f"<CaseDocuments(uuid={self.uuid}, filename={self.filename}, document_url={self.document_url}, folder_name={self.folder_name}, lawyer_email={self.lawyer_email}, lawyer_case={self.lawyer_case})>"
+
 
 class Connection:
     def __init__(self, database_actor="postgresql"):
@@ -398,7 +420,9 @@ class Functions:
         self,
         immigrant_email: EmailStr,
         file_url: str,
-        file_type: Literal["ai_chat_files", "forms", "personal_files", "filled_forms"],
+        file_type: Literal[
+            "ai_chat_files", "forms", "personal_files", "filled_forms", "case_docs"
+        ],
     ) -> None:
         db = self.Session()
         immigrant_file = ImmigrantDocuments(
@@ -411,11 +435,58 @@ class Functions:
         db.close()
         pass
 
+    def retrieve_filetype(self, user_email: EmailStr, file_url: str, user_type: Literal["immigrant", "lawpersonnel"]) -> str:
+        db = self.Session()
+        if user_type == "immigrant":
+            immigrant_file = db.query(ImmigrantDocuments).filter(ImmigrantDocuments.immigrant_email==user_email.lower(), ImmigrantDocuments.file_url==file_url).first()
+            if immigrant_file:
+                db.close()
+                return immigrant_file.file_type
+        else:
+            lawpersonnel_file = (
+                db.query(LawpersonnelDocuments)
+                .filter(
+                    LawpersonnelDocuments.lawpersonnel_email == user_email.lower(),
+                    LawpersonnelDocuments.file_url == file_url,
+                )
+                .first()
+            )
+            if lawpersonnel_file:
+                db.close()
+                return lawpersonnel_file.file_type
+
+    def retrieve_file(self, user_email: EmailStr, file_url: str, user_type: Literal["immigrant", "lawpersonnel"]) -> Union[ImmigrantDocuments, LawpersonnelDocuments]:
+        db = self.Session()
+        if user_type == "immigrant":
+            immigrant_file = (
+                db.query(ImmigrantDocuments)
+                .filter(
+                    ImmigrantDocuments.immigrant_email == user_email.lower(),
+                    ImmigrantDocuments.file_url == file_url,
+                )
+                .first()
+            )
+            if immigrant_file:
+                db.close()
+                return immigrant_file
+        else:
+            lawpersonnel_file = (
+                db.query(LawpersonnelDocuments)
+                .filter(
+                    LawpersonnelDocuments.lawpersonnel_email == user_email.lower(),
+                    LawpersonnelDocuments.file_url == file_url,
+                )
+                .first()
+            )
+            if lawpersonnel_file:
+                db.close()
+                return lawpersonnel_file
+
     def add_lawpersonnel_filedetails(
         self,
         lawpersonnel_email: EmailStr,
         file_url: str,
-        file_type: Literal["ai_chat_files", "forms", "personal_files", "filled_forms"],
+        file_type: Literal["ai_chat_files", "forms", "personal_files", "filled_forms", "case_docs"],
     ) -> None:
         db = self.Session()
         lawpersonnel_file = LawpersonnelDocuments(
@@ -623,3 +694,248 @@ class Functions:
         # return form_url, form_name.
         # TODO: Connect with user management
         pass
+
+    def add_case_document(
+        self,
+        lawyer_email: EmailStr,
+        case_id: str,
+        document_url: str,
+        filename: str,
+        folder_name: str,
+    ) -> tuple[str, str, str]:
+        doc_url = document_url.replace(" ", "+")
+        db = self.Session()
+        file_id = Encrypt.generate_uuid()
+        exist_document = (
+            db.query(CaseDocuments)
+            .filter(
+                CaseDocuments.lawyer_email == lawyer_email.lower(),
+                CaseDocuments.lawyer_case == case_id,
+                CaseDocuments.document_url == doc_url.lower(),
+            )
+            .all()
+        )
+        if not exist_document and (
+            self.check_if_paid(case_id)
+            or self.get_lawpersonnel(lawyer_email).username
+            in ["codyfisher", "dlane", "drobertson", "ghawkins", "carter.elizabeth1965"]
+        ):
+            new_document = CaseDocuments(
+                uuid=file_id,
+                filename=filename,
+                document_url=doc_url,
+                folder_name=folder_name,
+                lawyer_email=lawyer_email.lower(),
+                lawyer_case=case_id,
+            )
+            db.add(new_document)
+            db.commit()
+        db.close()
+        return filename, doc_url, file_id
+
+    def retrieve_folder_list(self, lawyer_email: EmailStr, case_id: str) -> list[str]:
+        db = self.Session()
+        documents = (
+            db.query(CaseDocuments)
+            .filter(
+                CaseDocuments.lawyer_email == lawyer_email.lower(),
+                CaseDocuments.lawyer_case == case_id,
+            )
+            .all()
+        )
+        result = []
+        if documents and (
+            self.check_if_paid(case_id)
+            or self.get_lawpersonnel(lawyer_email).username
+            in ["codyfisher", "dlane", "drobertson", "ghawkins", "carter.elizabeth1965"]
+        ):
+            for document in documents:
+                result.append(document.folder_name)
+        db.close()
+        return result
+
+    def retrieve_case_documents(
+        self, lawyer_email: EmailStr, case_id: str, folder_name: str = None
+    ) -> dict[str, dict[str, str]]:
+        db = self.Session()
+        documents = (
+            db.query(CaseDocuments)
+            .filter(
+                CaseDocuments.lawyer_email == lawyer_email.lower(),
+                CaseDocuments.lawyer_case == case_id,
+            )
+            .all()
+        )
+        if folder_name is not None:
+            docs = [doc for doc in documents if doc.folder_name == folder_name]
+        else:
+            docs = [doc for doc in documents]
+        # print(docs)
+        result = {}
+        if docs != [] and (
+            self.check_if_paid(case_id)
+            or self.get_lawpersonnel(lawyer_email).username
+            in ["codyfisher", "dlane", "drobertson", "ghawkins", "carter.elizabeth1965"]
+        ):
+            for document in docs:
+                result[document.uuid] = {
+                    "name": document.filename,
+                    "url": document.document_url.replace(" ", "+"),
+                }
+
+        db.close()
+        return result
+
+    def rename_document_folder(
+        self,
+        lawyer_email: EmailStr,
+        case_id: str,
+        old_folder_name: str,
+        new_folder_name: str,
+    ) -> None:
+        db = self.Session()
+        documents = (
+            db.query(CaseDocuments)
+            .filter(
+                CaseDocuments.lawyer_email == lawyer_email.lower(),
+                CaseDocuments.lawyer_case == case_id,
+                CaseDocuments.folder_name == old_folder_name,
+            )
+            .all()
+        )
+        if documents and (
+            self.check_if_paid(case_id)
+            or self.get_lawpersonnel(lawyer_email).username
+            in ["codyfisher", "dlane", "drobertson", "ghawkins", "carter.elizabeth1965"]
+        ):
+            for document in documents:
+                old_url = document.document_url.split(
+                    f'/{old_folder_name.replace(" ", "+")}/'
+                )
+                new_url = f"/{new_folder_name.replace(' ', '+')}/".join(old_url)
+                document.folder_name = new_folder_name
+                document.document_url = new_url
+                db.commit()
+                db.refresh(document)
+
+        db.close()
+
+    def change_document_folder(
+        self,
+        lawyer_email: EmailStr,
+        case_id: str,
+        document_uuid: str,
+        new_folder_name: str,
+    ) -> tuple[str, str]:
+        db = self.Session()
+        document = (
+            db.query(CaseDocuments)
+            .filter(
+                CaseDocuments.lawyer_email == lawyer_email.lower(),
+                CaseDocuments.lawyer_case == case_id,
+                CaseDocuments.uuid == document_uuid,
+            )
+            .first()
+        )
+        if document and (
+            self.check_if_paid(case_id)
+            or self.get_lawpersonnel(lawyer_email).username
+            in ["codyfisher", "dlane", "drobertson", "ghawkins", "carter.elizabeth1965"]
+        ):
+            old_folder_name = document.folder_name
+            old_url = document.document_url.split(
+                f'/{old_folder_name.replace(" ", "+")}/'
+            )
+            new_url = f"/{new_folder_name.replace(' ', '+')}/".join(old_url)
+            document.folder_name = new_folder_name
+            document.document_url = new_url
+            db.commit()
+            db.refresh(document)
+            db.close()
+            return old_folder_name, document.filename
+        db.close()
+        return None, None
+
+    def delete_case_document(
+        self, lawyer_email: EmailStr, case_id: str, document_uuid: str
+    ) -> tuple[str, str]:
+        db = self.Session()
+        document = (
+            db.query(CaseDocuments)
+            .filter(
+                CaseDocuments.lawyer_email == lawyer_email.lower(),
+                CaseDocuments.lawyer_case == case_id,
+                CaseDocuments.uuid == document_uuid,
+            )
+            .first()
+        )
+        filename = None
+        document_url = None
+        if document:
+            filename = document.filename
+            document_url = document.document_url
+            db.delete(document)
+            db.commit()
+        db.close()
+        return filename, document_url
+
+    def delete_case_folder(
+        self, lawyer_email: EmailStr, case_id: str, folder_name: str
+    ) -> None:
+        db = self.Session()
+        documents = (
+            db.query(CaseDocuments)
+            .filter(
+                CaseDocuments.lawyer_email == lawyer_email.lower(),
+                CaseDocuments.lawyer_case == case_id,
+                CaseDocuments.folder_name == folder_name,
+            )
+            .all()
+        )
+        if documents:
+            for document in documents:
+                db.delete(document)
+            db.commit()
+        db.close()
+
+    def check_if_paid(self, case_id: str) -> bool:
+        # case_sub = self.retrieve_lawyer_case_sub(case_id)
+        # print(case_sub)
+        # if case_sub != {} and case_sub["is_paid"]:
+        #     return True
+        # return False
+        # TODO: connect with case management
+        pass
+
+    def retrieve_specific_case(
+        self, lawyer_email: EmailStr, case_id: str
+    ) -> tuple[list[EmailStr], EmailStr]:
+        # db = self.Session()
+        # case = (
+        #     db.query(AllCases)
+        #     .filter(
+        #         AllCases.lawyer_email == lawyer_email.lower(),
+        #         AllCases.case_id == case_id,
+        #     )
+        #     .first()
+        # )
+        # assignees = []
+        # client_email = None
+        # if case:
+        #     assignees = case.assignee_list if case.assignee_list is not None else []
+        #     client_email = case.client_email
+
+        # db.close()
+        # return assignees, client_email
+        # TODO: Connect with case management
+        pass
+
+    def retrieve_used_storage(self, email_id: EmailStr) -> int:
+        db = self.Session()
+        used_storage = 0
+        all_files = db.query(AllFiles).filter(AllFiles.owner == email_id).all()
+        if all_files:
+            for file in all_files:
+                used_storage += file.file_size
+        db.close()
+        return used_storage

@@ -63,6 +63,7 @@ class BucketConsole:
                 Key=bucket_directory,
                 ExtraArgs={"ContentType": file.content_type, "ACL": "public-read"},
             )
+        return f"{self.base_url}/{bucket_directory}"
 
     def upload_new_profile_picture(self, file_data: bytes, user_type: Literal["immigrants", "lawyers", "nonlawyers", "lawstudents", "paralegals"], username: str) -> str:
         file = DummyFile(
