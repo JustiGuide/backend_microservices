@@ -1,4 +1,4 @@
-
+from datetime import datetime, timezone
 import json
 import mimetypes
 from pathlib import Path
@@ -13,13 +13,16 @@ import os
 from authorization import Authorizer, FormNameValidator
 from PIL import Image
 import io
-from helpers import Helpers
+from helpers import Helpers, UploadFile_Dummy
 from .formfiller_module import FormFiller
+from signature_processing.sign_processing import SignGenerator
 
 db_func = Functions()
 app = APIRouter()
 bucket = BucketConsole()
 filler = FormFiller()
+bucket = BucketConsole()
+signer = SignGenerator()
 
 class StoreForm(BaseModel):
     form_owner: EmailStr = Form(...)
@@ -249,35 +252,19 @@ class SignIntake(BaseModel):
     sign_id: str = Depends(Authorizer.client_signid_validator)
 
 
-@app.post("/forms/sign-pdf")
-async def sign_pdf(payload: SignIntake):
+@app.post("/forms/sign-intake")
+async def sign_intake(payload: SignIntake):
     client = db_func.get_immigrant(payload.client_email)
-    intake_form_url, filename = db_func.retrieve_intake_form(payload.intake_form_id)
+    intake_form_url, filename, owner = db_func.retrieve_intake_form(payload.intake_form_id)
+    lawpersonnel = db_func.get_lawpersonnel(owner)
     response = requests.get(str(intake_form_url))
     if response.status_code != 200:
         raise HTTPException(status_code=400, detail="Failed to retrieve the intake form")
-    temp_file_path = Path("./temp") / filename
-    temp_file_path.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(temp_file_path, "wb") as f:
-        f.write(response.content)
-    content_type, _ = mimetypes.guess_type(str(temp_file_path))
-    if content_type != 'application/pdf':
-        if content_type.startswith('image/'):
-            pdf_path = Path("./temp") / f"{os.path.splitext(filename)[0]}.pdf"
-            image = Image.open(temp_file_path)
-            image.convert('RGB').save(pdf_path, 'PDF')
-            os.remove(temp_file_path)
-            temp_file_path = str(pdf_path)
-        elif filename.endswith('.docx') or filename.endswith('.doc'):
-            pdf_path = Path("./temp") / f"{os.path.splitext(filename)[0]}.pdf"
-            docx2pdf.convert(str(temp_file_path), str(pdf_path))
-            os.remove(temp_file_path)
-            temp_file_path = str(pdf_path)
-        else:
-            raise HTTPException(status_code=400, detail="Unsupported file format for conversion")
-
-    output_file_path = Path("./temp") / f"signed_{filename}"
+    # temp_file_path = Path("./temp") / filename
+    # temp_file_path.parent.mkdir(parents=True, exist_ok=True)
+    content_type = "application/pdf"
+    pdf_bytes = response.content
+    output_filename = f"signed_{filename}"
     sign_data = []
     for sign_position in payload.signature_positions.positions:
         sign_data.append({
@@ -285,16 +272,37 @@ async def sign_pdf(payload: SignIntake):
             "target_page": sign_position.page_number,
             "offsets": sign_position.offsets
         })
-    new_output, upd_filename = filler.sign_pdf(
-        input_path=temp_file_path,
-        output_path=str(output_file_path),
+    new_intake_data = filler.sign_pdf(
+        pdf_data=pdf_bytes,
         user_email=payload.client_email,
         full_legal_name=client.full_legal_name,        
         sign_data=sign_data,
     )
-    return FileResponse(
-        path=new_output,
-        filename=upd_filename,
-        media_type="application/pdf"
-    )
 
+    destination = f"{lawpersonnel.personnel_type}s/{lawpersonnel.username}/Intake+Forms"
+    new_intake_filename, _ = os.path.splitext(output_filename)
+    s3_directroy, final_filename = bucket.crosscheck_existing(
+        destination_path=destination, filename=output_filename
+    )
+    intake_form_file = DummyFile(
+        content=new_intake_data,
+        size=len(new_intake_data),
+        name=new_intake_filename,
+        ext="pdf",
+        content_type="application/pdf",
+    )
+    file_url = bucket.upload_file(file=intake_form_file, bucket_directory=s3_directroy)
+    intake_form = UploadFile_Dummy(
+        size = len(new_intake_data),
+        content_type="application/pdf"
+    )
+    _ = Helpers.store_file(
+        file=intake_form,
+        file_url=file_url,
+        email_id=lawpersonnel.email,
+        filename=final_filename,
+    )
+    date_signed = datetime.now(tz=timezone.utc).date()
+
+    db_func.update_sign_date(sign_id=payload.sign_id, today_date=date_signed)
+    return {"form_url": file_url, "date_signed": date_signed}

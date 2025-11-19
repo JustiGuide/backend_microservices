@@ -687,11 +687,13 @@ class Functions:
         # )
         # form_url = None
         # form_name = None
+        # form_owner = None
         # if intake_form:
         #     form_url = intake_form.form_url
         #     form_name = intake_form.form_name
+        #     form_owner = intake_form.lawyer_email
         # db.close()
-        # return form_url, form_name.
+        # return form_url, form_name, form_owner
         # TODO: Connect with user management
         pass
 

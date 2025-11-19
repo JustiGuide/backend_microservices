@@ -1,3 +1,5 @@
+import io
+import uuid
 import cv2
 import numpy as np
 import os
@@ -26,36 +28,35 @@ class FormFiller:
                     return page, widget
         return None, None
 
-    def sign_pdf(self, input_path, output_path, user_email, full_legal_name, sign_data):
-
+    def sign_pdf(self, pdf_data, user_email, full_legal_name, sign_data):
         temp_path = "./temp_formfiller_pages"
         if not os.path.exists(temp_path):
             os.makedirs(temp_path)
 
-        file_name_base = os.path.splitext(os.path.basename(input_path))[0]
+        file_name_base = uuid.uuid4()
+        input_stream = io.BytesIO(pdf_data)
 
-        with open(input_path, "rb") as f_in:
-            pdf_reader = PyPDF2.PdfReader(f_in)
-            if not pdf_reader.pages:
-                print(f"Error: No pages found in {input_path}")
-                for f_item in glob.glob(os.path.join(temp_path, "*")):
-                    os.remove(f_item)
-                if os.path.exists(temp_path) and not os.listdir(temp_path):
-                    os.rmdir(temp_path)
-                return None, None
+        pdf_reader = PyPDF2.PdfReader(input_stream)
+        if not pdf_reader.pages:
+            print(f"Error: No pages found in input data")
+            for f_item in glob.glob(os.path.join(temp_path, "*")):
+                os.remove(f_item)
+            if os.path.exists(temp_path) and not os.listdir(temp_path):
+                os.rmdir(temp_path)
+            return None
 
-            first_page_for_dims = pdf_reader.pages[0]
-            page_width_pt = float(first_page_for_dims.mediabox.width)
-            page_height_pt = float(first_page_for_dims.mediabox.height)
+        first_page_for_dims = pdf_reader.pages[0]
+        page_width_pt = float(first_page_for_dims.mediabox.width)
+        page_height_pt = float(first_page_for_dims.mediabox.height)
 
-            for i, page_obj in enumerate(pdf_reader.pages):
-                writer = PyPDF2.PdfWriter()
-                writer.add_page(page_obj)
-                temp_pdf_page_path = os.path.join(
-                    temp_path, f"{file_name_base}_page_{i}.pdf"
-                )
-                with open(temp_pdf_page_path, "wb") as f_out_page:
-                    writer.write(f_out_page)
+        for i, page_obj in enumerate(pdf_reader.pages):
+            writer = PyPDF2.PdfWriter()
+            writer.add_page(page_obj)
+            temp_pdf_page_path = os.path.join(
+                temp_path, f"{file_name_base}_page_{i}.pdf"
+            )
+            with open(temp_pdf_page_path, "wb") as f_out_page:
+                writer.write(f_out_page)
 
         for sig_data in sign_data:
             sign_response = signer.retrieve_signs(
@@ -191,10 +192,9 @@ class FormFiller:
             c.save()
 
         output_pdf_writer = PyPDF2.PdfWriter()
-        num_pages_in_original = 0
-        with open(input_path, "rb") as f_orig_count:
-            num_pages_in_original = len(PyPDF2.PdfReader(f_orig_count).pages)
+        input_stream.seek(0)
 
+        num_pages_in_original = len(PyPDF2.PdfReader(input_stream).pages)
         for i in range(num_pages_in_original):
             processed_page_path = os.path.join(
                 temp_path, f"{file_name_base}_page_{i}.pdf"
@@ -208,21 +208,24 @@ class FormFiller:
                         print(
                             f"Warning: Processed page {processed_page_path} is empty or corrupted."
                         )
+                try:
+                    os.remove(processed_page_path)
+                    jpg_path = processed_page_path.replace(".pdf", ".jpg")
+                    if os.path.exists(jpg_path):
+                        os.remove(jpg_path)
+                except OSError:
+                    pass
             else:
-                print(
-                    f"Warning: Processed page PDF {processed_page_path} not found. Attempting to use original page {i+1}."
-                )
-                with open(input_path, "rb") as f_original_pdf_for_missing:
-                    original_reader_for_missing = PyPDF2.PdfReader(
-                        f_original_pdf_for_missing
-                    )
-                    if i < len(original_reader_for_missing.pages):
-                        output_pdf_writer.add_page(original_reader_for_missing.pages[i])
+                print(f"Warning: Processed page {i} not found. Using original.")
+                input_stream.seek(0)
+                original_reader_fallback = PyPDF2.PdfReader(input_stream)
+                if i < len(original_reader_fallback.pages):
+                    output_pdf_writer.add_page(original_reader_fallback.pages[i])
 
-        with open(output_path, "wb") as f_final_out:
-            output_pdf_writer.write(f_final_out)
+        pdf_buffer = io.BytesIO()
+        output_pdf_writer.write(pdf_buffer)
 
-        return output_path, str(output_path).split("/")[-1]
+        return pdf_buffer.getvalue()
 
     def fill_form(
         self,

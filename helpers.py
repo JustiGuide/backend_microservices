@@ -4,6 +4,7 @@ import os
 import string
 import re
 from typing import Any, Literal, Union
+from fastapi import UploadFile
 from pydantic import BaseModel, EmailStr
 import requests
 from database import Functions
@@ -173,3 +174,88 @@ class Helpers:
             return f"{file_size / 1024**2:.2f} MB"
         else:
             return f"{file_size / 1024**3:.2f} GB"
+
+    @staticmethod
+    def store_file(
+        file: Union[UploadFile, UploadFile_Dummy],
+        file_url: str,
+        email_id: EmailStr,
+        filename: str,
+        readable: bool = False,
+    ) -> str:
+        # TODO: Connect with Docs Service
+        # def get_file_size(file_size: int) -> str:
+        #     if file_size < 1024:
+        #         return f"{file_size} B"
+        #     elif file_size < 1024**2:
+        #         return f"{file_size / 1024:.2f} KB"
+        #     elif file_size < 1024**3:
+        #         return f"{file_size / 1024**2:.2f} MB"
+        #     else:
+        #         return f"{file_size / 1024**3:.2f} GB"
+
+        # def add_file(
+        #     self,
+        #     file_name: str,
+        #     file_size: str,
+        #     file_url: str,
+        #     file_type: str,
+        #     readable: bool,
+        #     email_id: EmailStr,
+        # ) -> str:
+        #     db = self.Session()
+        #     user = self.get_immigrant(email_id)
+        #     lawyer = self.get_lawpersonnel(email_id)
+        #     if user:
+        #         owner = email_id
+        #         owner_type = "user"
+        #     elif lawyer:
+        #         owner = email_id
+        #         owner_type = lawyer.personnel_type
+        #     else:
+        #         return HTTPException(
+        #             status_code=400,
+        #             detail="User or Lawyer not found",
+        #         )
+
+        #     file_id = None
+        #     exist_file = (
+        #         db.query(AllFiles)
+        #         .filter(AllFiles.file_url == file_url, AllFiles.owner == owner)
+        #         .first()
+        #     )
+        #     if not exist_file:
+        #         new_file = AllFiles(
+        #             file_name=file_name,
+        #             file_size=file_size,
+        #             file_url=file_url,
+        #             file_type=file_type,
+        #             open_read=readable,
+        #             owner=owner,
+        #             owner_type=owner_type,
+        #         )
+        #         db.add(new_file)
+        #         db.commit()
+        #         db.refresh(new_file)
+        #         file_id = new_file.uuid
+        #     else:
+        #         exist_file.file_name = file_name
+        #         exist_file.file_size = file_size
+        #         exist_file.file_type = file_type
+        #         exist_file.owner_type = owner_type
+        #         exist_file.open_read = readable
+        #         file_id = exist_file.uuid
+        #         db.commit()
+        #     db.close()
+        #     return file_id
+
+        # file_id = db_func.add_file(
+        #     file_name=filename,
+        #     file_size=get_file_size(file.size),
+        #     file_url=file_url,
+        #     file_type=file.content_type,
+        #     readable=readable,
+        #     email_id=email_id,
+        # )
+        # return file_id
+        return ""
