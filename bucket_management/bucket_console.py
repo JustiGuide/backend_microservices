@@ -74,7 +74,7 @@ class BucketConsole:
             content_type = "image/png"
         )
         bucket_directory = f"{user_type}/{username}/profile_pic/user.png"
-        self.upload_file(file, bucket_directory, is_previewable=True)
+        return self.upload_file(file, bucket_directory, is_previewable=True)
 
     def _extract_text_content(self, filename: str, file_content: bytes) -> str:
         file_ext = filename.split(".")[-1].lower()
