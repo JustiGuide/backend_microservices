@@ -243,8 +243,8 @@ class ImmigrantKYC(Base):
     def __repr__(self):
         return f"<ImmigrantKYC(uuid={self.uuid}, immigrant_email={self.immigrant_email}, kyc_details={self.kyc_details})>"
 
-class UsersVerification(Base):
-    __tablename__ = "users_verification"
+class ImmigrantVerification(Base):
+    __tablename__ = "immigrant_verification"
     email = Column(EncryptedText, primary_key=True, nullable=False)
     verification_code = Column(String(4), nullable=False)
 
@@ -799,6 +799,56 @@ class Functions:
 
         db.close()
 
+    def update_immigrant_data(self, immigrant_email: EmailStr, first_name: str = None, profile_picture_url: str = None, last_name: str = None, full_legal_name: str = None, user_location: str = None):
+        db = self.Session()
+        immigrant = db.query(Immigrants).filter(Immigrants.email == immigrant_email).first()
+        actual_first_name = first_name if first_name else immigrant.first_name
+        actual_last_name = last_name if last_name else immigrant.last_name
+        actual_full_legal_name = (
+            full_legal_name if full_legal_name else immigrant.full_legal_name
+        )
+        actual_location = user_location if user_location else immigrant.location
+        actual_profile_pic = profile_picture_url if profile_picture_url else immigrant.profile_pic
+        immigrant.first_name = actual_first_name
+        immigrant.last_name = actual_last_name
+        immigrant.full_legal_name = actual_full_legal_name
+        immigrant.location = actual_location
+        immigrant.profile_pic = actual_profile_pic
+        db.commit()
+        db.refresh(immigrant)
+        db.close()
+
+    def update_lawpersonnel_data(self, lawpersonnel_email: EmailStr, first_name: str = None, profile_picture_url: str = None, last_name: str = None, full_legal_name: str = None, professional_address: str = None):
+        db = self.Session()
+        lawpersonnel = (
+            db.query(LawPersonnel)
+            .filter(LawPersonnel.email == lawpersonnel_email)
+            .first()
+        )
+        actual_first_name = first_name if first_name else lawpersonnel.firstName
+        actual_last_name = last_name if last_name else lawpersonnel.lastName
+        actual_full_legal_name = (
+            full_legal_name if full_legal_name else lawpersonnel.full_legal_name
+        )
+        actual_location = (
+            professional_address
+            if professional_address
+            else lawpersonnel.professional_address
+        )
+        actual_profile_pic = (
+            profile_picture_url
+            if profile_picture_url
+            else lawpersonnel.professional_address
+        )
+        lawpersonnel.firstName = actual_first_name
+        lawpersonnel.lastName = actual_last_name
+        lawpersonnel.full_legal_name = actual_full_legal_name
+        lawpersonnel.professional_address = actual_location
+        lawpersonnel.professional_address = actual_profile_pic
+        db.commit()
+        db.refresh(lawpersonnel)
+        db.close()
+
     def update_immigrant_kyc(
         self, immigrant_email: EmailStr, kyc_details: dict[str, Any]
     ) -> None:
@@ -983,15 +1033,15 @@ class Functions:
     def add_user_verification(self, email: EmailStr, verification_code: str) -> None:
         db = self.Session()
         exist_user = (
-            db.query(UsersVerification)
-            .filter(UsersVerification.email == email.lower())
+            db.query(ImmigrantVerification)
+            .filter(ImmigrantVerification.email == email.lower())
             .first()
         )
         if exist_user:
             exist_user.verification_code = verification_code
             db.commit()
         else:
-            user_verification = UsersVerification(
+            user_verification = ImmigrantVerification(
                 email=email.lower(), verification_code=verification_code
             )
             db.add(user_verification)
@@ -1001,8 +1051,8 @@ class Functions:
     def retrieve_user_verification(self, email: EmailStr) -> Union[str, None]:
         db = self.Session()
         user_verification = (
-            db.query(UsersVerification)
-            .filter(UsersVerification.email == email.lower())
+            db.query(ImmigrantVerification)
+            .filter(ImmigrantVerification.email == email.lower())
             .first()
         )
         verification_code = None
@@ -1014,8 +1064,8 @@ class Functions:
     def delete_user_verification(self, email: EmailStr) -> None:
         db = self.Session()
         user_verification = (
-            db.query(UsersVerification)
-            .filter(UsersVerification.email == email.lower())
+            db.query(ImmigrantVerification)
+            .filter(ImmigrantVerification.email == email.lower())
             .first()
         )
         if user_verification:
@@ -1296,3 +1346,70 @@ class Functions:
             return [notif[0] for notif in all_notifications]
         db.close()
         return []
+
+    def retrieve_verified_lawyers(self) -> list[LawPersonnel]:
+        db = self.Session()
+        all_lawpersonnel = db.query(LawPersonnel).filter(LawPersonnel.verified == True, LawPersonnel.personnel_type == "lawyer").all()
+        if all_lawpersonnel:
+            db.close()
+            return [lawyer for lawyer in all_lawpersonnel]
+        db.close()
+        return []
+
+    def new_lawpersonnel_add_team_case(
+        self, invited_email: EmailStr, user_name: str
+    ) -> tuple[list[LawPersonnel], list[dict[str, Union[LawPersonnel, str]]]]:
+        team_lawyers = []
+        case_lawyers = []
+        # team_invited = self.retrieve_invitation_data(
+        #     invited_type="invited_to_team", invited_email=invited_email
+        # )
+        # if team_invited is not None:
+        #     for team_invitations in team_invited:
+        #         lawyer_email, invitation_dets = team_invitations.items()
+        #         lawyer = self.get_lawpersonnel(lawyer_email)
+        #         invited = self.get_lawpersonnel(invited_email)
+        #         team_lawyers.append(lawyer)
+        #         self.add_team_member(
+        #             lawyer_email=lawyer.email,
+        #             member_email=invited_email,
+        #             member_role=invited.personnel_type.capitalize(),
+        #             member_permissions=invitation_dets["permissions"],
+        #         )
+        #         self.delete_invitation_data(
+        #             invited_type="invited_to_team",
+        #             invited_email=invited_email,
+        #             invitee_email=lawyer.email,
+        #         )
+        # case_invited = self.retrieve_invitation_data(
+        #     invited_type="invited_to_case", invited_email=invited_email
+        # )
+        # if case_invited is not None:
+        #     for case_invitations in case_invited:
+        #         lawyer_email, invitation_dets = case_invitations.items()
+        #         lawyer = self.get_lawpersonnel(lawyer_email)
+        #         invited = self.get_lawpersonnel(invited_email)
+        #         case_lawyers.append(
+        #             {"lawyer": lawyer, "case_id": invitation_dets["case_id"]}
+        #         )
+        #         self.add_team_member(
+        #             lawyer_email=lawyer.email,
+        #             member_email=invited_email,
+        #             member_role=invited.personnel_type.capitalize(),
+        #             member_permissions=invitation_dets["permissions"],
+        #         )
+        #         self.add_case_teammate(
+        #             lawyer_email=lawyer.email,
+        #             case_id=invitation_dets["case_id"],
+        #             member_name=user_name,
+        #             member_email=invited_email,
+        #         )
+        #         self.delete_invitation_data(
+        #             invited_type="invited_to_case",
+        #             invited_email=invited_email,
+        #             invitee_email=lawyer.email,
+        #             case_id=invitation_dets["case_id"],
+        #         )
+        # return team_lawyers, case_lawyers
+        # TODO: Connect to relationship service
+        pass
