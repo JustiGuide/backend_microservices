@@ -272,7 +272,7 @@ class Helpers:
         return sorted_msgHist
 
     @staticmethod
-    def retreive_ai_messages_for_autofill(
+    def retrieve_ai_messages_for_autofill(
         ai_message_history: dict[
             str, dict[str, dict[str, Union[str, list[str], bool, list[str]]]]
         ],

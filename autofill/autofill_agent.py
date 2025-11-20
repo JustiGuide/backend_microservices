@@ -73,7 +73,7 @@ class AutofillGenerator:
         try:
             immigrant = db_func.get_immigrant(immigrant_username)
             kyc_data = db_func.get_immigrant_kyc(immigrant.username)
-            messages = Helpers.retreive_ai_messages_for_autofill(db_func.process_immigrant_messages(immigrant_email=immigrant.email), limit)
+            messages = Helpers.retrieve_ai_messages_for_autofill(db_func.process_immigrant_messages(immigrant_email=immigrant.email), limit)
             case_info = {}
             if case_type:
                 case_info = db_func.retrieve_case_info(immigrant.username, case_type)
