@@ -1207,7 +1207,7 @@ class Functions:
         db.close()
         return all_cases
 
-    def delete_case(lawpersonnel_email: EmailStr, case_id: str):
+    def delete_case(self, lawpersonnel_email: EmailStr, case_id: str):
         # TODO: connect with user service (Cleanup)
         pass
 
