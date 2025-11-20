@@ -581,7 +581,7 @@ class Functions:
             "ai_chat_files", "forms", "personal_files", "form_details"
         ],
     ) -> None:
-        # TODO: Connect with User Management
+        # TODO: Connect with docs Management
         # db = self.Session()
         # immigrant_file = ImmigrantDocuments(
         #     immigrant_email=immigrant_email.lower(),
@@ -601,7 +601,7 @@ class Functions:
             "ai_chat_files", "forms", "personal_files", "form_details"
         ],
     ) -> None:
-        # TODO: Connect with User Management
+        # TODO: Connect with docs Management
         # db = self.Session()
         # lawpersonnel_file = LawpersonnelDocuments(
         #     lawpersonnel_email=lawpersonnel_email.lower(),
