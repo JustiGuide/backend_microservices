@@ -321,7 +321,10 @@ class Functions:
         pass
 
     def retrieve_all_assignees(self, assignee_emails: list[EmailStr]) -> dict[str, dict[str, str]]:
-        # TODO: connect with user management module (profile pic)
+        for assignee in assignee_emails:
+            assigned_user = self.get_lawpersonnel(assignee)
+
+        # TODO: complete
         pass
 
     def retrieve_all_cases(
