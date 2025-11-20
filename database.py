@@ -694,7 +694,7 @@ class Functions:
         #     form_owner = intake_form.lawyer_email
         # db.close()
         # return form_url, form_name, form_owner
-        # TODO: Connect with user management
+        # TODO: Connect with relationship management
         pass
 
     def add_case_document(
