@@ -1208,7 +1208,7 @@ class Functions:
         return all_cases
 
     def delete_case(lawpersonnel_email: EmailStr, case_id: str):
-        # TODO: connect with utilities (Cleanup)
+        # TODO: connect with user service (Cleanup)
         pass
 
     def get_all_tasks(
