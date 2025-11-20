@@ -5,14 +5,17 @@ import re
 from typing import Any, Union, Literal
 from fastapi import HTTPException
 from pydantic import EmailStr
-from sqlalchemy.orm import sessionmaker, declarative_base
+from sqlalchemy.orm import sessionmaker, declarative_base, validates
 from dotenv import load_dotenv
 from sqlalchemy import (
+    JSON,
     TIMESTAMP,
     Column,
     Date,
+    DateTime,
     Float,
     Integer,
+    LargeBinary,
     String,
     Text,
     Boolean,
@@ -25,6 +28,440 @@ from datetime import date, datetime, timedelta
 load_dotenv()
 Base = declarative_base()
 encr = Encrypt()
+
+
+class ScheduledFunctions(Base):
+    __tablename__ = "scheduled_functions"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    func_name = Column(LargeBinary, nullable=False)
+    args = Column(EncryptedText, nullable=False)
+    kwargs = Column(EncryptedText, nullable=False)
+    scheduled_date = Column(DateTime(timezone=True), nullable=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "func_name": self.func_name,
+            "args": self.args,
+            "kwargs": self.kwargs,
+            "scheduled_date": self.scheduled_date,
+        }
+
+    def __repr__(self):
+        return f"<ScheduledFunctions(uuid={self.uuid}, func_name={self.func_name}, args={self.args}, kwargs={self.kwargs}, scheduled_date={self.scheduled_date})>"
+
+
+class ChatMessage(Base):
+    __tablename__ = "chat_messages"
+    id = Column(String(7), primary_key=True, index=True, default=Encrypt.generate_uuid)
+    message = Column(EncryptedText)
+    starred = Column(Boolean, default=False)
+    sender_email = Column(EncryptedText, nullable=True)
+    recipient_email = Column(EncryptedText, nullable=True)
+    timestamp = Column(DateTime(timezone=True), default=func.now())
+    read = Column(Boolean, default=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "message": self.message,
+            "sender_email": self.sender_email,
+            "recipient_email": self.recipient_email,
+            "starred": self.starred,
+            "timestamp": self.timestamp,
+            "read": self.read,
+        }
+
+    def __repr__(self):
+        return f"<ChatMessage(id={self.id}, sender_email={self.sender_email}, recipient_email={self.recipient_email}, starred={self.starred}, read={self.read})>"
+
+
+class LiveChatMessage(Base):
+    __tablename__ = "live_chat_messages"
+    id: str = Column(
+        String(7), primary_key=True, index=True, default=Encrypt.generate_uuid
+    )
+    message: str = Column(EncryptedText, nullable=False)
+    sender_email: EmailStr = Column(EncryptedText, nullable=True)
+    recipient_email: EmailStr = Column(EncryptedText, nullable=True)
+    timestamp: datetime = Column(DateTime(timezone=True), default=func.now())
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "message": self.message,
+            "sender_email": self.sender_email,
+            "recipient_email": self.recipient_email,
+            "timestamp": self.timestamp,
+        }
+
+    def __repr__(self):
+        return f"<LiveChatMessage(id={self.id}, sender_email={self.sender_email}, recipient_email={self.recipient_email})>"
+
+
+class ConnectionRequests(Base):
+    __tablename__ = "connection_requests"
+    id = Column(String(7), primary_key=True, index=True, default=Encrypt.generate_uuid)
+    message = Column(EncryptedText, nullable=False)
+    sender_email = Column(EncryptedText, nullable=True)
+    recipient_email = Column(EncryptedText, nullable=True)
+    status = Column(String, default="Pending")
+    status_changed = Column(DateTime, nullable=True)
+    timestamp = Column(DateTime, default=func.now())
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "message": self.message,
+            "sender_email": self.sender_email,
+            "recipient_email": self.recipient_email,
+            "status": self.status,
+        }
+
+    def __repr__(self):
+        return f"<SentMessage(id={self.id}, sender_email={self.sender_email}, recipient_email={self.recipient_email}, status={self.status})>"
+
+    @validates("status")
+    def validate_status(self, key, value):
+        if value:
+            self.status_changed = func.now()
+        return value
+
+
+class AllCases(Base):
+    __tablename__ = "all_cases"
+    case_id: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    lawyer_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
+    client_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
+    case_name: str = Column(EncryptedText, nullable=False)
+    assignee_list: list[EmailStr] = Column(EncryptedText, nullable=True)
+    task_list: list[str] = Column(EncryptedText, nullable=True)
+    case_status: Literal["In Progress", "Submitted", "Closed"] = Column(
+        EncryptedText, nullable=False, default="In Progress"
+    )
+    case_description: str = Column(EncryptedText, nullable=True)
+    form_submitted: bool = Column(Boolean, nullable=False, default=False)
+    case_type: str = Column(EncryptedText, nullable=False)
+
+    def to_dict(self):
+        return {
+            "case_id": self.case_id,
+            "lawyer_email": self.lawyer_email,
+            "client_email": self.client_email,
+            "case_name": self.case_name,
+            "assignee_list": self.assignee_list,
+            "task_list": self.task_list,
+            "case_status": self.case_status,
+            "case_description": self.case_description,
+            "form_submitted": self.form_submitted,
+            "case_type": self.case_type,
+        }
+
+    def __repr__(self):
+        return f"<AllCases(case_id={self.case_id}, lawyer_email={self.lawyer_email}, client_email={self.client_email}, case_name={self.case_name}, assignee_list={self.assignee_list}, task_list={self.task_list}, case_status={self.case_status}, case_description={self.case_description}, form_submitted={self.form_submitted}, case_type={self.case_type})>"
+
+
+class AllClients(Base):
+    __tablename__ = "all_clients"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    lawyer_email = Column(EncryptedText, nullable=False, index=True)
+    client_email = Column(EncryptedText, nullable=False)
+    client_number = Column(EncryptedText, nullable=False)
+    client_address = Column(EncryptedText, nullable=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "lawyer_email": self.lawyer_email,
+            "client_email": self.client_email,
+            "client_number": self.client_number,
+            "client_address": self.client_address,
+        }
+
+    def __repr__(self):
+        return f"<AllClients(uuid={self.uuid}, lawyer_email={self.lawyer_email}, client_email={self.client_email}, client_number={self.client_number}, client_address={self.client_address})>"
+
+
+class AllTasks(Base):
+    __tablename__ = "all_tasks"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    lawyer_email = Column(EncryptedText, nullable=False, index=True)
+    task_name = Column(EncryptedText, nullable=False)
+    task_visibility = Column(Text, nullable=False)
+    case_name = Column(EncryptedText, nullable=False)
+    case_id = Column(String(7), nullable=False)
+    task_assignees = Column(EncryptedText, nullable=True)
+    task_status = Column(Text, nullable=False, default="To-Do")
+    task_completed_date = Column(Text, nullable=True)
+    task_deadline = Column(Text, nullable=False)
+    task_documents = Column(EncryptedText, nullable=True)
+    task_description = Column(EncryptedText, nullable=True)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "lawyer_email": self.lawyer_email,
+            "task_name": self.task_name,
+            "task_visibility": self.task_visibility,
+            "case_name": self.case_name,
+            "case_id": self.case_id,
+            "task_assignees": self.task_assignees,
+            "task_status": self.task_status,
+            "task_completed_date": self.task_completed_date,
+            "task_deadline": self.task_deadline,
+            "task_documents": self.task_documents,
+            "task_description": self.task_description,
+        }
+
+    def __repr__(self):
+        return f"<AllTasks(uuid={self.uuid}, lawyer_email={self.lawyer_email}, task_name={self.task_name}, task_visibility={self.task_visibility}, case_name={self.case_name}, case_id={self.case_id}, task_assignees={self.task_assignees}, task_status={self.task_status}, task_completed_date={self.task_completed_date}, task_deadline={self.task_deadline}, task_documents={self.task_documents}, task_description={self.task_description})>"
+
+
+class CaseDocuments(Base):
+    __tablename__ = "case_documents"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    filename = Column(String(255), nullable=False)
+    document_url = Column(EncryptedText, nullable=False)
+    folder_name = Column(EncryptedText, nullable=False)
+    lawyer_email = Column(EncryptedText, nullable=False, index=True)
+    lawyer_case = Column(String(7), nullable=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "filename": self.filename,
+            "document_url": self.document_url,
+            "folder_name": self.folder_name,
+            "lawyer_email": self.lawyer_email,
+            "lawyer_case": self.lawyer_case,
+        }
+
+    def __repr__(self):
+        return f"<CaseDocuments(uuid={self.uuid}, filename={self.filename}, document_url={self.document_url}, folder_name={self.folder_name}, lawyer_email={self.lawyer_email}, lawyer_case={self.lawyer_case})>"
+
+
+class CaseRecentActions(Base):
+    __tablename__ = "case_actions"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    lawyer_email = Column(EncryptedText, nullable=False, index=True)
+    lawyer_case = Column(String(7), nullable=False, index=True)
+    action = Column(EncryptedText, nullable=False)
+    actor = Column(EncryptedText, nullable=False)
+    role = Column(String(50), nullable=False)
+    action_time = Column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "lawyer_email": self.lawyer_email,
+            "lawyer_case": self.lawyer_case,
+            "action": self.action,
+            "actor": self.actor,
+            "role": self.role,
+            "action_time": self.action_time,
+        }
+
+    def __repr__(self):
+        return f"<CaseRecentActions(uuid={self.uuid}, lawyer_email={self.lawyer_email}, lawyer_case={self.lawyer_case}, action={self.action}, actor={self.actor}, role={self.role}, action_time={self.action_time})>"
+
+
+class CaseTeams(Base):
+    __tablename__ = "case_teams"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    lawyer_email = Column(EncryptedText, nullable=False)
+    member_name = Column(EncryptedText, nullable=False)
+    member_type = Column(String(50), nullable=False)
+    member_email = Column(EncryptedText, nullable=False)
+    lawyer_case = Column(EncryptedText, nullable=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "lawyer_email": self.lawyer_email,
+            "member_name": self.member_name,
+            "member_type": self.member_type,
+            "member_email": self.member_email,
+            "lawyer_case": self.lawyer_case,
+        }
+
+    def __repr__(self):
+        return f"<CaseTeams(uuid={self.uuid}, lawyer_email={self.lawyer_email}, member_name={self.member_name}, member_type={self.member_type}, member_email={self.member_email}, lawyer_case={self.lawyer_case})>"
+
+
+class ImmigrantDocuments(Base):
+    __tablename__ = "immigrant_documents"
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    immigrant_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
+    file_url: str = Column(EncryptedText, nullable=False)
+    file_type: str = Column(Text, nullable=False)
+
+    def to_dict(self) -> dict[str, Union[str, EmailStr]]:
+        return {
+            "uuid": self.uuid,
+            "immigrant_email": self.immigrant_email,
+            "file_url": self.file_url,
+            "file_type": self.file_type,
+        }
+
+    def __repr__(self) -> str:
+        return f"<ImmigrantDocuments(uuid={self.uuid}, immigrant_email={self.immigrant_email}, file_url={self.file_url}, file_type={self.file_type})>"
+
+
+class ImmigrantLawyerConnection(Base):
+    __tablename__ = "immigrant_lawyer_connection"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    immigrant_email = Column(EncryptedText, nullable=False, index=True)
+    lawyer_email = Column(EncryptedText, nullable=False, index=True)
+    lawyer_case_ids = Column(EncryptedText, nullable=True, default=[])
+    connected_boolean = Column(Boolean, nullable=False, default=False)
+    saved_boolean = Column(Boolean, nullable=False, default=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "immigrant_email": self.immigrant_email,
+            "lawyer_email": self.lawyer_email,
+            "lawyer_case_ids": self.lawyer_case_ids,
+            "connected_boolean": self.connected_boolean,
+            "saved_boolean": self.saved_boolean,
+        }
+
+    def __repr__(self):
+        return f"<ImmigrantLawyerConnection(uuid={self.uuid}, immigrant_email={self.immigrant_email}, lawyer_email={self.lawyer_email}, lawyer_case_ids={self.lawyer_case_ids}, connected_boolean={self.connected_boolean}, saved_boolean={self.saved_boolean})>"
+
+
+class Invitations(Base):
+    __tablename__ = "invitations"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    invited_type = Column(String(50), nullable=False)
+    invitee_email = Column(EncryptedText, nullable=False, index=True)
+    invited_email = Column(EncryptedText, nullable=False)
+    case_type = Column(EncryptedText, nullable=True)
+    client_number = Column(EncryptedText, nullable=True)
+    client_address = Column(EncryptedText, nullable=True)
+    case_id = Column(String(7), nullable=True)
+    member_role = Column(String(50), nullable=True)
+    member_permissions = Column(EncryptedText, nullable=True)
+    case_name = Column(EncryptedText, nullable=True)
+    case_description = Column(EncryptedText, nullable=True)
+    assignees = Column(EncryptedText, nullable=True)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "invited_type": self.invited_type,
+            "invitee_email": self.invitee_email,
+            "invited_email": self.invited_email,
+            "case_type": self.case_type,
+            "client_number": self.client_number,
+            "client_address": self.client_address,
+            "case_id": self.case_id,
+            "member_role": self.member_role,
+            "member_permissions": self.member_permissions,
+            "case_name": self.case_name,
+            "case_description": self.case_description,
+            "assignees": self.assignees,
+        }
+
+    def __repr__(self):
+        return f"<Invitations(uuid={self.uuid}, invited_type={self.invited_type}, invitee_email={self.invitee_email}, invited_email={self.invited_email}, case_type={self.case_type}, client_number={self.client_number}, client_address={self.client_address}, case_id={self.case_id}, member_role={self.member_role}, member_permissions={self.member_permissions}, case_name={self.case_name}, case_description={self.case_description}, assignees={self.assignees})>"
+
+
+class LawyerRecommendations(Base):
+    __tablename__ = "lawyer_recommendations"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    client_email = Column(EncryptedText, nullable=False, index=True)
+    registered_lawyers = Column(EncryptedText, nullable=False)
+    unregistered_lawyers = Column(EncryptedText, nullable=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "client_email": self.client_email,
+            "registered_lawyers": self.registered_lawyers,
+            "unregistered_lawyers": self.unregistered_lawyers,
+        }
+
+    def __repr__(self):
+        return f"<LawyerRecommendations(uuid={self.uuid}, client_email={self.client_email}, registered_lawyers={self.registered_lawyers}, unregistered_lawyers={self.unregistered_lawyers})>"
+
+
+class LawyerTeams(Base):
+    __tablename__ = "lawyer_teams"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    member_role = Column(String(50), nullable=False)
+    member_email = Column(EncryptedText, nullable=False)
+    lawyer_email = Column(EncryptedText, nullable=False)
+    lawyer_cases = Column(EncryptedText, nullable=False, default=[])
+    member_permissions = Column(JSON, nullable=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "member_role": self.member_role,
+            "member_email": self.member_email,
+            "lawyer_email": self.lawyer_email,
+            "lawyer_cases": self.lawyer_cases,
+            "member_permissions": self.member_permissions,
+        }
+
+    def __repr__(self):
+        return f"<LawyerTeams(uuid={self.uuid}, member_role={self.member_role}, member_email={self.member_email}, lawyer_email={self.lawyer_email}, lawyer_cases={self.lawyer_cases}, member_permissions={self.member_permissions})>"
+
+
+class SubscriptionDetails(Base):
+    __tablename__ = "subscription_details"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    user_email = Column(EncryptedText, nullable=False, index=True, unique=True)
+    sub_tier = Column(Text, nullable=False)
+    checkout_id = Column(EncryptedText, nullable=True)
+    sub_id = Column(EncryptedText, nullable=True)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "user_email": self.user_email,
+            "sub_tier": self.sub_tier,
+            "checkout_id": self.checkout_id,
+            "sub_id": self.sub_id,
+        }
+
+    def __repr__(self):
+        return f"<SubscriptionDetails(uuid={self.uuid}, user_email={self.user_email}, sub_tier={self.sub_tier}, checkout_id={self.checkout_id}, sub_id={self.sub_id})>"
+
+
+class LawPersonnelAIChat(Base):
+    __tablename__ = "lawpersonnel_ai_chat"
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    lawpersonnel_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
+    message: str = Column(EncryptedText, nullable=False)
+    references: dict[str, list[str]] = Column(EncryptedText, nullable=True)
+    sender: str = Column(Text, nullable=False)
+    timestamp: datetime = Column(DateTime(timezone=True), nullable=False)
+    feedback: str = Column(EncryptedText, nullable=True)
+    favorite_bool: bool = Column(Boolean, nullable=False, default=False)
+    vote: str = Column(String(10), nullable=True)
+    document_urls: list[str] = Column(EncryptedText, nullable=True)
+
+    def to_dict(self) -> dict[str, Union[str, EmailStr, dict, datetime, list]]:
+        return {
+            "uuid": self.uuid,
+            "lawpersonnel_email": self.lawpersonnel_email,
+            "message": self.message,
+            "references": self.references,
+            "sender": self.sender,
+            "timestamp": self.timestamp,
+            "feedback": self.feedback,
+            "favorite_bool": self.favorite_bool,
+            "vote": self.vote,
+            "document_urls": self.document_urls,
+        }
+
+    def __repr__(self) -> str:
+        return f"<LawPersonnelAIChat(uuid={self.uuid}, lawpersonnel_email={self.lawpersonnel_email}, message={self.message}, references={self.references}, sender={self.sender}, timestamp={self.timestamp}, feedback={self.feedback}, favorite_bool={self.favorite_bool}, vote={self.vote}, document_urls={self.document_urls})>"
+
 
 class NotificationAlerts(Base):
     __tablename__ = "notification_alerts"
@@ -363,6 +800,68 @@ class Connection:
 class Functions:
     db = Connection()
     Session = db.SessionLocal
+
+    def add_scheduled_function(
+        self,
+        func_name: str,
+        scheduled_date: datetime,
+        args: tuple,
+        kwargs: dict[str, Any],
+    ) -> str:
+        db = self.Session()
+        unique_id = None
+        scheduled_function = (
+            db.query(ScheduledFunctions)
+            .filter(
+                ScheduledFunctions.func_name == func_name,
+                ScheduledFunctions.args == args,
+                ScheduledFunctions.kwargs == kwargs,
+                ScheduledFunctions.scheduled_date == scheduled_date,
+            )
+            .first()
+        )
+        if not scheduled_function:
+            scheduled_function = ScheduledFunctions(
+                func_name=func_name,
+                scheduled_date=scheduled_date,
+                args=args,
+                kwargs=kwargs,
+            )
+            db.add(scheduled_function)
+            db.commit()
+
+        unique_id = scheduled_function.uuid
+        db.close()
+        return unique_id
+
+    def retrieve_scheduled_functions(
+        self,
+    ) -> dict[str, dict[str, Union[str, datetime, tuple, dict[str, Any]]]]:
+        db = self.Session()
+        scheduled_functions = {}
+        all_functions = db.query(ScheduledFunctions).all()
+        for function in all_functions:
+            scheduled_functions[function.uuid] = {
+                "function": function.func_name,
+                "run_date": function.scheduled_date,
+                "args": function.args,
+                "kwargs": function.kwargs,
+            }
+        db.close()
+        return scheduled_functions
+
+    def delete_scheduled_function(self, function_id: str) -> None:
+        db = self.Session()
+        scheduled_function = (
+            db.query(ScheduledFunctions)
+            .filter(ScheduledFunctions.uuid == function_id)
+            .first()
+        )
+        if scheduled_function:
+            db.delete(scheduled_function)
+            db.commit()
+
+        db.close()
 
     def get_immigrant(self, parameter: Union[EmailStr, str]) -> Immigrants:
         db = self.Session()
@@ -1613,4 +2112,547 @@ class Functions:
         #     db.commit()
         # db.close()
         # TODO: connect with billing service
+        pass
+
+    def retrieve_client(
+        self, lawyer_email: EmailStr, case_id: str
+    ) -> Union[EmailStr, None]:
+        # db = self.Session()
+        # immigrant_email = None
+        # lawyer_case = (
+        #     db.query(AllCases)
+        #     .filter(
+        #         AllCases.lawyer_email == lawyer_email.lower(),
+        #         AllCases.case_id == case_id,
+        #     )
+        #     .first()
+        # )
+        # if lawyer_case:
+        #     immigrant_email = lawyer_case.client_email
+        # db.close()
+        # return immigrant_email
+        # TODO: connect with case management
+        pass
+
+    def remove_case_from_lawyer_connection(
+        self, lawyer_email: EmailStr, case_id: str
+    ) -> None:
+        # db = self.Session()
+        # lawyer_connections = (
+        #     db.query(ImmigrantLawyerConnection)
+        #     .filter(
+        #         ImmigrantLawyerConnection.lawyer_email == lawyer_email.lower(),
+        #         ImmigrantLawyerConnection.connected_boolean == True,
+        #     )
+        #     .all()
+        # )
+        # print(f"Lawyer Case Connections: {lawyer_connections}")
+        # if lawyer_connections:
+        #     for connection in lawyer_connections:
+        #         if case_id in connection.lawyer_case_ids:
+        #             new_case_ids = [
+        #                 case for case in connection.lawyer_case_ids if case != case_id
+        #             ]
+        #             if (
+        #                 connection.saved_boolean == True
+        #                 and len(connection.lawyer_case_ids) > 0
+        #             ):
+        #                 print(
+        #                     f"Updating connection for lawyer: {connection.lawyer_email} with new case ids: {new_case_ids}"
+        #                 )
+        #                 connection.lawyer_case_ids = new_case_ids
+        #                 db.commit()
+        #                 db.refresh(connection)
+        #             else:
+        #                 print(
+        #                     f"Deleting connection for lawyer: {connection.lawyer_email}"
+        #                 )
+        #                 db.delete(connection)
+        #                 db.commit()
+        # db.close()
+        # TODO: Connect to relationship service
+        pass
+
+    def remove_from_case_team(self, lawyer_email: EmailStr, case_id: str) -> None:
+        # db = self.Session()
+        # case_teams = (
+        #     db.query(CaseTeams)
+        #     .filter(
+        #         CaseTeams.lawyer_email == lawyer_email.lower(),
+        #         CaseTeams.lawyer_case == case_id,
+        #     )
+        #     .all()
+        # )
+        # print(f"Case Teams: {case_teams}")
+        # if case_teams:
+        #     for case_team in case_teams:
+        #         print(
+        #             f"Removing case team for lawyer: {case_team.lawyer_email} and case: {case_team.lawyer_case}"
+        #         )
+        #         db.delete(case_team)
+        #     db.commit()
+        # db.close()
+        # TODO: connect to case management
+        pass
+
+    def remove_case_from_all(self, lawyer_email: EmailStr, case_id: str) -> None:
+        # db = self.Session()
+        # cases = (
+        #     db.query(AllCases)
+        #     .filter(
+        #         AllCases.lawyer_email == lawyer_email.lower(),
+        #         AllCases.case_id == case_id,
+        #     )
+        #     .all()
+        # )
+        # print(f"All Cases: {cases}")
+        # if cases:
+        #     for case in cases:
+        #         print(f"Removing case: {case.case_id} for lawyer: {case.lawyer_email}")
+        #         db.delete(case)
+        #     db.commit()
+        # db.close()
+        # TODO: connect to cases managment
+        pass
+
+    def remove_case_from_tasks(self, lawyer_email: EmailStr, case_id: str) -> None:
+        # db = self.Session()
+        # case_tasks = (
+        #     db.query(AllTasks)
+        #     .filter(
+        #         AllTasks.lawyer_email == lawyer_email.lower(),
+        #         AllTasks.case_id == case_id,
+        #     )
+        #     .all()
+        # )
+        # print(f"Case Tasks: {case_tasks}")
+        # if case_tasks:
+        #     for task in case_tasks:
+        #         print(
+        #             f"Removing task: {task.uuid} for lawyer: {task.lawyer_email} and case: {task.case_id}"
+        #         )
+        #         db.delete(task)
+        #     db.commit()
+        # db.close()
+        # TODO: connect to case management
+        pass
+
+    def remove_case_from_invitations(self, case_id: str) -> None:
+        # db = self.Session()
+        # invitations = db.query(Invitations).filter(Invitations.case_id == case_id).all()
+        # print(f"Invitations for case {case_id}: {invitations}")
+        # if invitations:
+        #     for invitation in invitations:
+        #         print(f"Removing invitation: {invitation.uuid} for case: {case_id}")
+        #         db.delete(invitation)
+        #     db.commit()
+        # db.close()
+        # TODO: connect to relationship service
+        pass
+
+    def delete_case_documents(self, lawyer_email: EmailStr, case_id: str) -> None:
+        # db = self.Session()
+        # law_personnel = self.get_lawpersonnel(lawyer_email)
+        # # self.s3.delete_dir(
+        # #     f"{law_personnel.personnel_type}s/{law_personnel.username.lower()}/{case_id}"
+        # # ) TODO: Connect to docs
+        # case_documents = (
+        #     db.query(CaseDocuments)
+        #     .filter(
+        #         CaseDocuments.lawyer_case == case_id,
+        #         CaseDocuments.lawyer_email == lawyer_email.lower(),
+        #     )
+        #     .all()
+        # )
+        # print(f"Case Documents for case {case_id}: {case_documents}")
+        # if case_documents:
+        #     for document in case_documents:
+        #         print(f"Deleting document: {document.filename} for case: {case_id}")
+        #         db.delete(document)
+        #     db.commit()
+        # db.close()
+        # TODO: Connect to case management
+        pass
+
+    def delete_case_actions(self, lawyer_email: EmailStr, case_id: str) -> None:
+        # db = self.Session()
+        # case_actions = (
+        #     db.query(CaseRecentActions)
+        #     .filter(
+        #         CaseRecentActions.lawyer_email == lawyer_email.lower(),
+        #         CaseRecentActions.lawyer_case == case_id,
+        #     )
+        #     .all()
+        # )
+        # print(f"Case Actions for case {case_id}: {case_actions}")
+        # if case_actions:
+        #     for action in case_actions:
+        #         print(f"Deleting action: {action.action} for case: {case_id}")
+        #         db.delete(action)
+        #     db.commit()
+        # db.close()
+        # TODO: connect to case management
+        pass
+
+    def delete_case_from_teams(self, lawyer_email: EmailStr, case_id: str) -> None:
+        # db = self.Session()
+        # lawyer_team = (
+        #     db.query(LawyerTeams)
+        #     .filter(LawyerTeams.lawyer_email == lawyer_email.lower())
+        #     .all()
+        # )
+        # print(f"Lawyer Team for {lawyer_email}: {lawyer_team}")
+        # if lawyer_team:
+        #     for team_member in lawyer_team:
+        #         member_cases = team_member.lawyer_cases
+        #         updated_cases = [case for case in member_cases if case != case_id]
+        #         print(
+        #             f"Updating team member: {team_member.lawyer_email} with new cases: {updated_cases}"
+        #         )
+        #         team_member.lawyer_cases = updated_cases
+        #     db.commit()
+        # db.close()
+        # TODO: connect with case management
+        pass
+
+    def remove_case_notifications(
+        self, case_id: str, lawyer_email: EmailStr, disconnect: bool
+    ) -> None:
+        # db = self.Session()
+        # immigrant_email = self.retrieve_client(
+        #     lawyer_email=lawyer_email.lower(), case_id=case_id
+        # )
+        # lawyer = self.get_lawpersonnel(lawyer_email)
+        # if immigrant_email:
+        #     immigrant = self.get_immigrant(immigrant_email)
+        #     notifications = (
+        #         db.query(NotificationAlerts)
+        #         .filter(
+        #             or_(
+        #                 (NotificationAlerts.receiver == lawyer.email),
+        #                 (NotificationAlerts.sender == lawyer.email),
+        #             )
+        #         )
+        #         .all()
+        #     )
+        #     print(f"Notifications for lawyer {lawyer.email}: {notifications}")
+        #     if notifications:
+        #         for notification in notifications:
+        #             if disconnect and notification.type in [
+        #                 "lawyer_chat",
+        #                 "connection",
+        #                 "forms",
+        #             ]:
+        #                 if (
+        #                     notification.receiver == immigrant.username
+        #                     or notification.sender == immigrant.username
+        #                 ):
+        #                     print(
+        #                         f"Deleting {notification.type} type notification: {notification.id} for case {case_id}"
+        #                     )
+        #                     db.delete(notification)
+        #                     db.commit()
+        #             elif notification.type == "cases":
+        #                 if notification.target_id["case_id"] == case_id:
+        #                     print(
+        #                         f"Deleting {notification.type} type notification: {notification.id} for case {case_id}"
+        #                     )
+        #                     db.delete(notification)
+        #                     db.commit()
+        #             elif notification.type == "tasks":
+        #                 case = (
+        #                     db.query(AllCases)
+        #                     .filter(
+        #                         AllCases.lawyer_email == lawyer_email.lower(),
+        #                         AllCases.case_id == case_id,
+        #                     )
+        #                     .first()
+        #                 )
+        #                 if case:
+        #                     print(
+        #                         f"Deleting {notification.type} type notification: {notification.id} for case {case_id}"
+        #                     )
+        #                     if notification.target_id["task_id"] in case.task_list:
+        #                         db.delete(notification)
+        #                         db.commit()
+
+        #     db.close()
+        # TODO: Connect with communication service
+        pass
+
+    def get_connected_lawyer_cases(
+        self, lawyer_email: EmailStr, immigrant_email: EmailStr
+    ) -> list[str]:
+        # db = self.Session()
+        # lawyer_cases = []
+        # lawyer_connection = (
+        #     db.query(ImmigrantLawyerConnection)
+        #     .filter(
+        #         ImmigrantLawyerConnection.lawyer_email == lawyer_email.lower(),
+        #         ImmigrantLawyerConnection.immigrant_email == immigrant_email.lower(),
+        #         ImmigrantLawyerConnection.connected_boolean == True,
+        #     )
+        #     .first()
+        # )
+        # print(f"Connected Lawyer Details: {lawyer_connection}")
+        # if lawyer_connection and lawyer_connection.lawyer_case_ids is not None:
+        #     print(f"Lawyer Connection Found: {lawyer_connection.lawyer_case_ids}")
+        #     lawyer_cases = lawyer_connection.lawyer_case_ids
+        # db.close()
+        # return lawyer_cases
+        # TODO: connect with relationship service
+        pass
+
+    def disconnect_lawyer_connection(
+        self, lawyer_email: EmailStr, immigrant_email: EmailStr
+    ) -> None:
+        # db = self.Session()
+        # print(f"Disconnecting lawyer: {lawyer_email} for {immigrant_email}")
+        # lawyer_connections = (
+        #     db.query(ImmigrantLawyerConnection)
+        #     .filter(
+        #         ImmigrantLawyerConnection.lawyer_email == lawyer_email.lower(),
+        #         ImmigrantLawyerConnection.immigrant_email == immigrant_email.lower(),
+        #         ImmigrantLawyerConnection.connected_boolean == True,
+        #     )
+        #     .all()
+        # )
+        # print(f"Lawyer Connections: {lawyer_connections}")
+        # if lawyer_connections:
+        #     for connection in lawyer_connections:
+        #         print(
+        #             f"Disconnecting lawyer: {connection.lawyer_email} for {connection.immigrant_email}"
+        #         )
+        #         # print(connection.immigrant_email, connection.lawyer_email, connection.connected_boolean)
+        #         if connection.saved_boolean:
+        #             connection.connected_boolean = False
+        #             db.commit()
+        #             db.refresh(connection)
+        #         else:
+        #             db.delete(connection)
+        #             db.commit()
+        # db.close()
+        # TODO: Connect with relationship service
+        pass
+
+    def remove_immigrant_client(
+        self, lawyer_email: EmailStr, immigrant_email: EmailStr
+    ) -> None:
+        # db = self.Session()
+        # client = (
+        #     db.query(AllClients)
+        #     .filter(
+        #         AllClients.client_email == immigrant_email.lower(),
+        #         AllClients.lawyer_email == lawyer_email.lower(),
+        #     )
+        #     .first()
+        # )
+
+        # print(f"Connected Client Details: {client}")
+        # if client:
+        #     print(
+        #         f"Removing client: {client.client_email} from lawyer: {client.lawyer_email}"
+        #     )
+        #     db.delete(client)
+        #     db.commit()
+        # db.close()
+        # TODO: connect to relationship module
+        pass
+
+    def remove_message_history(
+        self, lawyer_email: EmailStr, immigrant_email: EmailStr
+    ) -> None:
+        # db = self.Session()
+        # # sent_messages = (
+        # #     db.query(ConnectionRequests)
+        # #     .filter(
+        # #         or_(
+        # #             (ConnectionRequests.recipient_email == lawyer_email.lower())
+        # #             & (ConnectionRequests.sender_email == immigrant_email.lower()),
+        # #             (ConnectionRequests.sender_email == lawyer_email.lower())
+        # #             & (ConnectionRequests.recipient_email == immigrant_email.lower()),
+        # #         )
+        # #     )
+        # #     .all()
+        # # ) TODO: connect to relationship module
+        # print(f"Sent Messages: {sent_messages}")
+        # live_chat_messages = (
+        #     db.query(LiveChatMessage)
+        #     .filter(
+        #         or_(
+        #             (LiveChatMessage.recipient_email == lawyer_email.lower())
+        #             & (LiveChatMessage.sender_email == immigrant_email.lower()),
+        #             (LiveChatMessage.sender_email == lawyer_email.lower())
+        #             & (LiveChatMessage.recipient_email == immigrant_email.lower()),
+        #         )
+        #     )
+        #     .all()
+        # )
+        # print(f"Live Chat Messages: {live_chat_messages}")
+        # chat_messages = (
+        #     db.query(ChatMessage)
+        #     .filter(
+        #         or_(
+        #             (ChatMessage.recipient_email == lawyer_email.lower())
+        #             & (ChatMessage.sender_email == immigrant_email.lower()),
+        #             (ChatMessage.sender_email == lawyer_email.lower())
+        #             & (ChatMessage.recipient_email == immigrant_email.lower()),
+        #         )
+        #     )
+        #     .all()
+        # )
+        # print(f"Chat Messages: {chat_messages}")
+        # if sent_messages:
+        #     for message in sent_messages:
+        #         print(
+        #             f"Deleting sent message: {message.id} between {message.sender_email} and {message.recipient_email}"
+        #         )
+        #         db.delete(message)
+        #     db.commit()
+
+        # if live_chat_messages:
+        #     for message in live_chat_messages:
+        #         print(
+        #             f"Deleting live chat message: {message.id} between {message.sender_email} and {message.recipient_email}"
+        #         )
+        #         db.delete(message)
+        #     db.commit()
+
+        # if chat_messages:
+        #     for message in chat_messages:
+        #         print(
+        #             f"Deleting chat message: {message.id} between {message.sender_email} and {message.recipient_email}"
+        #         )
+        #         db.delete(message)
+        #     db.commit()
+        # db.close()
+        # TODO: connect with communication service
+        pass
+
+    def remove_immigrant_subscription(self, immigrant_email: EmailStr) -> None:
+        # db = self.Session()
+        # user_subscription_details = (
+        #     db.query(SubscriptionDetails)
+        #     .filter(SubscriptionDetails.user_email == immigrant_email.lower())
+        #     .first()
+        # )
+        # if user_subscription_details:
+        #     db.delete(user_subscription_details)
+        #     db.commit()
+        # db.close()
+        # TODO: connect with billing service
+        pass
+
+    def remove_immigrant_invitations(self, immigrant_email: EmailStr) -> None:
+        db = self.Session()
+        # invitations = db.query(Invitations).filter(
+        #     or_(
+        #         Invitations.invited_email == immigrant_email.lower(),
+        #         Invitations.invitee_email == immigrant_email.lower(),
+        #     )
+        # )
+        # if invitations:
+        #     for invitation in invitations:
+        #         db.delete(invitation)
+        #     db.commit()
+        notification_alerts = (
+            db.query(NotificationAlerts)
+            .filter(
+                NotificationAlerts.sender == immigrant_email.lower(),
+                NotificationAlerts.type == "connection",
+            )
+            .all()
+        )
+        if notification_alerts:
+            for alert in notification_alerts:
+                if "Refered user" in alert.content and alert.target_id == {}:
+                    db.delete(alert)
+            db.commit()
+        db.close()
+        # TODO: connect with relationship management
+        pass
+
+    def remove_immigrant_recommendations(self, immigrant_email: EmailStr) -> None:
+        # db = self.Session()
+        # recommendations = (
+        #     db.query(LawyerRecommendations)
+        #     .filter(LawyerRecommendations.client_email == immigrant_email.lower())
+        #     .first()
+        # )
+        # if recommendations:
+        #     db.delete(recommendations)
+        #     db.commit()
+        # db.close()
+        # TODO: connect with ai agents
+        pass
+
+    def get_connected_lawyers(self, immigrant_email: EmailStr) -> list[EmailStr]:
+        # db = self.Session()
+        # connected_lawyers = []
+        # connections = (
+        #     db.query(ImmigrantLawyerConnection)
+        #     .filter(
+        #         ImmigrantLawyerConnection.immigrant_email == immigrant_email.lower(),
+        #         ImmigrantLawyerConnection.connected_boolean == True,
+        #     )
+        #     .all()
+        # )
+        # if connections:
+        #     for lawyer in connections:
+        #         connected_lawyers.append(lawyer.lawyer_email)
+        # db.close()
+        # return connected_lawyers
+        # TODO: connect with relationship service
+        pass
+
+    def delete_immigrant_connections(self, immigrant_email: EmailStr) -> None:
+        # db = self.Session()
+        # connections = (
+        #     db.query(ImmigrantLawyerConnection)
+        #     .filter(
+        #         ImmigrantLawyerConnection.immigrant_email == immigrant_email.lower()
+        #     )
+        #     .all()
+        # )
+        # if connections:
+        #     for connection in connections:
+        #         db.delete(connection)
+        #     db.commit()
+        # db.close()
+        # TODO: connect with relationship service
+        pass
+
+    def delete_immigrant_files(self, immigrant_email: EmailStr) -> None:
+        # db = self.Session()
+        # documents = (
+        #     db.query(ImmigrantDocuments)
+        #     .filter(ImmigrantDocuments.immigrant_email == immigrant_email.lower())
+        #     .all()
+        # )
+        # if documents:
+        #     for document in documents:
+        #         db.delete(document)
+        #     db.commit()
+        # db.close()
+        # TODO: Connect with docs service
+        pass
+
+    def remove_from_users(self, immigrant_email: EmailStr) -> None:
+        db = self.Session()
+        immigrant = self.get_immigrant(immigrant_email)
+        if immigrant:
+            db.delete(immigrant)
+            db.commit()
+        db.close()
+
+    def delete_immigrant_chat(self, immigrant_email: EmailStr) -> None:
+        # db = self.Session()
+        # _ = (
+        #     db.query(ImmigrantAIChat)
+        #     .filter(ImmigrantAIChat.immigrant_email == immigrant_email.lower())
+        #     .delete(synchronize_session=False)
+        # )
+        # db.commit()
+        # db.close()
+        # TODO: connect with ai agents
         pass

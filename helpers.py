@@ -348,7 +348,7 @@ class Helpers:
         sign_image = Image.open(io.BytesIO(sign_data))
         date_uploaded = datetime.now(tz=timezone.utc).date()
         # signer.push_sign(sign_image, email, date_uploaded, upload_info)
-        # TODO: connect with formfiller service
+        # TODO: connect with docs service
 
     @staticmethod
     def get_legal_filename(filename: str) -> str:
