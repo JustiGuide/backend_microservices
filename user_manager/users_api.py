@@ -1,12 +1,11 @@
 from datetime import datetime, timedelta, timezone, date
 import io
 import os
-from typing import Union
+from typing import Union, Literal
 from fastapi import APIRouter, BackgroundTasks, Depends, File, Form, HTTPException, Request, Response, UploadFile
 from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, HttpUrl, ValidationError
-from rdflib import Literal
 from database import Functions
 from authorization import Authorizer, Certificates, DateString, Experiences, GoogleToken, PersonnelDetailsUnion, PersonnelType, PhoneNumber
 from email_gateway import Email
