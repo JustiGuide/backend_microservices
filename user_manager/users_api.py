@@ -1,0 +1,56 @@
+from datetime import datetime, timezone, date
+from fastapi import APIRouter
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, EmailStr
+from database import Functions
+from authorization import Authorizer
+
+db_func = Functions()
+app = APIRouter()
+
+app.post("/user/{user_type}/get-user")
+app.post("/user/immigrant/get-kyc")
+app.post("/user/immigrant/reduce-chat-limit")
+app.post("/user/lawpersonnel/retrieve-verification-items")
+app.post("/user/lawpersonnel/verify-lawpersonnel")
+app.post("/user/lawpersonnel/delete-verification-items")
+app.post("/user/lawpersonnel/delete-info")
+app.post("/user/lawpersonnel/restart-lawpersonnel")
+app.post("/user/lawpersonnel/retrieve-verified")
+app.post("/user/external/retrieve-external")
+app.post("/user/{user_type}/update-info")
+app.post("/user/{user_type}/update-info")
+app.post("/user/{user_type}/check-user")
+app.post("/user/{user_type}/update-subscription")
+app.post("/user/external/remove-user")
+app.post("/user/lawpersonnel/update-statistic")
+app.post("/user/immigrant/add-verification-code")
+app.post("/user/{user_type}/verify-email")
+app.post("/user/{user_type}/retrieve-subscription")
+app.post("/user/{user_type}/verify-login")
+app.post("/user/immigrant/decode-google-token")
+app.post("/user/immigrant/verify-google-login")
+app.post("/user/{user_type}/verify-password")
+app.post("/user/{user_type}/initiate-password-reset")
+app.post("/user/{user_type}/change-password")
+app.post("/user/{user_type}/update-password")
+app.post("/user/{user_type}/upload-profile-picture")
+app.post("/user/lawpersonnel/verify-license")
+app.post("/user/lawpersonnel/verify-id")
+app.post("/user/lawpersonnel/retrieve-profile-picture")
+app.post("/user/{user_type}/retrieve-username")
+app.post("/user/immigrant/refresh-invitations")
+app.post("/user/immigrant/check-kyc")
+app.post("/user/immigrant/add-kyc")
+app.post("/user/{user_type}/retrieve-profile-details")
+app.post("/user/immigrant/create-account")
+app.post("/user/lawpersonnel/create-account")
+app.post("/user/lawpersonnel/statistics/connection-requests/growth")
+app.post("/user/lawpersonnel/statistics/clients/growth")
+app.post("/user/lawpersonnel/statistics/clients")
+app.post("/user/lawpersonnel/statistics/assignee/growth")
+app.post("/user/lawpersonnel/statistics/submitted/applications")
+app.post("/user/lawpersonnel/statistics/submitted/applications/growth")
+app.post("/user/lawpersonnel/statistics/submitted/documents")
+def temp():
+    pass
