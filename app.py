@@ -14,7 +14,6 @@ from task_generator.taskgen_api import app as task_generator_api
 from twilio_handler.twilio_api import app as twilio_handler_api
 from database import Functions
 
-
 db_func=Functions()
 
 app = FastAPI()

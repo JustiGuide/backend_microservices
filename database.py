@@ -24,7 +24,6 @@ from helpers import Helpers
 
 load_dotenv()
 
-encr = Encrypt()
 Base = declarative_base()
 
 
@@ -65,21 +64,10 @@ class Immigrants(Base):
             "location": self.location,
         }
 
-    @property
-    def password(self):
-        raise AttributeError("Password is not readable.")
-
-    @password.setter
-    def password(self, plain_password: str):
-        self.hashed_password = encr.hash_password(plain_password)
-
-    def verify_password(self, plain_password: str) -> bool:
-        return encr.verify_password(plain_password, self.hashed_password)
-
 
 class ImmigrantAIChat(Base):
     __tablename__ = "immigrant_ai_chat"
-    uuid: str = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     immigrant_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
     message: str = Column(EncryptedText, nullable=False)
     references: dict[str, list[str]] = Column(EncryptedText, nullable=True)
@@ -139,20 +127,6 @@ class LawPersonnel(Base):
     # General Details Object containing additional information.
     details: dict = Column(EncryptedText, nullable=False)
 
-    # Validate Password
-    @property
-    def password(self):
-        raise AttributeError("Password is not readable.")
-
-    # Set Hashed Password
-    @password.setter
-    def password(self, plain_password: str):
-        self.hashed_password = encr.hash_password(plain_password)
-
-    # Password Verification Method
-    def verify_password(self, plain_password: str) -> bool:
-        return encr.verify_password(plain_password, self.hashed_password)
-
     def extract_data(self) -> dict[str, Union[str, EmailStr]]:
         return {
             "email": self.email,
@@ -182,7 +156,7 @@ class LawPersonnel(Base):
 
 class LawPersonnelAIChat(Base):
     __tablename__ = "lawpersonnel_ai_chat"
-    uuid: str = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     lawpersonnel_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
     message: str = Column(EncryptedText, nullable=False)
     references: dict[str, list[str]] = Column(EncryptedText, nullable=True)
@@ -213,7 +187,7 @@ class LawPersonnelAIChat(Base):
 
 class ImmigrantDocuments(Base):
     __tablename__ = "immigrant_documents"
-    uuid: str = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     immigrant_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
     file_url: str = Column(EncryptedText, nullable=False)
     file_type: str = Column(Text, nullable=False)
@@ -233,7 +207,7 @@ class ImmigrantDocuments(Base):
 class AllFiles(Base):
     __tablename__ = "all_files"
     uuid: str = Column(
-        String(7), primary_key=True, nullable=False, default=encr.generate_uuid
+        String(7), primary_key=True, nullable=False, default=Encrypt.generate_uuid
     )
     file_name: str = Column(EncryptedText, nullable=False)
     file_url: str = Column(EncryptedText, nullable=False)
@@ -265,7 +239,7 @@ class AllFiles(Base):
 
 class ApplicationChecklists(Base):
     __tablename__ = "application_checklists"
-    uuid: str = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     immigrant_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
     form_name: str = Column(EncryptedText, nullable=False)
     checklist_items: list[dict[str, Union[str, list[str]]]] = Column(
@@ -290,7 +264,7 @@ class ApplicationChecklists(Base):
 
 class CompilerDocuments(Base):
     __tablename__ = "compiler_documents"
-    uuid: str = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     file_name: str = Column(EncryptedText, nullable=False)
     file_url: str = Column(EncryptedText, nullable=False)
     file_type: str = Column(EncryptedText, nullable=False)
@@ -323,7 +297,7 @@ class CompilerDocuments(Base):
 
 class AutofillData(Base):
     __tablename__ = "autofill_data"
-    uuid: str = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     immigrant_username: str = Column(EncryptedText, nullable=False)
     form_name: str = Column(EncryptedText, nullable=False)
     form_data: dict = Column(EncryptedText, nullable=False)
@@ -347,7 +321,7 @@ class AutofillData(Base):
 
 class FluencyProfile(Base):
     __tablename__ = "fluency_profiles"
-    uuid: str = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     immigrant_email: EmailStr = Column(EncryptedText, index=True, nullable=False)
     interaction_history: list[dict[str, Any]] = Column(JSON, nullable=False, default=[])
     last_session_date: datetime = Column(
@@ -413,7 +387,7 @@ class ExternalLawyer(Base):
 
 class LawyerRecommendations(Base):
     __tablename__ = "lawyer_recommendations"
-    uuid = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     client_email = Column(EncryptedText, nullable=False, index=True)
     registered_lawyers = Column(EncryptedText, nullable=False)
     unregistered_lawyers = Column(EncryptedText, nullable=False)
@@ -432,7 +406,7 @@ class LawyerRecommendations(Base):
 
 class N400Quiz(Base):
     __tablename__ = "n400_quiz"
-    uuid: str = Column(String(7), primary_key=True, default=encr.generate_uuid)
+    uuid: str = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
     immigrant_email: EmailStr = Column(EncryptedText, nullable=False, index=True)
     quiz_data: list[dict[str, str]] = Column(EncryptedText, nullable=False, default=[])
     start_date: datetime = Column(DateTime(timezone=True), nullable=False)
