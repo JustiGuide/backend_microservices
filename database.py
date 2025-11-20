@@ -324,7 +324,7 @@ class Functions:
         for assignee in assignee_emails:
             assigned_user = self.get_lawpersonnel(assignee)
 
-        # TODO: complete
+        # TODO: complete the function
         pass
 
     def retrieve_all_cases(
