@@ -1413,3 +1413,204 @@ class Functions:
         # return team_lawyers, case_lawyers
         # TODO: Connect to relationship service
         pass
+
+    def reset_immigrant_password(self, immigrant_email: EmailStr):
+        db = self.Session()
+        immigrant = db.query(Immigrants).filter(Immigrants.email == immigrant_email).first()
+        if immigrant:
+            immigrant.password == "reset"
+            db.commit()
+            db.refresh(immigrant)
+        db.close()
+
+    def reset_lawpersonnel_password(self, lawpersonnel_email: EmailStr):
+        db = self.Session()
+        lawpersonnel = (
+            db.query(LawPersonnel)
+            .filter(LawPersonnel.email == lawpersonnel_email)
+            .first()
+        )
+        if lawpersonnel:
+            lawpersonnel.password == "reset"
+            db.commit()
+            db.refresh(lawpersonnel)
+        db.close()
+
+    def modify_immigrant_password(
+        self, immigrant_email: EmailStr, old_password: str, new_password: str
+    ):
+        db = self.Session()
+        immigrant = (
+            db.query(Immigrants).filter(Immigrants.email == immigrant_email).first()
+        )
+        if immigrant and immigrant.verify_password(old_password):
+            immigrant.password = new_password
+            db.commit()
+            db.refresh(immigrant)
+        db.close()
+
+    def modify_lawpersonnel_password(
+        self, lawpersonnel_email: EmailStr, old_password: str, new_password: str
+    ):
+        db = self.Session()
+        lawpersonnel = (
+            db.query(LawPersonnel)
+            .filter(LawPersonnel.email == lawpersonnel_email)
+            .first()
+        )
+        if lawpersonnel and lawpersonnel.verify_password(old_password):
+            lawpersonnel.password == new_password
+            db.commit()
+            db.refresh(lawpersonnel)
+        db.close()
+
+    def retrieve_subscription_details(
+        self, user_email: EmailStr
+    ) -> tuple[str, str, str]:
+        # db = self.Session()
+        # user_subscription = (
+        #     db.query(SubscriptionDetails)
+        #     .filter(SubscriptionDetails.user_email == user_email.lower())
+        #     .first()
+        # )
+        # sub_tier = None
+        # checkout_id = None
+        # sub_id = None
+        # if user_subscription:
+        #     sub_tier = user_subscription.sub_tier
+        #     checkout_id = user_subscription.checkout_id
+        #     sub_id = user_subscription.sub_id
+
+        # db.close()
+        # return sub_tier, checkout_id, sub_id
+        # TODO: connect with billing service
+        pass
+
+    def retrieve_invitation_data(
+        self,
+        invited_type: Literal[
+            "invited_client",
+            "pending_case",
+            "pending_client",
+            "invited_external_lawyer",
+            "invited_to_case",
+            "invited_to_team",
+            "refered_user",
+        ],
+        invited_email: EmailStr = None,
+        invitee_email: EmailStr = None,
+    ) -> Union[
+        dict[EmailStr, str],
+        list[dict[str, Union[str, EmailStr, list[EmailStr]]]],
+        dict[EmailStr, dict[str, str]],
+        EmailStr,
+    ]:
+        # TODO: connect with relationship management
+        pass
+
+    def delete_invitation_data(
+        self,
+        invited_type: Literal[
+            "invited_client",
+            "pending_case",
+            "pending_client",
+            "invited_external_lawyer",
+            "invited_to_case",
+            "invited_to_team",
+            "refered_user",
+        ],
+        invited_email: EmailStr = None,
+        case_id: str = None,
+        invitee_email: EmailStr = None,
+    ) -> None:
+        # db = self.Session()
+        # inviteee_email = invitee_email.lower() if invitee_email else None
+        # invitation_data = {
+        #     "invited_client": db.query(Invitations)
+        #     .filter(
+        #         Invitations.invited_email == invited_email.lower(),
+        #         Invitations.invited_type == invited_type,
+        #     )
+        #     .first(),
+        #     "pending_case": db.query(Invitations)
+        #     .filter(
+        #         Invitations.invited_type == invited_type, Invitations.case_id == case_id
+        #     )
+        #     .first(),
+        #     "pending_client": db.query(Invitations)
+        #     .filter(
+        #         Invitations.invited_type == invited_type,
+        #         Invitations.invited_email == invited_email.lower(),
+        #         Invitations.invitee_email == inviteee_email,
+        #     )
+        #     .first(),
+        #     "invited_external_lawyer": db.query(Invitations)
+        #     .filter(
+        #         Invitations.invited_type == invited_type,
+        #         Invitations.invited_email == invited_email.lower(),
+        #         Invitations.invitee_email == inviteee_email,
+        #     )
+        #     .first(),
+        #     "invited_to_case": db.query(Invitations)
+        #     .filter(
+        #         Invitations.invited_type == invited_type,
+        #         Invitations.invited_email == invited_email.lower(),
+        #         Invitations.invitee_email == inviteee_email,
+        #         Invitations.case_id == case_id,
+        #     )
+        #     .first(),
+        #     "invited_to_team": db.query(Invitations)
+        #     .filter(
+        #         Invitations.invited_type == invited_type,
+        #         Invitations.invited_email == invited_email.lower(),
+        #         Invitations.invitee_email == inviteee_email,
+        #     )
+        #     .first(),
+        #     "refered_user": db.query(Invitations)
+        #     .filter(
+        #         Invitations.invited_email == invited_email.lower(),
+        #         Invitations.invited_type == invited_type,
+        #     )
+        #     .first(),
+        # }
+        # invitation = invitation_data[invited_type]
+        # if invitation:
+        #     db.delete(invitation)
+        #     db.commit()
+        # db.close()
+        # TODO: connect with relationship service
+        pass
+
+    def update_subscription_details(
+        self,
+        user_email: EmailStr,
+        sub_tier: Literal[
+            "plus", "nonlawyer", "lawyer", "clinic", "enterprise", "free"
+        ],
+        checkout_id: str,
+        sub_id: str,
+    ) -> None:
+        # db = self.Session()
+        # user_subscription = (
+        #     db.query(SubscriptionDetails)
+        #     .filter(SubscriptionDetails.user_email == user_email.lower())
+        #     .first()
+        # )
+        # if user_subscription:
+        #     user_subscription.sub_tier = sub_tier
+        #     user_subscription.checkout_id = checkout_id
+        #     user_subscription.sub_id = sub_id
+        #     db.commit()
+        #     db.refresh(user_subscription)
+        # else:
+        #     new_user_subscription = SubscriptionDetails(
+        #         user_email=user_email.lower(),
+        #         sub_tier=sub_tier,
+        #         checkout_id=checkout_id,
+        #         sub_id=sub_id,
+        #     )
+        #     db.add(new_user_subscription)
+        #     db.commit()
+        # db.close()
+        # TODO: connect with billing service
+        pass
