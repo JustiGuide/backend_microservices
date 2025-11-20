@@ -28,9 +28,9 @@ async def get_immigrant_autofill_data(payload: ImmigrantAutofillData, background
     to_redo = False
     if not existing_autofill:
         to_redo = True
-    
+
     if existing_autofill and (existing_autofill.created_at - datetime.now(timezone.utc)).days <= 7:
-       to_redo = True 
+        to_redo = True 
 
     if to_redo:
         case_type = Helpers.get_casetype(payload.form_name)
@@ -51,3 +51,29 @@ async def get_immigrant_autofill_data(payload: ImmigrantAutofillData, background
         "message": "Autofill data retrieved successfully",
         "fields": existing_autofill
     }
+
+
+@app.post("/autofill/immigrant/generate-autofill-data")
+async def generate_immigrant_autofill_data(
+    payload: ImmigrantAutofillData, background_tasks: BackgroundTasks
+):
+    existing_autofill = db_func.retrieve_autofill_data(
+        immigrant_username=payload.immigrant_username, form_name=payload.form_name
+    )
+    to_redo = False
+    if not existing_autofill:
+        to_redo = True
+
+    if (
+        existing_autofill
+        and (existing_autofill.created_at - datetime.now(timezone.utc)).days <= 7
+    ):
+        to_redo = True
+
+    if to_redo:
+        background_tasks.add_task(
+            run_in_threadpool,
+            BackgroundUtilities.start_autofill,
+            immigrant_username=payload.immigrant_username,
+            form_name=payload.form_name
+        )
