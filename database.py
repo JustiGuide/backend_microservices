@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Union, Literal
+from typing import Any, Union, Literal
 from fastapi import HTTPException
 from pydantic import EmailStr, HttpUrl
 from sqlalchemy.orm import sessionmaker, declarative_base, validates
@@ -11,6 +11,7 @@ from sqlalchemy import (
     Date,
     DateTime,
     Float,
+    LargeBinary,
     String,
     Text,
     Boolean,
@@ -25,6 +26,27 @@ load_dotenv()
 
 
 Base = declarative_base()
+
+
+class ScheduledFunctions(Base):
+    __tablename__ = "scheduled_functions"
+    uuid = Column(String(7), primary_key=True, default=Encrypt.generate_uuid)
+    func_name = Column(LargeBinary, nullable=False)
+    args = Column(EncryptedText, nullable=False)
+    kwargs = Column(EncryptedText, nullable=False)
+    scheduled_date = Column(DateTime(timezone=True), nullable=False)
+
+    def to_dict(self):
+        return {
+            "uuid": self.uuid,
+            "func_name": self.func_name,
+            "args": self.args,
+            "kwargs": self.kwargs,
+            "scheduled_date": self.scheduled_date,
+        }
+
+    def __repr__(self):
+        return f"<ScheduledFunctions(uuid={self.uuid}, func_name={self.func_name}, args={self.args}, kwargs={self.kwargs}, scheduled_date={self.scheduled_date})>"
 
 
 class Immigrants(Base):
@@ -360,6 +382,68 @@ class ConnectionRequests(Base):
 class Functions:
     db = Connection()
     Session = db.SessionLocal
+
+    def add_scheduled_function(
+        self,
+        func_name: str,
+        scheduled_date: datetime,
+        args: tuple,
+        kwargs: dict[str, Any],
+    ) -> str:
+        db = self.Session()
+        unique_id = None
+        scheduled_function = (
+            db.query(ScheduledFunctions)
+            .filter(
+                ScheduledFunctions.func_name == func_name,
+                ScheduledFunctions.args == args,
+                ScheduledFunctions.kwargs == kwargs,
+                ScheduledFunctions.scheduled_date == scheduled_date,
+            )
+            .first()
+        )
+        if not scheduled_function:
+            scheduled_function = ScheduledFunctions(
+                func_name=func_name,
+                scheduled_date=scheduled_date,
+                args=args,
+                kwargs=kwargs,
+            )
+            db.add(scheduled_function)
+            db.commit()
+
+        unique_id = scheduled_function.uuid
+        db.close()
+        return unique_id
+
+    def retrieve_scheduled_functions(
+        self,
+    ) -> dict[str, dict[str, Union[str, datetime, tuple, dict[str, Any]]]]:
+        db = self.Session()
+        scheduled_functions = {}
+        all_functions = db.query(ScheduledFunctions).all()
+        for function in all_functions:
+            scheduled_functions[function.uuid] = {
+                "function": function.func_name,
+                "run_date": function.scheduled_date,
+                "args": function.args,
+                "kwargs": function.kwargs,
+            }
+        db.close()
+        return scheduled_functions
+
+    def delete_scheduled_function(self, function_id: str) -> None:
+        db = self.Session()
+        scheduled_function = (
+            db.query(ScheduledFunctions)
+            .filter(ScheduledFunctions.uuid == function_id)
+            .first()
+        )
+        if scheduled_function:
+            db.delete(scheduled_function)
+            db.commit()
+
+        db.close()
 
     def get_immigrant(self, parameter: Union[EmailStr, str]) -> Immigrants:
         # TODO: Connect with User Management

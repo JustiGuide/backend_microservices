@@ -20,5 +20,5 @@ class FormsGateway:
         lawpersonnel_email: EmailStr,
         sign_id: str
     ) -> tuple[str, str]:
-        # TODO: connect with formfiller service
+        # TODO: connect with docs service
         pass
