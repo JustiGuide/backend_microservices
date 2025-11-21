@@ -1,21 +1,14 @@
-import json
 import re
 from typing import Annotated
-from fastapi import File, Form, HTTPException, UploadFile, status
+from fastapi import Form, HTTPException
 import phonenumbers
 from pydantic import (
     AfterValidator,
-    BaseModel,
-    EmailStr,
     Field,
-    HttpUrl,
-    ValidationError,
-    model_validator,
 )
 import os
 from dotenv import load_dotenv
 from database import ChatMessage, Connection, Functions, LiveChatMessage
-import datetime
 
 load_dotenv()
 db_func = Functions()

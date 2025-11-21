@@ -5,7 +5,6 @@ from botocore.exceptions import ClientError
 import random
 from dotenv import load_dotenv
 from pydantic import EmailStr
-from enum import Enum
 
 load_dotenv()
 

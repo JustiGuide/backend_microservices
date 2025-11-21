@@ -1,7 +1,6 @@
 import json
 from typing import Union
 from fastapi import WebSocket
-from pydantic import EmailStr
 from helpers import Helpers
 from database import Functions, Immigrants, LawPersonnel
 

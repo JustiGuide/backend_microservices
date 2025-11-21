@@ -1,18 +1,11 @@
-import asyncio
-import base64
-import json
 import os
-from typing import Any, Union, Literal
-from fastapi import WebSocketDisconnect
+from typing import Union, Literal
 from pydantic import EmailStr
 from sqlalchemy.orm import sessionmaker, declarative_base
-from sqlalchemy.orm.attributes import flag_modified
 from dotenv import load_dotenv
 from sqlalchemy import (
-    JSON,
     Column,
     Float,
-    Integer,
     String,
     Text,
     Boolean,

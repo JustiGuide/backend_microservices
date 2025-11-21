@@ -2,7 +2,7 @@ import json
 from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel, EmailStr
 from authorization import Authorizer, LiveChatMessageID, CaseChatMessageID
-from database import Functions, LiveChatMessage
+from database import Functions
 from .chat_module import WebSocketConnection
 
 app = APIRouter()
