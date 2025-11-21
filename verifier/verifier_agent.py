@@ -1,5 +1,4 @@
 import base64
-import logging
 import os
 from typing import Dict, List, Union, Tuple, Optional
 from pydantic import BaseModel, Field, EmailStr

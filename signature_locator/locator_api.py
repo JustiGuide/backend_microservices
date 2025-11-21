@@ -1,4 +1,3 @@
-import os
 from fastapi import APIRouter, Form, HTTPException, UploadFile, File
 from pydantic import BaseModel
 from .locator_agent import SignaturePositionLocatorApplication

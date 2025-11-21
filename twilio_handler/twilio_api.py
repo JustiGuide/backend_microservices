@@ -1,7 +1,6 @@
 from typing import Literal
-from fastapi.responses import JSONResponse
 from fastapi import APIRouter
-from pydantic import EmailStr, Field, BaseModel
+from pydantic import BaseModel
 from authorization import PhoneNumber
 from database import Functions
 from .twilio_interpreter import TwilioInterpreter

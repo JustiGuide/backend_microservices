@@ -7,7 +7,6 @@ import PyPDF2
 from docx import Document
 from openai import OpenAI
 from pdf2image import convert_from_bytes
-from pydantic import BaseModel, Field
 import os
 from dotenv import load_dotenv
 from PIL import Image
