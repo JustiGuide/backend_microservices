@@ -2,16 +2,15 @@ import base64
 import json
 import mimetypes
 from typing import Literal
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, HttpUrl
-
-from documents_management.email_gateway import Email
-from documents_management.helpers import Helpers
+from email_gateway import Email
+from helpers import Helpers
 from .bucket_console import BucketConsole, DummyFile
 from database import Functions
 import os
-from authorization import Authorizer, S3FileUrl, S3DirUrl, S3FileKey
+from authorization import S3FileUrl, S3DirUrl, S3FileKey
 from PIL import Image
 import io
 

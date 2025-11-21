@@ -1,18 +1,13 @@
 from datetime import datetime, timezone
 import json
-import mimetypes
-from pathlib import Path
-import docx2pdf
 from fastapi import APIRouter, Depends, Form, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr
 import requests
 from bucket_management.bucket_console import BucketConsole, DummyFile
 from database import Functions
 import os
 from authorization import Authorizer, FormNameValidator
-from PIL import Image
-import io
 from helpers import Helpers, UploadFile_Dummy
 from .formfiller_module import FormFiller
 from signature_processing.sign_processing import SignGenerator

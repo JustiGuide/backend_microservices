@@ -16,7 +16,6 @@ import openpyxl
 from pptx import Presentation
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from urllib.parse import urlparse
 from helpers import Helpers
 
 load_dotenv()
