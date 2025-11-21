@@ -28,15 +28,7 @@ docs = DocumentsGateway()
 load_dotenv()
 
 class Compiler:
-    """
-    An intelligent agent to determine required application documents, match
-    them against a user's available files, and validate their quality.
-    """
-
     def __init__(self):
-        """
-        Initializes the agent with the necessary API key.
-        """
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.MASTER_LIST = [
             {
@@ -1367,54 +1359,3 @@ class DocumentCompiler:
         # finally:
         #     # Exclude the output_path from deletion
         #     self._cleanup(exclude_files=[output_path])
-
-    def add_empty_first_page(self, pdf_url: str) -> bool:
-        try:
-            pdf_bytes = docs.download_file(pdf_url)
-            if not pdf_bytes:
-                print(f"Could not download PDF from {pdf_url}")
-                return False
-
-            temp_input_path = os.path.join(self.temp_dir, "temp_original.pdf")
-            temp_output_path = os.path.join(self.temp_dir, "temp_with_blank_page.pdf")
-
-            with open(temp_input_path, "wb") as input_file:
-                input_file.write(pdf_bytes)
-
-            pdf_reader = PyPDF2.PdfReader(temp_input_path)
-            pdf_writer = PyPDF2.PdfWriter()
-
-            if len(pdf_reader.pages) > 0:
-                first_page = pdf_reader.pages[0]
-                page_width = float(first_page.mediabox.width)
-                page_height = float(first_page.mediabox.height)
-            else:
-                page_width, page_height = letter
-
-            blank_pdf = io.BytesIO()
-            c = canvas.Canvas(blank_pdf, pagesize=(page_width, page_height))
-            c.showPage()
-            c.save()
-
-            blank_reader = PyPDF2.PdfReader(io.BytesIO(blank_pdf.getvalue()))
-            pdf_writer.add_page(blank_reader.pages[0])
-
-            for page in pdf_reader.pages:
-                pdf_writer.add_page(page)
-
-            with open(temp_output_path, "wb") as out_file:
-                pdf_writer.write(out_file)
-
-            parsed = urlparse(pdf_url)
-            file_key = parsed.path.lstrip("/")
-
-            docs.upload_file(filepath=temp_input_path, file_dir=file_key)
-
-            os.remove(temp_input_path)
-            os.remove(temp_output_path)
-
-            return True
-
-        except Exception as e:
-            print(f"Error adding blank page to PDF: {e}")
-            return False
