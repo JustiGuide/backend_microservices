@@ -8,26 +8,26 @@ from database import Functions
 db_func = Functions()
 
 class TaskScheduler:
-    def __init__(self, sideload: bool = False, name: str = None):
-        self.previous_schedules = db_func.retrieve_scheduled_functions()
-        for func_id, function_details in self.previous_schedules.items():
-            args = (
-                function_details["args"]
-                if function_details["args"] is not None
-                else ()
-            )
-            kwargs = (
-                function_details["kwargs"]
-                if function_details["kwargs"] is not None
-                else {}
-            )
-            self.execute_scheduled(
-                cloudpickle.loads(function_details["function"]),
-                function_details["run_date"],
-                func_id,
-                *args,
-                **kwargs
-            )
+    # def __init__(self):
+    #     self.previous_schedules = db_func.retrieve_scheduled_functions()
+    #     for func_id, function_details in self.previous_schedules.items():
+    #         args = (
+    #             function_details["args"]
+    #             if function_details["args"] is not None
+    #             else ()
+    #         )
+    #         kwargs = (
+    #             function_details["kwargs"]
+    #             if function_details["kwargs"] is not None
+    #             else {}
+    #         )
+    #         self.execute_scheduled(
+    #             cloudpickle.loads(function_details["function"]),
+    #             function_details["run_date"],
+    #             func_id,
+    #             *args,
+    #             **kwargs
+    #         )
 
     def _shutdown_scheduler(self, scheduler: BackgroundScheduler):
         scheduler.shutdown()

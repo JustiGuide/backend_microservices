@@ -1,21 +1,13 @@
-import asyncio
 from datetime import datetime, timedelta, timezone
-import io
-import mimetypes
-import os
-import random
 import string
 import re
 from typing import Any, Literal, Union
-from fastapi import UploadFile, HTTPException
+from fastapi import UploadFile
 from pydantic import BaseModel, EmailStr
-import requests
-
 from database import Immigrants, LawPersonnel, Functions
 from email_gateway import Email
 
 db_func = Functions()
-
 
 class UploadFile_Dummy(BaseModel):
     size: int

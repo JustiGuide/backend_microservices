@@ -1,7 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel
 import uvicorn
 from cases_module.cases_api import app as cases_api
 from tasks_module.tasks_api import app as tasks_api
