@@ -28,6 +28,7 @@ class TaskScheduler:
     #             *args,
     #             **kwargs
     #         )
+    # TODO: uncomment after AWS is live
 
     def _shutdown_scheduler(self, scheduler: BackgroundScheduler):
         scheduler.shutdown()
