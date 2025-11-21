@@ -1,0 +1,1 @@
+from .lob_module import LobMailing as LobMailing
