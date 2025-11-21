@@ -1,10 +1,5 @@
-import json
-import os
 from typing import Literal, Union
-from fastapi import HTTPException, status
 from pydantic import BaseModel
-import requests
-
 
 class DummyFile(BaseModel):
     content: bytes

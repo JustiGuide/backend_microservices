@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel, EmailStr
-from cleaner import CaseDeletion, DisconnectLawyer, DeleteImmigrant, DeleteLawpersonnel
+from .cleaner import CaseDeletion, DisconnectLawyer, DeleteImmigrant, DeleteLawpersonnel
 
 app = APIRouter()
 case_del = CaseDeletion()

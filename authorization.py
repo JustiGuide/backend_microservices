@@ -1,7 +1,7 @@
 import json
 import re
 from typing import Annotated, Any, Union
-from fastapi import File, Form, HTTPException, UploadFile, status
+from fastapi import Form, HTTPException, status
 import httpx
 import jwt
 import phonenumbers
@@ -10,17 +10,14 @@ from pydantic import (
     BaseModel,
     EmailStr,
     Field,
-    HttpUrl,
     ValidationError,
     field_validator,
-    model_validator,
 )
 import os
 from dotenv import load_dotenv
 from database import (
     Connection,
     Functions,
-    LawPersonnel,
 )
 from datetime import datetime,timezone, timedelta
 

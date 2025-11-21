@@ -800,6 +800,7 @@ class Connection:
 class Functions:
     db = Connection()
     Session = db.SessionLocal
+    engine = db.engine
 
     def add_scheduled_function(
         self,

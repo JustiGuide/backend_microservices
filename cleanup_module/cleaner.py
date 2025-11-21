@@ -81,7 +81,9 @@ class DeleteImmigrant:
 
 class DeleteLawpersonnel:
     session = db_func.Session()
-    inspector = inspect(db_func.engine)
+    # inspector = inspect(db_func.engine)
+    inspector = None
+    # TODO: uncomment after AWS is live
     def __init__(self, personnel_username: str) -> None:
         self.username = personnel_username
         self.personnel = self.get_personnel()
@@ -426,7 +428,7 @@ class DeleteLawpersonnel:
             self.session.close()
 
         return "Outer Cleanup Complete."
-    
+
     def delete_personnel(self) -> str:
         try:
             self.session.delete(self.personnel_info)
