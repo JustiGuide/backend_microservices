@@ -1,6 +1,6 @@
 import re
 from typing import Annotated
-from fastapi import File, Form, HTTPException, UploadFile, status
+from fastapi import HTTPException
 import phonenumbers
 from pydantic import AfterValidator, EmailStr, Field
 import os

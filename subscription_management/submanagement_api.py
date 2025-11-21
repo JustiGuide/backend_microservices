@@ -1,6 +1,5 @@
-from datetime import datetime
 from typing import Literal
-from fastapi import APIRouter, HTTPException, Header, Request
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from authorization import (
     Authorizer,
