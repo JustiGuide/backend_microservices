@@ -1,12 +1,9 @@
 from datetime import datetime
-import mimetypes
-import os
 import string
 import re
 from typing import Any, Literal, Union
 from fastapi import UploadFile
 from pydantic import BaseModel, EmailStr
-import requests
 from datetime import timezone, timedelta, datetime
 
 from database import Immigrants, LawPersonnel, Functions

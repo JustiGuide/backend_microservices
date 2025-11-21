@@ -1,4 +1,3 @@
-import json
 import os
 from typing import Any, Union, Literal
 from fastapi import HTTPException
@@ -6,7 +5,6 @@ from pydantic import EmailStr, HttpUrl
 from sqlalchemy.orm import sessionmaker, declarative_base, validates
 from dotenv import load_dotenv
 from sqlalchemy import (
-    JSON,
     Column,
     Date,
     DateTime,

@@ -1,25 +1,19 @@
-import json
 import re
 from typing import Annotated
-from fastapi import File, Form, HTTPException, UploadFile, status
+from fastapi import HTTPException, status
 import phonenumbers
 from pydantic import (
     AfterValidator,
-    BaseModel,
     EmailStr,
     Field,
     HttpUrl,
-    ValidationError,
-    model_validator,
 )
 import os
 from dotenv import load_dotenv
 from database import (
     Connection,
     Functions,
-    LawPersonnel,
 )
-import datetime
 
 load_dotenv()
 db_func = Functions()
