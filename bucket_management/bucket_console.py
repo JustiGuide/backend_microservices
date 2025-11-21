@@ -1,6 +1,7 @@
 import mimetypes
 import os
 from typing import Literal, Union
+import PyPDF2
 from dotenv import load_dotenv
 import boto3
 import io
@@ -13,7 +14,9 @@ from PyPDF2 import PdfReader
 from docx import Document
 import openpyxl
 from pptx import Presentation
-
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from urllib.parse import urlparse
 from helpers import Helpers
 
 load_dotenv()
@@ -43,6 +46,7 @@ class BucketConsole:
     base_url = f"https://{bucket_name}.s3.{region}.amazonaws.com"
     image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', 'webp', '.svg']
     allowed_case_extensions = {'.pdf', '.docx', '.doc', '.txt', '.jpg', '.jpeg', '.png', '.heic'}
+    temp_dir = "./tmp"
 
     def upload_file(self, file: DummyFile, bucket_directory: str, is_previewable: bool = True):
         bucket_directory = bucket_directory.replace(" ", "+")
@@ -403,3 +407,55 @@ class BucketConsole:
             ExtraArgs={"ACL": "public-read"},
         )
         return f"{self.base_url}/{file_key}"
+
+    def add_empty_first_page(self, pdf_url: str) -> bool:
+        try:
+            pdf_bytes = self.download_file(pdf_url)
+            if not pdf_bytes:
+                print(f"Could not download PDF from {pdf_url}")
+                return False
+            input_stream = io.BytesIO(pdf_bytes)
+
+            pdf_reader = PyPDF2.PdfReader(input_stream)
+            pdf_writer = PyPDF2.PdfWriter()
+
+            if len(pdf_reader.pages) > 0:
+                first_page = pdf_reader.pages[0]
+                page_width = float(first_page.mediabox.width)
+                page_height = float(first_page.mediabox.height)
+            else:
+                page_width, page_height = letter
+
+            blank_pdf_stream = io.BytesIO()
+            c = canvas.Canvas(blank_pdf_stream, pagesize=(page_width, page_height))
+            c.showPage()
+            c.save()
+
+            blank_pdf_stream.seek(0)
+            blank_reader = PyPDF2.PdfReader(blank_pdf_stream)
+            pdf_writer.add_page(blank_reader.pages[0])
+
+            for page in pdf_reader.pages:
+                pdf_writer.add_page(page)
+            output_stream = io.BytesIO()
+            pdf_writer.write(output_stream)
+
+            final_pdf_content = output_stream.getvalue()
+            file_key = pdf_url.removeprefix(self.base_url + "/")
+            base_name = os.path.basename(file_key)
+            filename = os.path.splitext(base_name)[0]
+
+            new_application = DummyFile(
+                content=final_pdf_content,
+                size=len(final_pdf_content),
+                name=filename,
+                ext="pdf",
+                content_type="application/pdf",
+            )
+
+            self.upload_file(file=new_application, bucket_directory=file_key)
+            return True
+
+        except Exception as e:
+            print(f"Error adding blank page to PDF: {e}")
+            return False
